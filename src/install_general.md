@@ -53,8 +53,7 @@ Build the package using PyInstaller:
 uv run pyinstaller qq.spec
 ```
 
-PyInstaller will create a directory named `qq` inside `dist`.  
-Copy that directory wherever you want and add it to your PATH.
+PyInstaller will create a directory named `qq` inside `dist`. Copy that directory wherever you want and add it to your PATH.
 
 If you want the `qq cd` command to work, add the following shell function to your shell's RC file:
 ```bash

@@ -70,7 +70,7 @@ metamodule add ...
 ```
 
 > In the example above, kebab-case is used for option names, but qq directives also support snake_case, camelCase, and PascalCase.  
-> For example: `# qq job-type loop`, `# qq JobType loop`, `# qq jobType loop`, and `# qq job_type loop` are all equivalent.
+> For example: `# qq job-type loop`, `# qq job_type loop`, `# qq jobType loop`, and `# qq JobType loop` are all equivalent.
 
 Command-line options always take precedence over options defined in the script body.
 
