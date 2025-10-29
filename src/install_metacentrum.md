@@ -1,0 +1,3 @@
+# Installing on metacentrum
+
+Work in progress...

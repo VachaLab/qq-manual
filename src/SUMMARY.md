@@ -1,17 +1,28 @@
 # Summary
 
-# About qq
-- [What is qq?](qq_intro.md)
+- [What is qq?](what_is_qq.md)
+- [Installation](installation.md)
+    - [Installing on robox](install_robox.md)
+    - [Installing on sokar](install_sokar.md)
+    - [Installing on metacentrum](install_metacentrum.md)
+    - [Installing manually](install_general.md)
 - [Job types](job_types.md)
-    - [Standard job](standard_job.md)
+    - [Standard jobs](standard_job.md)
+    - [Loop jobs](loop_job.md)
+- [Job states](job_states.md)
+- [Runtime files](runtime_files.md)
 - [Environment variables](env_vars.md)
-
-# Job commands
-- [qq submit](qq_submit.md)
-- [qq info](qq_info.md)
-- [qq go](qq_go.md)
-- [qq kill](qq_kill.md)
-- [qq clear](qq_clear.md)
-- [qq run](qq_run.md)
-
-# Batch system commands
+- [Commands](commands.md)
+    - [qq cd](qq_cd.md)
+    - [qq clear](qq_clear.md)
+    - [qq go](qq_go.md)
+    - [qq info](qq_info.md)
+    - [qq jobs](qq_jobs.md)
+    - [qq kill](qq_kill.md)
+    - [qq killall](qq_killall.md)
+    - [qq nodes](qq_nodes.md)
+    - [qq queues](qq_queues.md)
+    - [qq run](qq_run.md)
+    - [qq stat](qq_stat.md)
+    - [qq submit](qq_submit.md)
+    - [qq sync](qq_sync.md)

@@ -1,14 +1,18 @@
 # qq run
 
-The execution environment running the qq job. qq's equivalent of Infinity's `infinity-env`.
+The `qq run` command represents the execution environment in which a qq job runs. It is qq's equivalent of Infinity's `infex` script and the `infinity-env`.
 
-You should not (and cannot) use qq run directly, but all scripts submitted using `qq submit` must contain the following shebang calling it:
+You should not invoke `qq run` directly. Instead, every script submitted with `qq submit` must include the following shebang line:
 
 ```bash
 #!/usr/bin/env -S qq run
 ```
 
-> **Quick comparison with infinity-env**
-> - Just like `infinity-env`, using the `qq run` shebang protects you from inadvertently running the script directly.
-> - Unlike with Infinity, **all** qq jobs must use this execution environment.
-> - `qq run` also takes the resposibilities of `parchive` and `presubmit`, which direct equivalents do not exist in qq.
+For more details about what `qq run` does, see the sections on [standard jobs](standard_job.md) and [loop jobs](loop_job.md).
+
+***
+
+> **Quick comparison with infex and infinity-env**
+> - Like `infinity-env`, using the `qq run` shebang prevents you from accidentally running the script directly.
+> - Unlike Infinity, **all** qq jobs must use this execution environment — no separate helper run script is created when submitting a qq job.
+> - `qq run` also takes over the responsibilities of `parchive` and `presubmit`, which have no direct equivalents in qq.

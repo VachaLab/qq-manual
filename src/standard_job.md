@@ -1,41 +1,55 @@
-# Standard job
+# Standard jobs
 
-Standard job is the default qq job type. Here we describe the entire lifetime of a standard qq job.
+A standard job is the default qq job type. This section describes the full lifecycle of a standard qq job.
 
 ## 1. Submitting the job
 
-Submission of a qq job happens using [`qq submit`](qq_submit.md). `qq submit` submits the job to the batch system and generates a qq info file containing metadata and information about the job. This info file is named based on the submitted script, has a file extension `.qqinfo` and is located in the job directory (which is often also called submission or input directory).
+Submitting a qq job is done using [`qq submit`](qq_submit.md).
 
-The responsibility of handling the job is now given to the batch system which finds a suitable place and time to execute it. You, as a user, do not need to do anything, only wait for the job to be executed.
+`qq submit` submits the job to the batch system and generates a qq info file containing metadata and details about the job. This info file is named after the submitted script, has the `.qqinfo` extension, and is located in the input directory (often also called the submission or, somewhat confusingly, job directory).
 
-## 2. Preparing working directory
+Once submitted, the batch system takes over, finding a suitable place and time to execute your job. As a user, you don't need to do anything else except wait for the job to run.
 
-Once the batch system finds a suitable machine to run the job on, the [`qq run`](qq_run.md) environment takes over. It first sets up a working directory for executing the job on the execution machine. 
+## 2. Preparing the working directory
 
-In case you requested to run the job in the job directory (by submitting with `--workdir=jobdir`), the job directory is used as a working directory and no further action is needed. In case you requested the job to run on scratch (the default option for PBS) a working directory is created inside the allocated portion of scratch and **all files and directories in the job directory** are copied to the working directory with the exception of the qq info file and the "archive" directory (which we will discuss later, in the section addressing loop jobs) which are not copied. During submitting, you can also specify a list of files which you explicitely do **not** want to be copied to the working directory.
+When the batch system allocates a machine for your job, the [`qq run`](qq_run.md) environment takes over. It first prepares a working directory for the job on the execution node.
 
-Once the working directory is prepared, the qq info file is modified to set the state of the job as "running". Only then is the actual submitted script actually executed.
+If you requested the job to run in the input directory (by submitting with `--workdir=input_dir` or the equivalent `--workdir=job_dir`), the input directory is used directly as the working directory, and no additional setup is required.
+
+If you requested the job to run on scratch (the default for PBS), a working directory is created inside your allocated scratch space, and **all files and directories in the input directory** are copied there — except for the qq info file and the "archive" directory (discussed [later](loop_job.md#archive-directory)).  
+During submission, you can also specify files you explicitly do **not** want to copy to the working directory.
+
+Once the working directory is ready, qq updates the info file to mark the job state as `running`. Only then is your submitted script executed.
 
 ## 3. Executing the script
 
-Your submitted script is finally executed using `bash`. It should exit with a non-zero code if everything proceeded successfully or a non-zero code indicating an error. The exit code is propagated to the qq and qq eventually sets the appropriate job state based on it (exit code of 0 corresponds to the "finished" state, anything else to the "failed" state).
+Your submitted script is then executed using `bash`.
 
-Standard output from your script is stored into a file with the name of your script and a file extension `.out`. The standard error output from your script is stored into a similar file with a file extension `.err`.
+The script should exit with code `0` if everything ran successfully, or a non-zero code to indicate an error. The exit code is passed back to qq, which sets the appropriate job state (`finished` for 0, `failed` for anything else).
 
-## 4. Finalizing the execution
+Standard output from your script is saved to a file named after your script with the `.out` extension. Standard e rror output is stored in asimilar file with the `.err` extension.
 
-After the submitted script is executed, qq performs a clean-up. 
+## 4. Finalizing execution
 
-If your job is running in the job directory (`--workdir=jobdir`), the clean up is simple: the state of the job ("finished" or "failed") is marked to the qq info file associated with the job and the execution finishes.
+After the script finishes, qq performs cleanup.
 
-If your job is running on scratch, the performed clean up depends on whether your script was executed successfully or not. If it was, all files from the working directory are transferred to the job directory and the entire working directory, or at least its content, is deleted. Finally, qq sets the job sttate to "finished". If the execution of your script failed, no files are transferred and remain on the execution machine in the working directory for further inspection (you can navigate to the working directory of your job usig [`qq go`](qq_go.md)). The state of the job is then set to "failed".
+If your job ran in the input directory, cleanup is simple: qq updates the job's state (`finished` or `failed`) in the qq info file, and execution ends.
 
-No matter whether the job finished successfully or failed, a qq output file (named based on your script with a file extension `.qqout`) is generated in the job directory. This file contains basic information about what qq was doing and when when executing your job. It may take a few seconds for the batch system to write this file to the job directory, so if it does not appear immediately, be patient.
+If your job ran on scratch, cleanup depends on the script's exit status.
+
+If it finished successfully, all files from the working directory are copied back to the input directory, and the working directory (or its contents) is deleted. Finally, qq sets the job state to `finished`.
+
+If the job failed, the working directory is left intact on the execution machine for inspection (you can open it using [`qq go`](qq_go.md)). The job state is set to `failed`.
+
+Regardless of the result, qq creates an output file (named after your script with the `.qqout` extension) in the input directory. This file contains basic information about what qq did and when the job finished.
+
+It may take a few seconds for the batch system to write this file, so if it doesn't appear right away, be patient.
 
 ## Killing a qq job
 
-In case your job is killed (either by using [`qq kill`](qq_kill.md)) or by the batch system itself (e.g. because your job exceeded the allocated walltime), all the files remain in the working directory on the execution machine. The only thing that qq performs when a job is killed is terminating the execution of your submitted script and setting the job state to "killed".
+If your job is killed (either manually via [`qq kill`](qq_kill.md) or automatically by the batch system, for example if it exceeds walltime), all files remain in the working directory on the execution machine. qq stops the running script and marks the job state as `killed`.
 
 ## Additional notes
-- Almost all operations while setting up the working directory or finalizing the job execution are retried in case of an error. This is to avoid the entire job crashing in case a shared storage, server or a machine temporarily becomes unavalable. If a qq operation fails, qq waits for several minutes and then tries to repeat the operation. A single operation may be attempted up to 3 times. If the operation fails 3 times, qq terminates and reports an error. qq does not retry the execution of your script.
-- In case your job fails with an exit code of 90-99, this usually indicates that a specific qq operation failed. Check the qq output file (file with the `.qqout` file extension) for more details. An exit code of 99 indicates a critical, unexpected error. This usually indicates a bug in the qq environment. Please report such situations.
+
+- Most operations during working directory setup and cleanup are automatically retried in case of errors. This helps prevent job crashes caused by temporary storage or network issues. If an operation fails, qq waits a few minutes and retries — up to three attempts. After three failures, qq stops and reports an error. Note that qq does **not** retry execution of your script itself.
+- If your job fails with an exit code between 90–99, this usually means a qq operation failed. Check the qq output file (`.qqout`) for more details. An exit code of 99 indicates a critical or unexpected error, which usually means a bug in qq. Please report such cases.
