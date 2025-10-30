@@ -16,6 +16,7 @@ If the job is a [loop job](loop_job.md), the following additional environment va
 - `QQ_LOOP_START`: first cycle of the loop job
 - `QQ_LOOP_END`: last cycle of the loop job
 - `QQ_ARCHIVE_FORMAT`: filename format used for archived files
+- `QQ_NO_RESUBMIT`: exit code that can be returned from the body of the script to indicate that the next cycle of the job should not be submitted
 
 > Apart from the variables listed here and those provided by the batch system itself, no other environment variables are typically propagated from the submission environment to the job environment.
 

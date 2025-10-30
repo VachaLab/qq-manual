@@ -52,3 +52,27 @@ If the current cycle of the loop job corresponds to `loop-end`, no resubmission 
 Sometimes, after a job completes *N* cycles, you may realize you need *M* more. To extend the job, simply submit it again from the same input directory with `loop-end` set to *N + M*, either on the command line or in the submission script.  
 
 **Importantly:** you do not need to delete any runtime files from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
+
+## Forcing qq to not resubmit
+
+You can manually force qq to **not** submit the next cycle of a loop job, even if the current cycle number has not yet reached `loop-end`, by returning the value of the environment variable `QQ_NO_RESUBMIT` from within the script:
+
+```bash
+#!/usr/bin/env -S qq run
+
+# qq job-type loop
+# qq loop-end 100
+# qq archive storage
+# qq archive-format md%04d
+
+...
+
+# if a specific condition is met, do not resubmit but finish successfully
+if [ -n "${SOME_CONDITION}" ]; then
+    exit "${QQ_NO_RESUBMIT}"
+fi
+
+exit 0
+```
+
+If qq detects this exit code, it will not submit the next cycle of the loop job. The current cycle will still be marked as successfully finished (exit code 0).
