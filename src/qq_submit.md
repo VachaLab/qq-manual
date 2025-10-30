@@ -11,12 +11,12 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >
 >   **Infinity:**
 >   ```bash
->   psubmit default run_script ncpus=8,walltime=12h,props=cl_zero -y
+>   psubmit cpu run_script ncpus=8,walltime=12h,props=cl_zero -y
 >   ```
 >
 >   **qq:**
 >   ```bash
->   qq submit -q default run_script --ncpus=8 --walltime=12h --props=cl_zero
+>   qq submit -q cpu run_script --ncpus=8 --walltime=12h --props=cl_zero
 >   ```
 >
 > - Options can also be specified directly in the submitted script, or as a mix of in-script and command-line definitions. Command-line options always take precedence.
