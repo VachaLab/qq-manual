@@ -29,3 +29,4 @@
     - [qq submit](qq_submit.md)
     - [qq sync](qq_sync.md)
 - [Themes](themes.md)
+- [Glossary](glossary.md)

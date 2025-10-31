@@ -46,7 +46,7 @@ qq submit run_job.sh -q cpu --ncpus 8 --walltime 1d
 
 This submits `run_job.sh` to the `cpu` queue, requesting 8 CPU cores and a walltime of one day. All other parameters are determined by the queue or qq’s default settings.
 
-The batch system then schedules the job for execution. Once a suitable compute node is available, the job runs through [`qq run`](qq_run.md), a wrapper around bash that prepares the [working directory](work_dir.md), copies files, executes the script, and performs cleanup. You can read more about how exactly this works in [this section](job_types.md) of the manual.
+The batch system then schedules the job for execution. Once a suitable compute node is available, the job runs through [`qq run`](qq_run.md), a wrapper around bash that prepares the [working directory](work_dir.md), copies files, executes the script, and performs cleanup. You can read more about how exactly this works in [this section](standard_job.md) of the manual.
 
 ## 4. Inspecting the job
 
