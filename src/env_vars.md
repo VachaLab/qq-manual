@@ -7,6 +7,10 @@ When a qq job is submitted, several environment variables are automatically set 
 - `QQ_INPUT_DIR`: absolute path to the job's input directory on the input machine
 - `QQ_INFO`: absolute path to the qq job's info file on the input machine
 - `QQ_BATCH_SYSTEM`: name of the batch system used to schedule and execute the job
+- `QQ_NNODES`: the total number of allocated compute nodes
+- `QQ_NCPUS`: the total number of allocated CPU cores
+- `QQ_NGPUS`: the total number of allocated GPU cores
+- `QQ_WALLTIME`: the walltime of the job in hours
 
 If the `QQ_DEBUG` environment variable is set when running `qq submit`, its value is propagated to the job environment as well. This turns on the debug mode, dramatically increasing the verbosity of [`qq run`](qq_run.md).
 
