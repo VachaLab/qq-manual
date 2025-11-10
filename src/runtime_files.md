@@ -20,4 +20,4 @@ A `.err` file contains the **standard error output** from the script executed as
 
 ### qqout files
 
-A `.qqout` file contains the output from the `qq run` execution environment. It includes technical information about the job's progress and internal qq operations. This file is placed into the input directory by the batch system only after the job has fully completed.
+A `.qqout` file contains the output from the `qq run` execution environment. It includes technical information about the job's progress and internal qq operations. If your batch system is PBS, this file is only placed into the input directory after the job is completed. If your batch system is Slurm, this file is available after the job starts running.
