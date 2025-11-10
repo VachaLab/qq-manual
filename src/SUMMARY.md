@@ -5,6 +5,7 @@
     - [Installing on robox](install_robox.md)
     - [Installing on sokar](install_sokar.md)
     - [Installing on metacentrum](install_metacentrum.md)
+    - [Installing on karolina](install_karolina.md)
     - [Installing manually](install_general.md)
 - [Running a job](basics.md)
 - [Job types](job_types.md)
