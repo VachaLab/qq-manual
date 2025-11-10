@@ -39,9 +39,56 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 #### Options
 
-There are many available options. For a full list, run `qq submit --help`.
+##### General settings
 
-All options can also be specified directly inside the submitted script (see below).
+`-q`, `--queue` `TEXT` — Name of the queue to submit the job to.  
+
+`--account` `TEXT` — Account to use for the job. Required only in environments with accounting systems (e.g., IT4Innovations).  
+
+`--job-type` `TEXT` — Type of the qq job. Defaults to `standard`.  
+
+`--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. By default, all files and directories — except the qq info file, qq out file and the archive directory — are copied.  
+
+`--depend` `TEXT` — Specify job dependencies. You can provide one or more dependency expressions separated by commas, spaces, or both. Each expression should follow the format `<type>=<job_id>[:<job_id>...]`, for example: `after=1234`, `afterok=456:789`.  
+
+`--batch-system` `TEXT` — Name of the batch system to submit the job to. If not specified, qq will use the environment variable `QQ_BATCH_SYSTEM` or attempt to auto-detect it.  
+
+---
+
+##### Requested resources
+
+`--nnodes` `INTEGER` — Number of compute nodes to allocate for the job.  
+
+`--ncpus` `INTEGER` — Number of CPU cores to allocate for the job.  
+
+`--mem-per-cpu` `TEXT` — Amount of memory to allocate per CPU core. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `2gb`).  
+
+`--mem` `TEXT` — Total memory to allocate for the job. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `10gb`). Overrides `--mem-per-cpu`.  
+
+`--ngpus` `INTEGER` — Number of GPUs to allocate for the job.  
+
+`--walltime` `TEXT` — Maximum runtime allowed for the job.  
+
+`--work-dir`, `--workdir` `TEXT` — Type of working directory to use for the job.  
+
+`--work-size-per-cpu`, `--worksize-per-cpu` `TEXT` — Storage to allocate per CPU core. Specify as `Ngb` (e.g., `1gb`).  
+
+`--work-size`, `--worksize` `TEXT` — Total storage to allocate for the job. Specify as `Ngb` (e.g., `10gb`). Overrides `--work-size-per-cpu`.  
+
+`--props` `TEXT` — Colon-, comma-, or space-separated list of node properties required (e.g., `cl_two`) or prohibited (e.g., `^cl_two`) for the job.  
+
+---
+
+##### Loop options  
+*(Only used when `job-type` is set to `loop`.)*
+
+`--loop-start` `INTEGER` — Starting cycle number for a loop job. Defaults to `1`.  
+
+`--loop-end` `INTEGER` — Ending cycle number for a loop job.  
+
+`--archive` `TEXT` — Directory name used for archiving files in a loop job. Defaults to `storage`.  
+
+`--archive-format` `TEXT` — Filename format for archived files. Defaults to `job%04d`.  
 
 ### Specifying options in the script
 
