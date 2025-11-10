@@ -25,6 +25,7 @@
     - [qq killall](qq_killall.md)
     - [qq nodes](qq_nodes.md)
     - [qq queues](qq_queues.md)
+    - [qq shebang](qq_shebang.md)
     - [qq run](qq_run.md)
     - [qq stat](qq_stat.md)
     - [qq submit](qq_submit.md)
