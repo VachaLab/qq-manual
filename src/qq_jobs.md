@@ -22,6 +22,8 @@ qq jobs [OPTIONS]
 
 `-u`, `--user` `TEXT` — Username whose jobs should be displayed. Defaults to your own username.
 
+`-e`, `--extra` — Include extra information about the jobs.
+
 `-a`, `--all` — Include both unfinished and finished jobs in the summary.
 
 `--yaml` — Output job metadata in YAML format.
@@ -39,6 +41,12 @@ qq jobs -u user2
 ```
 
 Displays a summary of user2's unfinished jobs.
+
+```bash
+qq jobs -e
+```
+
+Includes extra information about your jobs in the output: the input machine (if available) and the input directory.
 
 ```bash
 qq jobs --all

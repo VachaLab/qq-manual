@@ -19,6 +19,8 @@ qq stat [OPTIONS]
 
 #### Options
 
+`-e`, `--extra` — Include extra information about the jobs.
+
 `-a`, `--all` — Include both unfinished and finished jobs in the summary.
 
 `--yaml` — Output job metadata in YAML format.
@@ -30,6 +32,12 @@ qq stat
 ```
 
 Displays a summary of all unfinished (queued, running, or exiting) jobs associated with the current batch server.
+
+```bash
+qq stat -e
+```
+
+Includes extra information about the jobs in the output: the input machine (if available) and the input directory.
 
 ```bash
 qq stat --all
