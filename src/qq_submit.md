@@ -53,8 +53,6 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--batch-system` `TEXT` — Name of the batch system to submit the job to. If not specified, qq will use the environment variable `QQ_BATCH_SYSTEM` or attempt to auto-detect it.  
 
----
-
 ##### Requested resources
 
 `--nnodes` `INTEGER` — Number of compute nodes to allocate for the job.  
@@ -76,8 +74,6 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 `--work-size`, `--worksize` `TEXT` — Total storage to allocate for the job. Specify as `Ngb` (e.g., `10gb`). Overrides `--work-size-per-cpu`.  
 
 `--props` `TEXT` — Colon-, comma-, or space-separated list of node properties required (e.g., `cl_two`) or prohibited (e.g., `^cl_two`) for the job.  
-
----
 
 ##### Loop options  
 *(Only used when `job-type` is set to `loop`.)*
