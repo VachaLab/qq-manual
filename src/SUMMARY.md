@@ -31,4 +31,5 @@
     - [qq submit](qq_submit.md)
     - [qq sync](qq_sync.md)
 - [Themes](themes.md)
+- [Run scripts](run_scripts.md)
 - [Glossary](glossary.md)
