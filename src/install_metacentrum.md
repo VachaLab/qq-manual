@@ -1,4 +1,4 @@
-# Installing on metacentrum
+# Installing on Metacentrum
 
 To install qq on Metacentrum, log in to any Metacentrum frontend and run:
 

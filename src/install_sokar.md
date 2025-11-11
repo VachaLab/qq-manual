@@ -1,6 +1,6 @@
-# Installing on sokar
+# Installing on Sokar
 
-To install qq on the sokar cluster (managed by NCBR), log in to `sokar.ncbr.muni.cz` and run:
+To install qq on the Sokar cluster (managed by NCBR), log in to `sokar.ncbr.muni.cz` and run:
 
 ```bash
 curl -fsSL https://github.com/Ladme/qq/releases/latest/download/qq-sokar-install.sh | bash
