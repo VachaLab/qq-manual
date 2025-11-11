@@ -39,13 +39,25 @@ If your job ran on scratch, cleanup depends on the script's exit status.
 
 If it finished successfully, all files from the working directory are copied back to the input directory, and the working directory (or its contents) is deleted. Finally, qq sets the job state to `finished`.
 
-If the job failed, the working directory is left intact on the execution machine for inspection (you can open it using [`qq go`](qq_go.md)). The job state is set to `failed`.
+If the job failed, the working directory is left intact on the execution machine for inspection (you can open it using [`qq go`](qq_go.md), download it using [`qq sync`](qq_sync.md), or delete it using [`qq wipe`](qq_wipe.md)). The job state is set to `failed`.
 
 Regardless of the result, qq creates an output file (named after your script with the `.qqout` extension) in the input directory. This file contains basic information about what qq did and when the job finished. Depending on the batch system, this file may appear either after job completion (PBS) or immediately after the job starts being executed (Slurm).
 
 ## Killing a qq job
 
 If your job is killed (either manually via [`qq kill`](qq_kill.md) or automatically by the batch system, for example if it exceeds walltime), all files remain in the working directory on the execution machine. qq stops the running script and marks the job state as `killed`.
+
+## Submitting the next job
+
+After a job has completed successfully, you may want to submit a new one: for example, to proceed to the next stage of your workflow. If you try to submit another qq job from the same directory as the previous one, you will however encounter an error:
+
+```
+ERROR       Detected qq runtime files in the submission directory. Submission aborted.
+```
+
+This behavior is intentional. qq enforces a one-job-per-directory policy to promote reproducibility and maintain organized workflows. Each job should reside in its own dedicated directory.
+
+If your previous job crashed or was terminated and you wish to rerun it, you can remove the existing qq runtime files using [`qq clear`](qq_clear.md).
 
 ## Additional notes
 

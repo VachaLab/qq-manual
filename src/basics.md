@@ -58,7 +58,7 @@ After submission, you can inspect the job using [`qq info`](qq_info.md), access 
 
 Once the job finishes, the resulting Gromacs output files will be transferred from the working directory back to the original input directory. You can verify that everything completed successfully using [`qq info`](qq_info.md).
 
-If your job failed (crashed) or was killed, the output files will **not** be transferred to ensure your input directory remains in a consistent state. In these cases, the working directory on the compute node is preserved, allowing you to inspect the job files directly there using [`qq go`](qq_go.md), or to explicitly copy them back to the input directory using [`qq sync`](qq_sync.md).
+If your job failed (crashed) or was killed, the output files will **not** be transferred to ensure your input directory remains in a consistent state. In these cases, the working directory on the compute node is preserved, allowing you to inspect the job files directly there using [`qq go`](qq_go.md), or to explicitly copy them back to the input directory using [`qq sync`](qq_sync.md). On some systems, you may then want to explicitly delete the working directory — to do this, use [`qq wipe`](qq_wipe.md).
 
 ***
 

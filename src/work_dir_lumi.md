@@ -12,7 +12,7 @@ To control where the working directory is created, use the `work-dir` option (or
 > **Recommendations:**
 > - Submit jobs from your project's space (`/project/<project_id>`). With the default `--work-dir` option, qq automatically copies your data to scratch, executes the job there, and then copies the results back to your input directory.
 > - The size of the working directory on LUMI is limited by your filesystem quota, so you do not need to specify the `work-size` option.
-> - **IMPORTANT!** On LUMI, you are billed for the amount of storage you use! qq only clears the working directory if the job is successfully completed. If your job fails, you MUST clear the working directory yourself, otherwise you will get billed for it!
+> - **IMPORTANT!** On LUMI, you are billed for the amount of storage you use! qq only clears the working directory if the job is successfully completed. If your job fails, you MUST clear the working directory yourself (see [`qq wipe`](qq_wipe.md)), otherwise you will get billed for it!
 
 ***
 

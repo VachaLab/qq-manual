@@ -34,6 +34,7 @@
     - [qq stat](qq_stat.md)
     - [qq submit](qq_submit.md)
     - [qq sync](qq_sync.md)
+    - [qq wipe](qq_wipe.md)
 - [Themes](themes.md)
 - [Run scripts](run_scripts.md)
 - [Glossary](glossary.md)
