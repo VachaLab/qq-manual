@@ -27,7 +27,7 @@ Your submitted script is then executed using `bash`.
 
 The script should exit with code `0` if everything ran successfully, or a non-zero code to indicate an error. The exit code is passed back to qq, which sets the appropriate job state (`finished` for 0, `failed` for anything else).
 
-Standard output from your script is saved to a file named after your script with the `.out` extension. Standard e rror output is stored in asimilar file with the `.err` extension.
+Standard output from your script is saved to a file named after your script with the `.out` extension. Standard error output is stored in a similar file with the `.err` extension.
 
 ## 4. Finalizing execution
 
@@ -41,9 +41,7 @@ If it finished successfully, all files from the working directory are copied bac
 
 If the job failed, the working directory is left intact on the execution machine for inspection (you can open it using [`qq go`](qq_go.md)). The job state is set to `failed`.
 
-Regardless of the result, qq creates an output file (named after your script with the `.qqout` extension) in the input directory. This file contains basic information about what qq did and when the job finished.
-
-It may take a few seconds for the batch system to write this file, so if it doesn't appear right away, be patient.
+Regardless of the result, qq creates an output file (named after your script with the `.qqout` extension) in the input directory. This file contains basic information about what qq did and when the job finished. Depending on the batch system, this file may appear either after job completion (PBS) or immediately after the job starts being executed (Slurm).
 
 ## Killing a qq job
 

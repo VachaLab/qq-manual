@@ -2,7 +2,7 @@
 
 The [qq GitHub repository](https://github.com/Ladme/qq/tree/main/scripts/run_scripts) provides several ready-to-use scripts for running [Gromacs](https://www.gromacs.org/) simulations in loops — similar to Infinity’s `precycle` scripts.
 
-These scripts are compatible with all qq-supported clusters, including both Metacentrum-family clusters and Karolina.
+These scripts are compatible with all qq-supported clusters, including Metacentrum-family clusters, Karolina, and LUMI. **Do not forget to load Gromacs from the module appropriate for the given cluster.**
 
 ---
 
@@ -14,7 +14,7 @@ Start by preparing a directory containing all necessary input files, and place `
 
 In your `.mdp` file, specify the number of simulation steps to perform **in each cycle**. In the body of the script, set the total number of cycles to run (using the `qq loop-end` directive), define input filenames, specify the Gromacs module to load, and optionally adjust the number of MPI ranks and OpenMP threads to use. By default, qq assigns one MPI rank per node or GPU and divides the remaining CPU cores among these ranks as OpenMP threads.
 
-Once ready, submit the job with `qq submit`. The first cycle will be submitted and executed, and before it finishes, qq will automatically submit the next cycle Read more about qq loop jobs [here](loop_job.md).
+Once ready, submit the job with `qq submit`. The first cycle will be submitted and executed, and before it finishes, qq will automatically submit the next cycle. Read more about qq loop jobs [here](loop_job.md).
 
 The total simulation length after all cycles finish equals: (steps per cycle in the `.mdp` file) × (number of cycles).
 

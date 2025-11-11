@@ -46,6 +46,8 @@ qq submit run_job.sh -q cpu --ncpus 8 --walltime 1d
 
 This submits `run_job.sh` to the `cpu` queue, requesting 8 CPU cores and a walltime of one day. All other parameters are determined by the queue or qq’s default settings.
 
+> Note that on Karolina and LUMI, you also have to specify the `--account` option, providing the ID of the project you are associated with.
+
 The batch system then schedules the job for execution. Once a suitable compute node is available, the job runs through [`qq run`](qq_run.md), a wrapper around bash that prepares the [working directory](work_dir.md), copies files, executes the script, and performs cleanup. You can read more about how exactly this works in [this section](standard_job.md) of the manual.
 
 ## 4. Inspecting the job
@@ -62,4 +64,4 @@ If your job failed (crashed) or was killed, the output files will **not** be tra
 
 ## Run scripts
 
-For more complex setups — particularly for running Gromacs simulations in loops — [qq provides several ready-to-use run scripts](run_scripts.md). These scripts are fully compatible with all qq-supported clusters, including both Metacentrum-family clusters and Karolina.
+For more complex setups — particularly for running Gromacs simulations in loops — [qq provides several ready-to-use run scripts](run_scripts.md). These scripts are fully compatible with all qq-supported clusters, including Metacentrum-family clusters, Karolina, and LUMI.
