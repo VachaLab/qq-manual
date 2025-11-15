@@ -52,7 +52,7 @@ gmx_mpi grompp -f md.mdp -c eq.gro -t eq.cpt -n index.ndx -p system.top -o md.tp
 gmx_mpi mdrun -deffnm md -ntomp 8 -v
 ```
 
-If you run `qq shebang` without specifying a script (`qq shebang`), it simply prints the qq shebang to standard output:
+If you run `qq shebang` without specifying a script (you use just `qq shebang`), it simply prints the qq shebang to standard output:
 
 ```bash
 #!/usr/bin/env -S qq run

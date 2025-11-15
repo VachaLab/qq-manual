@@ -31,6 +31,8 @@ gmx_mpi grompp -f md.mdp -c eq.gro -t eq.cpt -n index.ndx -p system.top -o md.tp
 gmx_mpi mdrun -deffnm md -ntomp 8 -v
 ```
 
+> **Hint:** You can use the [`qq shebang`](qq_shebang.md) command to easily add the qq run shebang to your script.
+
 Save this file as `run_job.sh` and make it executable:
 ```bash
 chmod u+x run_job.sh
