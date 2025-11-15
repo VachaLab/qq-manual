@@ -47,7 +47,7 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--job-type` `TEXT` — Type of the qq job. Defaults to `standard`.  
 
-`--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. By default, all files and directories — except the qq info file, qq out file and the archive directory — are copied.  
+`--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths to files and directories to exclude must be relative to the input directory.
 
 `--depend` `TEXT` — Specify job dependencies. You can provide one or more dependency expressions separated by commas, spaces, or both. Each expression should follow the format `<type>=<job_id>[:<job_id>...]`, for example: `after=1234`, `afterok=456:789`.  
 
