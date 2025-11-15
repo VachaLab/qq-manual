@@ -37,7 +37,7 @@ Displays a summary of all unfinished (queued, running, or exiting) jobs associat
 qq stat -e
 ```
 
-Includes extra information about the jobs in the output: the input machine (if available) and the input directory.
+Includes extra information about the jobs in the output: the input machine (if available), the input directory, and the job comment (if available).
 
 ```bash
 qq stat --all
