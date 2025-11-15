@@ -26,7 +26,7 @@ If `JOB_ID` is not provided, `qq sync` searches for qq jobs in the current direc
 
 #### Options
 
-`-f`, `--files` `TEXT` — A colon-, comma-, or space-separated list of files to fetch. If not specified, all files are fetched.
+`-f`, `--files` `TEXT` — A colon-, comma-, or space-separated list of files and directories to fetch. If not specified, the entire content of the working directory is fetched.
 
 ### Examples
 

@@ -49,6 +49,8 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths to files and directories to exclude must be relative to the input directory.
 
+`--include` `TEXT` —  A colon-, comma-, or space-separated list of files or directories that **should be** copied to the working directory even though they are not part of the job's input directory. These files will **not** be copied back to the input directory even after successful completion of the job. Paths to files and directories to include must be either absolute or relative to the input directory. This option is ignored if the input directory itself is used as the working directory.
+
 `--depend` `TEXT` — Specify job dependencies. You can provide one or more dependency expressions separated by commas, spaces, or both. Each expression should follow the format `<type>=<job_id>[:<job_id>...]`, for example: `after=1234`, `afterok=456:789`.  
 
 `--batch-system` `TEXT` — Name of the batch system to submit the job to. If not specified, qq will use the environment variable `QQ_BATCH_SYSTEM` or attempt to auto-detect it.  

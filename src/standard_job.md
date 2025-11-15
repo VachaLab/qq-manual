@@ -44,7 +44,7 @@ If the job failed (exit code other than 0), the working directory is left intact
 
 Regardless of the result, qq creates an output file (named after your script with the `.qqout` extension) in the input directory. This file contains basic information about what qq did and when the job finished. Depending on the batch system, this file may appear either after job completion (PBS) or immediately after the job starts being executed (Slurm).
 
-> The decision not to copy data from failed runs back to the input directory is a deliberate part of qq's design philosophy. It prevents temporary or partially written files from polluting the input directory and ensures you can rerun the job cleanly after fixing the issue. In some cases, your script may even modify input files during execution and copying them back after a failure would overwrite data necessary for rerun. If you need anything from a failed run, you can copy selected files — or the entire working directory — using `qq sync`.
+> The decision not to copy data from failed runs back to the input directory is a deliberate part of qq's design philosophy. It prevents temporary or partially written files from polluting the input directory and ensures you can rerun the job cleanly after fixing the issue. In some cases, your script may even modify input files during execution and copying them back after a failure would overwrite data necessary for rerun. If you need anything from a failed run, you can copy selected files — or the entire working directory — using [`qq sync`](qq_sync.md).
 
 ## Killing a qq job
 
@@ -58,9 +58,15 @@ After a job has completed successfully, you may want to submit a new one: for ex
 ERROR       Detected qq runtime files in the submission directory. Submission aborted.
 ```
 
-This behavior is intentional. qq enforces a one-job-per-directory policy to promote reproducibility and maintain organized workflows. Each job should reside in its own dedicated directory.
+This behavior is intentional. qq enforces a one-job-per-directory policy to promote reproducibility and maintain organized workflows. Each job should reside in its own dedicated directory. (*You can always override this policy by using `qq clear --force` but that is not recommended.*)
 
 If your previous job crashed or was terminated and you wish to rerun it, you can remove the existing qq runtime files using [`qq clear`](qq_clear.md).
+
+> Even analysis jobs that operate on results from earlier runs are recommended to be submitted from their own directories. Although qq copies only the files and directories located in the job’s input directory by default, you can explicitly include additional files or directories using the `--include` option of [`qq submit`](qq_submit.md). These included items are copied to the working directory for the duration of the job, but they are **not** copied back after job completion. This allows you to maintain a clean one-job-per-directory workflow while still accessing any extra data your analysis requires.
+>
+> Example directory structure:  
+> `simulation/1_run` → directory for the simulation job  
+> `simulation/2_analysis` → directory for the analysis job, submitted with `--include ../1_run`
 
 ## Additional notes
 
