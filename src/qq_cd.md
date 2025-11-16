@@ -6,8 +6,9 @@ The `qq cd` command is used to navigate to the input directory of a job. It is q
 
 > **Quick comparison with pgo**  
 > - Unlike `pgo`, `qq cd` does not have a dual function.  
->   `pgo` can either open a new shell on the job's main node or navigate to the job's input directory depending on the arguments provided.  
->   `qq cd`, on the other hand, always navigates to the input directory of the specified job in the current shell. It never opens a new shell.
+>   - `pgo` can either open a new shell on the job's main node or navigate to the job's input directory depending on the arguments provided.  
+>   - `qq cd`, on the other hand, always navigates to the **input directory** of the specified job in the current shell. It never opens a new shell.
+>   - If you want to open a shell in the job's working directory instead, use [`qq go`](qq_go.md).
 
 ***
 

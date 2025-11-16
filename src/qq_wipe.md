@@ -2,7 +2,7 @@
 
 The `qq wipe` command is used to delete working directories of qq jobs. It has no direct equivalent in Infinity.
 
-> It can be tricky to remember the difference between `qq wipe` and [`qq clear`](qq_clear.md). A helpful reminder: **W**ipe affects the **W**orking directory.
+> It can be tricky to remember the difference between `qq wipe` and [`qq clear`](qq_clear.md). This might be useful: **W**ipe affects the **W**orking directory.
 
 ### Description
 

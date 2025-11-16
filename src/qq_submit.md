@@ -19,7 +19,8 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >   qq submit -q cpu run_script --ncpus=8 --walltime=12h --props=cl_zero
 >   ```
 >
-> - Options can also be specified directly in the submitted script, or as a mix of in-script and command-line definitions. Command-line options always take precedence.
+> - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
+> - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory.
 
 ***
 
@@ -33,7 +34,7 @@ qq submit [OPTIONS] SCRIPT
 
 **SCRIPT** — Path to the script to submit.
 
-The submitted script must contain the [`qq run` shebang](qq_run.md).
+The submitted script must contain the [qq run shebang](qq_run.md). You can add it to your script by running [`qq shebang SCRIPT`](qq_shebang.md).
 
 When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for tracking the job’s state.
 

@@ -1,6 +1,6 @@
 # qq shebang
 
-The `qq shebang` command is a small utility for converting regular scripts into qq-compatible scripts. It has no direct equivalent in Infinity.
+The `qq shebang` command is a utility for converting regular scripts into qq-compatible scripts. It has no direct equivalent in Infinity.
 
 ### Description
 

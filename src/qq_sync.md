@@ -6,6 +6,7 @@ The `qq sync` command fetches files from a job's working directory to its input 
 
 > **Quick comparison with psync**
 > - Unlike `psync`, `qq sync` fetches **all files** from the working directory by default.
+> - You can use `qq sync` with a job ID to fetch files from the job's working directory to its input directory without having to actually navigate to its input directory.
 > - If you want to fetch only specific files, you cannot select them interactively — you must provide a list of filenames when running `qq sync`.
 
 ***

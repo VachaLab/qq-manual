@@ -5,7 +5,7 @@ The `qq stat` command displays information about jobs from all users. It is qq's
 ***
 
 > **Quick comparison with pqstat**
-> - The same differences that apply between `qq jobs` and `pjobs` also apply here.
+> - The same differences that apply between [`qq jobs`](qq_jobs.md) and `pjobs` also apply here.
 
 ***
 
