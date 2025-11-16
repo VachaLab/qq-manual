@@ -46,7 +46,7 @@ Displays a summary of user2's unfinished jobs.
 qq jobs -e
 ```
 
-Includes extra information about your jobs in the output: the input machine (if available) and the input directory.
+Includes extra information about your jobs in the output: the input machine (if available), the input directory, and the job comment (if available).
 
 ```bash
 qq jobs --all

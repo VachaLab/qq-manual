@@ -5,7 +5,7 @@ The `qq stat` command displays information about jobs from all users. It is qq's
 ***
 
 > **Quick comparison with pqstat**
-> - The same differences that apply between `qq jobs` and `pjobs` also apply here.
+> - The same differences that apply between [`qq jobs`](qq_jobs.md) and `pjobs` also apply here.
 
 ***
 
@@ -37,7 +37,7 @@ Displays a summary of all unfinished (queued, running, or exiting) jobs associat
 qq stat -e
 ```
 
-Includes extra information about the jobs in the output: the input machine (if available) and the input directory.
+Includes extra information about the jobs in the output: the input machine (if available), the input directory, and the job comment (if available).
 
 ```bash
 qq stat --all

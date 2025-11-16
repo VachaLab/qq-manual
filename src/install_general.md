@@ -72,3 +72,10 @@ qq() {
     fi
 }
 ```
+
+If you want the autocomplete for the `qq` commands to work, add the following line to your shell's RC file:
+```bash
+eval "$(_QQ_COMPLETE=bash_source qq)"
+```
+
+To finish the installation, either open a new terminal or source your `.bashrc` file.

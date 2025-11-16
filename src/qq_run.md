@@ -2,7 +2,7 @@
 
 The `qq run` command represents the execution environment in which a qq job runs. It is qq's equivalent of Infinity's `infex` script and the `infinity-env`.
 
-You should not invoke `qq run` directly. Instead, every script submitted with `qq submit` must include the following shebang line:
+You should not invoke `qq run` directly. Instead, every script submitted with [`qq submit`](qq_submit.md) must include the following shebang line:
 
 ```bash
 #!/usr/bin/env -S qq run

@@ -6,9 +6,10 @@ The `qq go` command is used to navigate to the working directory of a job. It is
 
 > **Quick comparison with pgo**  
 > - Unlike `pgo`, `qq go` does not have a dual function.  
->   `pgo` can either open a new shell on the job's main node or navigate to the job's input directory depending on the arguments provided.
->   `qq go`, on the other hand, always opens a new shell on the job's main node in the working directory.
->   If you want to navigate to the input directory instead, use `qq cd`.
+>   - `pgo` can either open a new shell on the job's main node or navigate to the job's input directory depending on the arguments provided.
+>   - `qq go`, on the other hand, always opens a new shell in the job's **working directory** (on the job's main node, if available).
+>   - If you want to navigate to the input directory instead, use [`qq cd`](qq_cd.md).
+> - If you use `qq go` with a job ID, a new shell in the job's working directory will be opened.
 > - `qq go` always attempts to access the job's working directory if it exists, even if the job has failed or been killed — no `--force` option is required.
 
 ***

@@ -37,7 +37,7 @@ After the submitted script finishes successfully, qq moves **all** files matchin
 
 In summary, unlike with Infinity, you do not need to explicitly fetch files from and to the archive, you just need to name them accordingly and qq will archive them automatically.
 
-If the script fails or the job is killed, no archival is performed. All files remain in the working directory, as with standard jobs.
+If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](runtime_files.md) are copied to the input directory.
 
 ## Resubmiting
 
@@ -51,7 +51,7 @@ If the current cycle of the loop job corresponds to `loop-end`, no resubmission 
 
 Sometimes, after a job completes *N* cycles, you may realize you need *M* more. To extend the job, simply submit it again from the same input directory with `loop-end` set to *N + M*, either on the command line or in the submission script.  
 
-**Importantly:** you do not need to delete any runtime files from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
+**Importantly:** you do not need to [delete any runtime files](standard_job.md#submitting-the-next-job) from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
 
 ## Forcing qq to not resubmit
 

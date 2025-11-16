@@ -31,6 +31,8 @@ gmx_mpi grompp -f md.mdp -c eq.gro -t eq.cpt -n index.ndx -p system.top -o md.tp
 gmx_mpi mdrun -deffnm md -ntomp 8 -v
 ```
 
+> **Hint:** You can use the [`qq shebang`](qq_shebang.md) command to easily add the qq run shebang to your script.
+
 Save this file as `run_job.sh` and make it executable:
 ```bash
 chmod u+x run_job.sh
@@ -46,6 +48,8 @@ qq submit run_job.sh -q cpu --ncpus 8 --walltime 1d
 
 This submits `run_job.sh` to the `cpu` queue, requesting 8 CPU cores and a walltime of one day. All other parameters are determined by the queue or qq’s default settings.
 
+> Note that on Karolina and LUMI, you also have to specify the `--account` option, providing the ID of the project you are associated with.
+
 The batch system then schedules the job for execution. Once a suitable compute node is available, the job runs through [`qq run`](qq_run.md), a wrapper around bash that prepares the [working directory](work_dir.md), copies files, executes the script, and performs cleanup. You can read more about how exactly this works in [this section](standard_job.md) of the manual.
 
 ## 4. Inspecting the job
@@ -56,10 +60,10 @@ After submission, you can inspect the job using [`qq info`](qq_info.md), access 
 
 Once the job finishes, the resulting Gromacs output files will be transferred from the working directory back to the original input directory. You can verify that everything completed successfully using [`qq info`](qq_info.md).
 
-If your job failed (crashed) or was killed, the output files will **not** be transferred to ensure your input directory remains in a consistent state. In these cases, the working directory on the compute node is preserved, allowing you to inspect the job files directly there using [`qq go`](qq_go.md), or to explicitly copy them back to the input directory using [`qq sync`](qq_sync.md).
+If your job failed (crashed) or was killed, only the [qq runtime files](runtime_files.md) are transferred to the input directory to ensure it remains in a consistent state. In these cases, the working directory on the compute node is preserved, allowing you to inspect the job files directly using [`qq go`](qq_go.md) or to copy them back to the input directory using [`qq sync`](qq_sync.md). On some systems, you may also want to explicitly delete the working directory afterward — to do this, use [`qq wipe`](qq_wipe.md).
 
 ***
 
 ## Run scripts
 
-For more complex setups — particularly for running Gromacs simulations in loops — [qq provides several ready-to-use run scripts](run_scripts.md). These scripts are fully compatible with all qq-supported clusters, including both Metacentrum-family clusters and Karolina.
+For more complex setups — particularly for running Gromacs simulations in loops — [qq provides several ready-to-use run scripts](run_scripts.md). These scripts are fully compatible with all qq-supported clusters, including Metacentrum-family clusters, Karolina, and LUMI.

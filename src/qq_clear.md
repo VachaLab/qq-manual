@@ -5,10 +5,10 @@ The `qq clear` command is used to remove qq runtime files from the current direc
 ***
 
 > **Quick comparison with premovertf**  
-> - `qq clear` checks whether the qq runtime files belong to an active or successfully completed qq job.  
->   If they do **not**, the files are deleted without asking for confirmation.  
->   Otherwise, qq prints an error and asks you to rerun the command with `--force`.  
->   In contrast, `premovertf` simply lists the files and always asks for confirmation before deleting them (unless run as `premovertf -f`).
+> - `qq clear` checks whether the qq runtime files belong to an **active** or **successfully completed** qq job.
+>   - If they **do**, the files are **not** deleted (if you *really* want to delete them, you have to use the `--force` flag).  
+>   - If they do **not**, the files are deleted without asking for confirmation.  
+>   - In contrast, `premovertf` simply lists the files and always asks for confirmation before deleting them (unless run as `premovertf -f`).
 
 ***
 

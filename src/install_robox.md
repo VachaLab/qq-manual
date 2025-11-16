@@ -1,6 +1,6 @@
-# Installing on robox
+# Installing on Robox
 
-To install qq on the robox cluster (computers of the RoVa Lab), log in to your desktop and run:
+To install qq on the Robox cluster (computers of the RoVa Lab), log in to your desktop and run:
 
 ```bash
 curl -fsSL https://github.com/Ladme/qq/releases/latest/download/qq-robox-install.sh | bash

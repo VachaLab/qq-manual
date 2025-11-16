@@ -1,4 +1,4 @@
-# Installing on karolina
+# Installing on Karolina
 
 To install qq on the Karolina supercomputer (IT4Innovations), log in to `karolina.it4i.cz` and run:
 
