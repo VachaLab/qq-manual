@@ -62,7 +62,7 @@ After your simulations finish, you may find that you want them to continue for a
 
 ### qq_loop_md / qq_loop_re
 
-Prolonging simulations run with `qq_loop_*` scripts is straightforward. Increase the value in the `# qq loop-end ...` directive to extend the total number of cycles, then submit the loop script again using [`qq submit`](qq_submit.md). The loop job will resume from the next cycle.
+Prolonging simulations run with `qq_loop_*` scripts is straightforward. Increase the value in the `# qq loop-end ...` directive to extend the total number of cycles, then submit the loop script again using [`qq submit`](qq_submit.md). You do not need to remove the runtime files in the directory. The loop job will resume from the next cycle.
 
 ### qq_flex_md / qq_flex_re
 
@@ -82,4 +82,4 @@ If you are using `qq_flex_re`, you must update `tpr` files for all clients creat
 md<NEXT_CYCLE_NUMBER>-<DIRECTORY_IDENTIFIER>.tpr
 ```
 
-Once the `tpr` files are updated, simply submit the flex script again using [`qq submit`](qq_submit.md).
+Once the `tpr` files are updated, simply submit the flex script again using [`qq submit`](qq_submit.md). You do not need to remove the runtime files in the directory.
