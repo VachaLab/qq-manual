@@ -21,7 +21,7 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >
 > - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
 > - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory.
-> - `qq submit` has a better support for multi-node jobs as it allows specifying resource requirements per requested node.
+> - `qq submit` has better support for multi-node jobs than `psubmit` as it allows specifying resource requirements per requested node.
 
 ***
 

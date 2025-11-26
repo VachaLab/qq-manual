@@ -37,4 +37,5 @@
     - [qq wipe](qq_wipe.md)
 - [Configuration](config.md)
 - [Run scripts](run_scripts.md)
+- [Using qq in Python](scripting.md)
 - [Glossary](glossary.md)
