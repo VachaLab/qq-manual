@@ -14,7 +14,7 @@ A job script for running **single-directory Gromacs simulations** in loops.
 
 Start by preparing a directory containing all necessary input files, and place `qq_loop_md` inside it.
 
-In your `.mdp` file, specify the number of simulation steps to perform **in each cycle**. In the body of the script, set the total number of cycles to run (using the `qq loop-end` directive), define input filenames, specify the Gromacs module to load, and optionally adjust the number of MPI ranks and OpenMP threads to use. By default, qq assigns one MPI rank per node or GPU and divides the remaining CPU cores among these ranks as OpenMP threads.
+In your `.mdp` file, specify the number of simulation steps to perform **in each cycle**. In the body of the script, set the total number of cycles to run (using the `qq loop-end` directive), define input filenames, specify the Gromacs module to load, and optionally adjust the number of MPI ranks and OpenMP threads to use. By default, qq assigns one MPI rank per CPU core. If any GPUs are requested, one MPI rank per GPU is used and the remaining CPU cores are distributed among the MPI ranks as OpenMP threads.
 
 Once ready, submit the job with `qq submit`. The first cycle will be submitted and executed, and before it finishes, qq will automatically submit the next cycle. Read more about qq loop jobs [here](loop_job.md).
 
@@ -40,7 +40,7 @@ Place `qq_loop_re` in the **parent directory** containing your subdirectories. I
 
 This script is typically used for **replica exchange simulations** (hence the `re` in its name). You can thus also set the exchange attempt frequency and choose whether to perform Hamiltonian replica exchange.
 
-Note that by default, `qq_loop_re` and `qq_flex_re` scripts use a single MPI rank per the specified subdirectory or GPU.
+Note that by default, `qq_loop_re` and `qq_flex_re` scripts use a single MPI rank per GPU (if requested) or per CPU core.
 
 The total simulation length after all cycles finish equals: (steps per cycle in the `.mdp` file) × (number of cycles).
 

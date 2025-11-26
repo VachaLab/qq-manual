@@ -21,6 +21,7 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >
 > - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
 > - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory.
+> - `qq submit` has better support for multi-node jobs than `psubmit` as it allows specifying resource requirements per requested node.
 
 ***
 
@@ -44,48 +45,56 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `-q`, `--queue` `TEXT` — Name of the queue to submit the job to.  
 
-`--account` `TEXT` — Account to use for the job. Required only in environments with accounting systems (e.g., IT4Innovations).  
+`--account` `TEXT` — Account to use for the job. Required only in environments with accounting (e.g., IT4Innovations).  
 
 `--job-type` `TEXT` — Type of the qq job. Defaults to `standard`.  
 
-`--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths to files and directories to exclude must be relative to the input directory.
+`--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths must be relative to the input directory.
 
-`--include` `TEXT` —  A colon-, comma-, or space-separated list of files or directories that **should be** copied to the working directory even though they are not part of the job's input directory. These files will **not** be copied back to the input directory even after successful completion of the job. Paths to files and directories to include must be either absolute or relative to the input directory. This option is ignored if the input directory itself is used as the working directory.
+`--include` `TEXT` — A colon-, comma-, or space-separated list of files or directories that **should** be copied to the working directory even though they are not part of the input directory. These files will **not** be copied back after the job finishes Paths may be absolute or relative to the input directory. Ignored if the input directory is used directly as the working directory.
 
-`--depend` `TEXT` — Specify job dependencies. You can provide one or more dependency expressions separated by commas, spaces, or both. Each expression should follow the format `<type>=<job_id>[:<job_id>...]`, for example: `after=1234`, `afterok=456:789`.  
+`--depend` `TEXT` — Job dependency specification. You may provide one or more dependency expressions separated by commas or spaces. Each expression uses the format `<type>=<job_id>[:<job_id>...]`, e.g.: `after=1234`, `afterok=456:789`.
 
-`--batch-system` `TEXT` — Name of the batch system to submit the job to. If not specified, qq will use the environment variable `QQ_BATCH_SYSTEM` or attempt to auto-detect it.  
+`--batch-system` `TEXT` — Name of the batch system to submit the job to. If not provided, qq will use the environment variable `QQ_BATCH_SYSTEM` or attempt to auto-detect the system.
 
 ##### Requested resources
 
 `--nnodes` `INTEGER` — Number of compute nodes to allocate for the job.  
 
-`--ncpus` `INTEGER` — Number of CPU cores to allocate for the job.  
+`--ncpus-per-node` `INTEGER` — Number of CPU cores to allocate per requested node.
 
-`--mem-per-cpu` `TEXT` — Amount of memory to allocate per CPU core. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `2gb`).  
+`--ncpus` `INTEGER` — Total number of CPU cores to allocate for the job. Overrides `--ncpus-per-node`.
 
-`--mem` `TEXT` — Total memory to allocate for the job. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `10gb`). Overrides `--mem-per-cpu`.  
+`--mem-per-cpu` `TEXT` — Memory per CPU core. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `2gb`).  
 
-`--ngpus` `INTEGER` — Number of GPUs to allocate for the job.  
+`--mem-per-node` `TEXT` — Memory per node. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `32gb`). Overrides `--mem-per-cpu`.
 
-`--walltime` `TEXT` — Maximum runtime allowed for the job.  
+`--mem` `TEXT` — Total memory for the job. Specify as `Nmb` or `Ngb` (e.g., `500mb`, `64gb`). Overrides both `--mem-per-cpu` and `--mem-per-node`.
 
-`--work-dir`, `--workdir` `TEXT` — Type of working directory to use for the job.  
+`--ngpus-per-node` `INTEGER` — Number of GPUs to allocate per requested node.
 
-`--work-size-per-cpu`, `--worksize-per-cpu` `TEXT` — Storage to allocate per CPU core. Specify as `Ngb` (e.g., `1gb`).  
+`--ngpus` `INTEGER` — Total number of GPUs to allocate for the job. Overrides `--ngpus-per-node`.
 
-`--work-size`, `--worksize` `TEXT` — Total storage to allocate for the job. Specify as `Ngb` (e.g., `10gb`). Overrides `--work-size-per-cpu`.  
+`--walltime` `TEXT` — Maximum allowed runtime for the job. Examples: `1d`, `12h`, `10m`, `24:00:00`, `12:00:00`, `00:10:00`.
 
-`--props` `TEXT` — Colon-, comma-, or space-separated list of node properties required (e.g., `cl_two`) or prohibited (e.g., `^cl_two`) for the job.  
+`--work-dir`, `--workdir` `TEXT` — Working directory type for the job. Available types [depend on the environment](work_dir.md).
+
+`--work-size-per-cpu`, `--worksize-per-cpu` `TEXT` — Storage per CPU core. Specify as `Ngb` (e.g., `1gb`).  
+
+`--work-size-per-node`, `--worksize-per-node` `TEXT` — Storage per node. Specify as `Ngb` (e.g., `32gb`). Overrides `--work-size-per-cpu`.
+
+`--work-size`, `--worksize` `TEXT` — Total storage for the job. Specify as `Ngb` (e.g., `64gb`). Overrides both `--work-size-per-cpu` and `--work-size-per-node`.
+
+`--props` `TEXT` — Colon-, comma-, or space-separated list of required or prohibited node properties (e.g., `cl_two` or `^cl_two`).
 
 ##### Loop options  
-*(Only used when `job-type` is set to `loop`.)*
+*(Only used when `--job-type` is set to `loop`.)*
 
-`--loop-start` `INTEGER` — Starting cycle number for a loop job. Defaults to `1`.  
+`--loop-start` `INTEGER` — Starting cycle number. Defaults to `1`.  
 
-`--loop-end` `INTEGER` — Ending cycle number for a loop job.  
+`--loop-end` `INTEGER` — Ending cycle number.  
 
-`--archive` `TEXT` — Directory name used for archiving files in a loop job. Defaults to `storage`.  
+`--archive` `TEXT` — Directory used for archiving loop-job files. Defaults to `storage`.  
 
 `--archive-format` `TEXT` — Filename format for archived files. Defaults to `job%04d`.  
 
