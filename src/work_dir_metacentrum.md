@@ -20,10 +20,11 @@ For more details on scratch storage types available on Metacentrum-family cluste
 ### Local, SSD, and shared scratch
 By default, qq allocates **1 GB of storage per CPU core** when using a scratch directory. If you need a different amount of storage, you can adjust it using the following [`qq submit`](qq_submit.md) options:
 
-- `--work-size-per-cpu` (or `--worksize-per-cpu`) — specifies the amount of storage per CPU core.  
-- `--work-size` (or `--worksize`) — specifies the total amount of storage for the entire job.  
+- `--work-size-per-cpu` (or `--worksize-per-cpu`) — specifies the amount of storage per requested CPU core.
+- `--work-size-per-node` (or `--worksize-per-node`) — specifies the amount of storage per requested compute node.
+- `--work-size` (or `--worksize`) — specifies the total amount of storage for the entire job.
 
-> `--work-size` overrides `--work-size-per-cpu`.
+> `--work-size-per-node` overrides `--work-size-per-cpu`. `--work-size` overrides both `--work-size-per-cpu` and `--work-size-per-node`.
 
 **Example:**
 
@@ -34,9 +35,9 @@ qq submit --work-size-per-cpu=2gb (...)
 ```
 
 ### In-memory scratch
-If you use `--work-dir=scratch_shm`, you should allocate memory instead of `work-size`, using the `mem` or `mem-per-cpu` options. Make sure the total allocated memory covers both your program’s memory usage **and** your in-memory storage needs. By default, qq allocates **1 GB of RAM per CPU core** for all jobs.
+If you use `--work-dir=scratch_shm`, you should allocate memory instead of `work-size`, using the `mem`, `mem-per-node`, or `mem-per-cpu` options. Make sure the total allocated memory covers both your program’s memory usage **and** your in-memory storage needs. By default, qq allocates **1 GB of RAM per CPU core** for all jobs.
 
-> `--mem` overrides `--mem-per-cpu`.
+> `--mem-per-node` overrides `--mem-per-cpu`. `--mem` overrides both `--mem-per-cpu` and `--mem-per-node`.
 
 **Example:**
 
