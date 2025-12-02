@@ -31,7 +31,7 @@ qq stat [OPTIONS]
 qq stat
 ```
 
-Displays a summary of all unfinished (queued, running, or exiting) jobs associated with the current batch server.
+Displays a summary of all unfinished (queued, running, or exiting) jobs associated with the current batch server. The display looks similar to the display of [`qq jobs`](qq_jobs.md#description-of-the-output).
 
 ```bash
 qq stat -e

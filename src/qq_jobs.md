@@ -34,7 +34,11 @@ qq jobs [OPTIONS]
 qq jobs
 ```
 
-Displays a summary of your unfinished jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the current batch server.
+Displays a summary of your unfinished jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the current batch server. This is what the output might look like:
+
+![Example of qq jobs output](img/qq_jobs.png)
+
+*For a detailed description of the output, see below.*
 
 ```bash
 qq jobs -u user2
@@ -52,7 +56,11 @@ Includes extra information about your jobs in the output: the input machine (if 
 qq jobs --all
 ```
 
-Displays a summary of all your jobs in the batch system, both unfinished and finished. Note that the batch system eventually removes records of finished jobs, so they may disappear from the output over time.
+Displays a summary of all your jobs in the batch system, both unfinished and finished. Note that the batch system eventually removes records of finished jobs, so they may disappear from the output over time. This is what the output might look like:
+
+![Example of qq jobs output](img/qq_jobs_all.png)
+
+*For a detailed description of the output, see below.*
 
 ```bash
 qq jobs --yaml
@@ -65,3 +73,10 @@ Prints a summary of your unfinished jobs in YAML format. This output contains al
 - This command lists all types of jobs, including those submitted using `qq submit` and jobs created through other tools.  
 - The run times and job states may not exactly match the output of `qq info`, since `qq jobs` relies solely on batch system data and does not use qq info files.
 
+### Description of the output
+
+![Example and a description of qq jobs output](img/qq_jobs_description.png)
+
+- The output of [`qq stat`](qq_stat.md) is the same, except that it displays the jobs of all users.
+- You can control which columns are displayed and customize the appearance of the output using a [configuration file](config.md).
+- Note that the `%CPU` and `%Mem` columns are not available on systems using Slurm (Karolina, LUMI).
