@@ -34,11 +34,13 @@ qq jobs [OPTIONS]
 qq jobs
 ```
 
-Displays a summary of your unfinished jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the current batch server. This is what the output might look like:
+Displays a summary of your unfinished jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the current batch server. 
+
+This is what the output might look like:
 
 ![Example of qq jobs output](img/qq_jobs.png)
 
-*For a detailed description of the output, see below.*
+*For a detailed description of the output, see [below](#description-of-the-output).*
 
 ```bash
 qq jobs -u user2
@@ -60,7 +62,7 @@ Displays a summary of all your jobs in the batch system, both unfinished and fin
 
 ![Example of qq jobs output](img/qq_jobs_all.png)
 
-*For a detailed description of the output, see below.*
+*For a detailed description of the output, see [below](#description-of-the-output).*
 
 ```bash
 qq jobs --yaml

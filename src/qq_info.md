@@ -35,9 +35,11 @@ qq info 740173
 
 Displays the full information panel for the job with ID `740173`. You can use either the short ID or the full ID including the batch server address. This only works if the job is a qq job with a valid and accessible info file, and the associated batch server is reachable from the current machine.
 
-The output might look like this:
+This is what the output might look like:
 
 ![Example of qq info output](img/qq_info_2.png)
+
+*For a detailed description of the output, see [below](#description-of-the-output).*
 
 ```bash
 qq info
@@ -45,9 +47,11 @@ qq info
 
 Displays the full information panel for all jobs whose info files are present in the current directory.
 
-The output might look like this:
+This is what the output might look like:
 
 ![Example of qq info output](img/qq_info_1.png)
+
+*For a detailed description of the output, see [below](#description-of-the-output).*
 
 ```bash
 qq info -s
@@ -58,3 +62,5 @@ Displays short information for all jobs whose info files are present in the curr
 ### Description of the output
 
 ![Example and a description of qq info output](img/qq_info_description.png)
+
+- You can customize the appearance of the output using a [configuration file](config.md).
