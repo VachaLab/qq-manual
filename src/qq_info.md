@@ -30,10 +30,14 @@ If `JOB_ID` is not provided, `qq info` searches for qq jobs in the current direc
 ### Examples
 
 ```bash
-qq info 123456
+qq info 740173
 ```
 
-Displays the full information panel for the job with ID `123456`. You can use either the short ID or the full ID including the batch server address. This only works if the job is a qq job with a valid and accessible info file, and the associated batch server is reachable from the current machine.
+Displays the full information panel for the job with ID `740173`. You can use either the short ID or the full ID including the batch server address. This only works if the job is a qq job with a valid and accessible info file, and the associated batch server is reachable from the current machine.
+
+The output might look like this:
+
+![Example of qq info output](img/qq_info_2.png)
 
 ```bash
 qq info
@@ -41,8 +45,16 @@ qq info
 
 Displays the full information panel for all jobs whose info files are present in the current directory.
 
+The output might look like this:
+
+![Example of qq info output](img/qq_info_1.png)
+
 ```bash
 qq info -s
 ```
 
 Displays short information for all jobs whose info files are present in the current directory. Only the jobs' full IDs and their current states are shown.
+
+### Description of the output
+
+![Example and a description of qq info output](img/qq_info_description.png)
