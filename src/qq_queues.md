@@ -30,16 +30,29 @@ qq queues [OPTIONS]
 qq queues
 ```
 
-Displays a summary of all batch system queues to which you can submit jobs.
+Displays a summary of all batch system queues to which you can submit jobs. The output might look like this:
+
+![Example of qq queues output](img/qq_queues.png)
 
 ```bash
 qq queues --all
 ```
 
-Displays a summary of all queues in the batch system, including those you cannot submit to.
+Displays a summary of all queues in the batch system, including those you cannot submit to. The output might look like this *(truncated)*:
+
+![Example of qq queues output](img/qq_queues_all.png)
+
+*Output truncated.*
 
 ```bash
 qq queues --yaml
 ```
 
 Prints a summary of all available queues in YAML format. This output contains the full metadata provided by the batch system.
+
+### Description of the output
+
+![Example and a description of qq queues output](img/qq_queues_description.png)
+
+- The output may also contain the column `Comment` providing the comment associated with the queue (typically additional information about the queue).
+- `Max Nodes` column is hidden if no queue defines a maximal allowed number of requested nodes per job.
