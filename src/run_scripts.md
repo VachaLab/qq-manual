@@ -38,7 +38,7 @@ A job script for running **multi-directory Gromacs simulations** in loops. It fu
 
 Place `qq_loop_re` in the **parent directory** containing your subdirectories. In the script body, specify the naming pattern for the subdirectories (e.g., `win` for `win01`, `win02`, ..., `win42`, etc.).
 
-This script is typically used for **replica exchange simulations** (hence the `re` in its name). You can thus also set the exchange attempt frequency and choose whether to perform Hamiltonian replica exchange.
+This script is typically used for **replica exchange simulations** (hence the `re` in its name). You can thus also set the exchange attempt frequency and choose whether to perform Hamiltonian replica exchange. You can also use the script to run multiple-walker metadynamics or AWH.
 
 Note that by default, `qq_loop_re` and `qq_flex_re` scripts use a single MPI rank per GPU (if requested) or per CPU core.
 
