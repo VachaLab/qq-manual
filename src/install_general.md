@@ -5,8 +5,8 @@
 To install a pre-built version of qq on a single computer or on several computers sharing the same home directory, run:
 
 ```bash
-curl -fsSL https://github.com/Ladme/qq/releases/latest/download/qq-install.sh | \
-bash -s -- $HOME https://github.com/Ladme/qq/releases/latest/download/qq-release.tar.gz
+curl -fsSL https://github.com/VachaLab/qq/releases/latest/download/qq-install.sh | \
+bash -s -- $HOME https://github.com/VachaLab/qq/releases/latest/download/qq-release.tar.gz
 ```
 
 To finish the installation, either open a new terminal or source your `.bashrc` file.
@@ -17,7 +17,7 @@ If you're not using bash, you'll need to modify the `qq-install.sh` script.
 
 First, download it:
 ```bash
-curl -OL https://github.com/Ladme/qq/releases/latest/download/qq-install.sh
+curl -OL https://github.com/VachaLab/qq/releases/latest/download/qq-install.sh
 ```
 
 Then edit this line to match your shell's RC file:
@@ -30,7 +30,7 @@ BASHRC="${TARGET_HOME}/.zshrc"
 Next, make the script executable and run it:
 ```bash
 chmod u+x qq-install.sh
-./qq-install.sh $HOME https://github.com/Ladme/qq/releases/latest/download/qq-release.tar.gz
+./qq-install.sh $HOME https://github.com/VachaLab/qq/releases/latest/download/qq-release.tar.gz
 ```
 
 
@@ -39,7 +39,7 @@ To build and install qq yourself, you'll need `git` and [`uv`](https://docs.astr
 
 First, clone the qq repository:
 ```bash
-git clone git@github.com:Ladme/qq.git
+git clone git@github.com:VachaLab/qq.git
 ```
 
 Then navigate to the project directory and install the dependencies:

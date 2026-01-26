@@ -1,6 +1,6 @@
 # Run scripts
 
-The [qq GitHub repository](https://github.com/Ladme/qq/tree/main/scripts/run_scripts) provides several ready-to-use scripts for running [Gromacs](https://www.gromacs.org/) simulations in loops — similar to Infinity’s `precycle` scripts.
+The [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/run_scripts) provides several ready-to-use scripts for running [Gromacs](https://www.gromacs.org/) simulations in loops — similar to Infinity’s `precycle` scripts.
 
 These scripts are compatible with all qq-supported clusters, including Metacentrum-family clusters, Karolina, and LUMI. **Do not forget to load Gromacs from the module appropriate for the given cluster.**
 
@@ -8,7 +8,7 @@ These scripts are compatible with all qq-supported clusters, including Metacentr
 
 ---
 
-## [qq_loop_md](https://github.com/Ladme/qq/blob/main/scripts/run_scripts/qq_loop_md)
+## [qq_loop_md](https://github.com/VachaLab/qq/blob/main/scripts/run_scripts/qq_loop_md)
 
 A job script for running **single-directory Gromacs simulations** in loops.
 
@@ -22,7 +22,7 @@ The total simulation length after all cycles finish equals: (steps per cycle in 
 
 ---
 
-## [qq_flex_md](https://github.com/Ladme/qq/blob/main/scripts/run_scripts/qq_flex_md)
+## [qq_flex_md](https://github.com/VachaLab/qq/blob/main/scripts/run_scripts/qq_flex_md)
 
 A job script for running **single-directory Gromacs simulations** in flexible-length loops.
 
@@ -32,7 +32,7 @@ The total simulation length after all cycles finish corresponds to the number of
 
 ---
 
-## [qq_loop_re](https://github.com/Ladme/qq/blob/main/scripts/run_scripts/qq_loop_re)
+## [qq_loop_re](https://github.com/VachaLab/qq/blob/main/scripts/run_scripts/qq_loop_re)
 
 A job script for running **multi-directory Gromacs simulations** in loops. It functions like `qq_loop_md`, but instead of a single simulation, it manages multiple simulations across several subdirectories.
 
@@ -46,7 +46,7 @@ The total simulation length after all cycles finish equals: (steps per cycle in 
 
 ---
 
-## [qq_flex_re](https://github.com/Ladme/qq/blob/main/scripts/run_scripts/qq_flex_re)
+## [qq_flex_re](https://github.com/VachaLab/qq/blob/main/scripts/run_scripts/qq_flex_re)
 
 A job script for running **multi-directory Gromacs simulations** in flexible-length loops — essentially a hybrid of `qq_loop_re` and `qq_flex_md`.
 

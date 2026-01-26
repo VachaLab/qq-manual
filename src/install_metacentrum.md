@@ -3,7 +3,7 @@
 To install qq on Metacentrum, log in to any Metacentrum frontend and run:
 
 ```bash
-curl -fsSL https://github.com/Ladme/qq/releases/latest/download/qq-metacentrum-install.sh | bash
+curl -fsSL https://github.com/VachaLab/qq/releases/latest/download/qq-metacentrum-install.sh | bash
 ```
 
 This command downloads the latest version of qq and installs it into your home directory on `brno12-cerit`. The script then adds qq's location on this storage to your `PATH` across all Metacentrum machines.

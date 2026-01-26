@@ -3,7 +3,7 @@
 To install qq on the Robox cluster (computers of the RoVa Lab), log in to your desktop and run:
 
 ```bash
-curl -fsSL https://github.com/Ladme/qq/releases/latest/download/qq-robox-install.sh | bash
+curl -fsSL https://github.com/VachaLab/qq/releases/latest/download/qq-robox-install.sh | bash
 ```
 
 This command downloads the latest version of qq, installs it to your home directory on your desktop, and then installs it to the home directory of the computing nodes.

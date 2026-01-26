@@ -30,7 +30,7 @@ See all configurable options [below](#all-configurable-options).
 
 ## Themes
 
-Does writing your own configuration seem to complex? qq provides few ready-to-use themes, available from [github.com/Ladme/qq/tree/main/themes](https://github.com/Ladme/qq/tree/main/themes).
+Does writing your own configuration seem to complex? qq provides few ready-to-use themes, available from [github.com/VachaLab/qq/tree/main/themes](https://github.com/VachaLab/qq/tree/main/themes).
 
 Available themes include:
 

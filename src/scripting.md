@@ -7,13 +7,13 @@ The recommended way to use `qq_lib` is to use the [uv package manager](https://d
 To add `qq_lib` to your project:
 
 ```bash
-uv add git+https://github.com/Ladme/qq.git --tag v0.6.0
+uv add git+https://github.com/VachaLab/qq.git --tag v0.6.2
 ```
 
 Alternatively, you can add it directly to a specific script:
 
 ```bash
-uv add git+https://github.com/Ladme/qq.git --tag v0.6.0 --script [YOUR_SCRIPT].py
+uv add git+https://github.com/VachaLab/qq.git --tag v0.6.2 --script [YOUR_SCRIPT].py
 ```
 
 Then import qq classes and utilities in your Python code:
@@ -37,11 +37,11 @@ See the [Python API documentation](https://qq.readthedocs.io/) for details on av
 
 ## Official qq scripts
 
-qq offers several official helper scripts built on top of `qq_lib`. These tools automate common workflows—especially useful when running many Gromacs simulations—but are not part of core qq functionality. You can find them in the [qq GitHub repository](https://github.com/Ladme/qq/tree/main/scripts/qq_scripts).
+qq offers several official helper scripts built on top of `qq_lib`. These tools automate common workflows—especially useful when running many Gromacs simulations—but are not part of core qq functionality. You can find them in the [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts).
 
 Again, the recommended approach is to use the [uv package manager](https://docs.astral.sh/uv/getting-started/installation/). If you have `uv` installed, download the script, make it executable (`chmod u+x SCRIPT`), and run it (`./SCRIPT`). If you use the scripts frequently, consider adding their directory to your `PATH`.
 
-## [gmx-eta](https://github.com/Ladme/qq/tree/main/scripts/qq_scripts/gmx-eta)
+## [gmx-eta](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/gmx-eta)
 
 `gmx-eta` estimates the remaining runtime of a Gromacs simulation. Run it in a directory containing a qq job, or supply a specific job ID.
 
@@ -68,7 +68,7 @@ Simulation will finish in 06:41:07.
 
 ---
 
-## [multi-check](https://github.com/Ladme/qq/tree/main/scripts/qq_scripts/multi-check)
+## [multi-check](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-check)
 
 `multi-check` scans multiple directories for qq jobs and reports their collective status. It uses multithreading to significantly speed up job-state inspection compared to checking jobs individually.
 
@@ -142,7 +142,7 @@ COULD NOT FIX             0
 
 ---
 
-## [multi-submit](https://github.com/Ladme/qq/tree/main/scripts/qq_scripts/multi-submit)
+## [multi-submit](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-submit)
 
 `multi-submit` submits qq jobs from multiple directories in bulk. All jobs must use the same submission script name and request identical resources. The resource specification from the *first* submitted job is applied to all others.
 
@@ -174,7 +174,7 @@ COULD NOT SUBMIT          0
 
 ---
 
-## [multi-kill](https://github.com/Ladme/qq/tree/main/scripts/qq_scripts/multi-kill)
+## [multi-kill](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-kill)
 
 `multi-kill` terminates qq jobs across multiple directories in parallel. Because it uses multithreading, it is significantly faster than running `qq kill` for each job independently.
 
