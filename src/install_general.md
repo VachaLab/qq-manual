@@ -60,7 +60,7 @@ If you want the `qq cd` command to work, add the following shell function to you
 qq() {
     if [[ "$1" == "cd" ]]; then
         for arg in "$@"; do
-            if [[ "$arg" == "--help" ]]; then
+            if [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
                 command qq "$@"
                 return
             fi
