@@ -16,7 +16,7 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >
 >   **qq:**
 >   ```bash
->   qq submit -q cpu run_script --ncpus=8 --walltime=12h --props=cl_zero
+>   qq submit -q cpu run_script --ncpus 8 --walltime 12h --props cl_zero
 >   ```
 >
 > - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
@@ -117,9 +117,9 @@ All qq directives must appear at the beginning of the script, before any executa
 # qq archive storage
 # qq archive-format md%04d
 
-# qq ncpus=8
-# qq ngpus=1
-# qq walltime=1d
+# qq ncpus 8
+# qq ngpus 1
+# qq walltime 1d
 
 metamodule add ...
 ```
