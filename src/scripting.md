@@ -7,13 +7,13 @@ The recommended way to use `qq_lib` is to use the [uv package manager](https://d
 To add `qq_lib` to your project:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.7.1
+uv add git+https://github.com/VachaLab/qq.git --tag v0.7.2
 ```
 
 Alternatively, you can add it directly to a specific script:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.7.1 --script [YOUR_SCRIPT].py
+uv add git+https://github.com/VachaLab/qq.git --tag v0.7.2 --script [YOUR_SCRIPT].py
 ```
 
 Then import qq classes and utilities in your Python code:

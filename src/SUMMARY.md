@@ -39,3 +39,4 @@
 - [Run scripts](run_scripts.md)
 - [Using qq in Python](scripting.md)
 - [Glossary](glossary.md)
+- [Common issues](common_issues.md)
