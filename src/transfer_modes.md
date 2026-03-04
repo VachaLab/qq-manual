@@ -4,7 +4,7 @@
 
 As described in various sections of this manual, if your job creates its own [working directory](work_dir.md) (e.g., on scratch), the data produced during the job's execution are transferred back to the input directory **only if the job finishes successfully** (with exit code `0`, or the value of the `QQ_NO_RESUBMIT` environment variable in the case of loop jobs). The working directory is then removed and can no longer be accessed.
 
-If the job fails (i.e., finishes with an exit code other than `0`), no data are transferred to the input directory (except for [qq runtime files](runtime_files.md)). Instead, the files remain in the working directory. You can then inspect the working directory to determine what went wrong using [`qq go`](qq_go.md), fetch the data manually using [`qq sync`](qq_sync.md), or delete the working directory using [`qq wipe`](qq_wipe.md).
+If the job fails (i.e., finishes with an exit code other than `0`), no data are transferred to the input directory (except for [qq runtime files](runtime_files.md)). Instead, the files remain in the working directory. You can then navigate to the working directory to determine what went wrong using [`qq go`](qq_go.md), fetch the data manually using [`qq sync`](qq_sync.md), or delete the working directory using [`qq wipe`](qq_wipe.md).
 
 In some situations, it may be useful to automatically transfer files even from failed jobs. In other cases, you may want the opposite behavior—never transfer files automatically and always keep them in the working directory. To support these use cases, qq allows you to specify a **transfer mode** when submitting a job. The transfer mode determines how file transfer should be handled.
 
