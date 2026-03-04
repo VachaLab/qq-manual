@@ -20,7 +20,7 @@ If you requested the job to run on scratch (the default option for all environme
 
 Once the working directory is ready, qq updates the info file to mark the job state as `running`. Only then is your submitted script executed.
 
-> In all environments supported by qq, the working directory is placed on scratch storage by default. This is typically not only faster but also safer — qq generally recommends keeping the job execution environment separate from the input directory until the job finishes successfully. This ensures that, if something goes wrong, your original input data remain untouched — no matter what your executed script did. However, all qq-supported environments also allow you to use `--workdir=input_dir` if you prefer to run directly in the input directory.
+> In all environments supported by qq, the working directory is placed on scratch storage by default. This is typically not only faster but also safer — qq generally recommends keeping the job execution environment separate from the input directory until the job finishes successfully. This ensures that, if something goes wrong, your original input data remain untouched — no matter what your executed script did. However, all qq-supported environments also allow you to use `--workdir=input_dir` if you prefer to run the job directly in the input directory.
 
 ## 3. Executing the script
 
@@ -38,13 +38,15 @@ If your job ran in the input directory, cleanup is simple: qq updates the job's 
 
 If your job ran on scratch, cleanup depends on the script's exit code.
 
-If the script finished successfully (exit code 0), all files from the working directory are copied back to the input directory, and the working directory is deleted. Finally, qq sets the job state to `finished`.
+By default, if the script finished successfully (exit code 0), all files from the working directory are copied back to the input directory, and the working directory is deleted. Finally, qq sets the job state to `finished`.
 
 If the job failed (exit code other than 0), the working directory is left intact on the execution machine for inspection (you can open it using [`qq go`](qq_go.md), download it using [`qq sync`](qq_sync.md), or delete it using [`qq wipe`](qq_wipe.md)). Only the [qq runtime files](runtime_files.md) with file extensions `.err` and `.out` are copied to the input directory so you can easily check what exactly went wrong during the execution. Finally, the job state is set to `failed`.
 
 Regardless of the result, qq creates an output file (named after your script with the `.qqout` extension) in the input directory. This file contains basic information about what qq did and when the job finished. Depending on the batch system, this file may appear either after job completion (PBS) or immediately after the job starts being executed (Slurm).
 
-> The decision not to copy data from failed runs back to the input directory is a deliberate part of qq's design philosophy. It prevents temporary or partially written files from polluting the input directory and ensures you can rerun the job cleanly after fixing the issue. In some cases, your script may even modify input files during execution and copying them back after a failure would overwrite data necessary for rerun. If you need anything from a failed run, you can copy selected files — or the entire working directory — using [`qq sync`](qq_sync.md).
+> The decision not to copy data from failed runs back to the input directory is a deliberate part of qq's design philosophy. It prevents temporary or partially written files from polluting the input directory and ensures you can rerun the job cleanly after fixing the issue. In some cases, your script may even modify input files during execution and copying them back after a failure would overwrite data necessary for rerun. If you need anything from a failed run, you can copy selected files — or the entire working directory — using [`qq sync`](qq_sync.md). 
+>
+> You can however change this default behavior by providing a different [transfer mode](transfer_modes.md) when submitting the job.
 
 ## Killing a qq job
 
