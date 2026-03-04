@@ -16,6 +16,7 @@
     - [Metacentrum family](work_dir_metacentrum.md)
     - [Karolina](work_dir_karolina.md)
     - [LUMI](work_dir_lumi.md)
+- [Transferring files from the working directory](transfer_modes.md)
 - [Job states](job_states.md)
 - [Runtime files](runtime_files.md)
 - [Environment variables](env_vars.md)

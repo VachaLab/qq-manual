@@ -14,7 +14,7 @@ Below are the meanings of the most common real states you may encounter:
 - **booting** – The job has been allocated computing nodes and the working directory is being prepared, but it is not yet ready.
 - **running** – The job is currently running; its script is being executed or the execution is being finalized.
 - **exiting** – `qq run` has finished executing or is submitting the next job cycle (for loop jobs), but the batch system hasn't completed the job yet.
-- **finished** – The job completed successfully (exit code 0) and data from the working directory were transferred to the input directory.
+- **finished** – The job completed successfully (exit code 0) and data from the working directory were transferred to the input directory (*if the default [transfer mode](transfer_modes.md) was used*).
 - **failed** – The job's execution failed (exit code > 0).
 - **killed** – The job was terminated by the user, an administrator, or the batch system.
 - **in an inconsistent state** – qq believes the job to be in a specific state which is incompatible with what the batch system reports. This usually indicates either a bug or that the job was manipulated outside qq.
