@@ -64,4 +64,4 @@ qq submit -q default (...) --transfer-mode always --archive-mode always qq_loop_
 
 The same modes are available for `--archive-mode` as for `--transfer-mode` (see [above](#transfer-modes)).
 
-> Remember that all qq options, including `--transfer-mode` and `--archive-mode`, can also be specified [inside the submitted script](qq_submit.md#specifying-options-in-the-script) using qq directives.
+> Remember that all qq options, including `--transfer-mode` and `--archive-mode`, can also be specified [inside the submitted script](qq_submit.md#specifying-options-in-the-script) using qq directives. You can also set the default transfer and archive mode for your jobs in the [QQ_CONFIG file](config.md) (this needs to be done on all machines from which you submit jobs).
