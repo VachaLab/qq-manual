@@ -37,7 +37,7 @@ After the submitted script finishes successfully, qq moves **all** files matchin
 
 In summary, unlike with Infinity, you do not need to explicitly fetch files from and to the archive, you just need to name them accordingly and qq will archive them automatically.
 
-If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](runtime_files.md) are copied to the input directory.
+If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](runtime_files.md) are copied to the input directory. Note that this behavior can be changed by providing a non-default [archival mode](transfer_modes.md#archive-modes).
 
 ## Resubmiting
 

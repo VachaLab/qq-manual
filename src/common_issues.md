@@ -5,7 +5,7 @@
 Here are some issues that you may encounter when installing or using `qq`.
 
 ## Submitted jobs fail on a node
-You submit a job, it starts being executed, and then it finishes way to quickly. `qq info` says that the job is in an inconsistent state, and your `.qqout` file contains the following output:
+You submit a job, it starts being executed, and then it finishes way too quickly. `qq info` says that the job is in an inconsistent state, and your `.qqout` file contains the following output:
 
 ```
 /usr/bin/env: 'qq': No such file or directory
@@ -53,7 +53,7 @@ If this block is not in the `.bashrc` file, first try reinstalling `qq` on the c
 
 3) **`qq` has been installed, `.bashrc` has been modified, but it is not read before executing the job.**
 
-This may indicate that when a job was run on the affected node, a login shell was opened instead of the typically used non-login shell. In such cases, the `.bashrc` file may not be read; instead, either the `.profile` or `.bash_profile` file will be read. We need to force the shell to read the `.bashrc` file. Add the following to both `.profile` and `.bash_profile`:
+This may indicate that when a job was run on the affected node, a login shell was opened instead of the typically used non-login shell. In such cases, the `.bashrc` file may not be read; instead, either the `.profile` or `.bash_profile` file will be read. We need to force the shell to read the `.bashrc` file. Connect to the affected **computing node**, go to your HOME directory (`cd ~`), and add the following to both `.profile` and `.bash_profile` located there:
 
 ```bash
 if [ -f ~/.bashrc ]; then

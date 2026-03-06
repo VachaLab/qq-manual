@@ -400,6 +400,14 @@ scratch_dir_attempts = 3
 # Number of attempts when preparing a working directory on scratch.
 scratch_dir_attempts = 3
 
+##############################################
+# Options associated with transferring and archiving files.
+##############################################
+[transfer_files_options]
+# Default transfer mode used for jobs.
+default_transfer_mode = "success"
+# Default archive mode used for jobs.
+default_archive_mode = "success"
 
 ##############################################
 # General configuration

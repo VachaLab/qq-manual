@@ -19,7 +19,7 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >   qq submit -q cpu run_script --ncpus 8 --walltime 12h --props cl_zero
 >   ```
 >
-> - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
+> - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence (including list options since qq v0.8).
 > - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory.
 > - `qq submit` has better support for multi-node jobs than `psubmit` as it allows specifying resource requirements per requested node.
 
@@ -54,6 +54,9 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 `--include` `TEXT` — A colon-, comma-, or space-separated list of files or directories that **should** be copied to the working directory even though they are not part of the input directory. These files will **not** be copied back after the job finishes Paths may be absolute or relative to the input directory. Ignored if the input directory is used directly as the working directory.
 
 `--depend` `TEXT` — Job dependency specification. You may provide one or more dependency expressions separated by commas or spaces. Each expression uses the format `<type>=<job_id>[:<job_id>...]`, e.g.: `after=1234`, `afterok=456:789`.
+
+`--transfer-mode` `TEXT` — A colon-, comma-, or space-separated list of transfer modes that specify whether files in the working directory should be transferred to the input directory upon job completion. Available modes: `success` (transfer only on exit code 0), `failure` (transfer only on non-zero exit code), `always` (always transfer), `never` (never transfer), or a specific exit code number (e.g., `42`). Multiple modes can be combined; files are transferred if any apply. The default value is `success` meaning that files are transferred only if the job finishes successfully. When files are transferred, the working directory is deleted. If files are not transferred, the working directory is preserved. Note that data from killed jobs are never automatically transferred. This option is ignored if the input directory itself is used as the working directory. Examples: `success`, `always`, `success:42`, `1 2 3`.
+
 
 `--batch-system` `TEXT` — Name of the batch system to submit the job to. If not provided, qq will use the environment variable `QQ_BATCH_SYSTEM` or attempt to auto-detect the system.
 
@@ -98,6 +101,8 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--archive-format` `TEXT` — Filename format for archived files. Defaults to `job%04d`.  
 
+`--archive-mode` `TEXT` — A colon-, comma-, or space-separated list of archive modes that specify whether files in the working directory should be archived upon job completion. Supports the same modes as `--transfer-mode`. See that option for available modes and examples. The default value is `success` meaning that files are archived only if the job finishes successfully.
+
 ### Specifying options in the script
 
 Instead of specifying submission options on the command line, you can include them directly in the script using *qq directives*.
@@ -127,7 +132,7 @@ metamodule add ...
 > In the example above, kebab-case is used for option names, but qq directives also support snake_case, camelCase, and PascalCase.  
 > For example: `# qq job-type loop`, `# qq job_type loop`, `# qq jobType loop`, and `# qq JobType loop` are all equivalent.
 
-Command-line options always take precedence over options defined in the script body.
+Command-line options (*including list options since qq v0.8*) always take precedence over options defined in the script body.
 
 ### Examples
 
