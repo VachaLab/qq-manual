@@ -14,13 +14,16 @@ When a qq job is submitted, several environment variables are automatically set 
 
 If the `QQ_DEBUG` environment variable is set when running `qq submit`, its value is propagated to the job environment as well. This turns on the debug mode, dramatically increasing the verbosity of [`qq run`](qq_run.md).
 
+If the job is a [loop job](loop_job.md) or a [continuous job](continuous_job.md), the following environment variable is also set:
+
+- `QQ_NO_RESUBMIT`: exit code that can be returned from the body of the script to indicate that the next cycle of the job should [not be submitted](loop_job.md#forcing-qq-not-to-resubmit)
+
 If the job is a [loop job](loop_job.md), the following additional environment variables are also set:
 
 - `QQ_LOOP_CURRENT`: current cycle number of the loop job
 - `QQ_LOOP_START`: first cycle of the loop job
 - `QQ_LOOP_END`: last cycle of the loop job
 - `QQ_ARCHIVE_FORMAT`: filename format used for archived files
-- `QQ_NO_RESUBMIT`: exit code that can be returned from the body of the script to indicate that the next cycle of the job should [not be submitted](loop_job.md#forcing-qq-to-not-resubmit)
 
 > Apart from the variables listed here and those provided by the batch system itself, no other environment variables can be guaranteed to be propagated from the submission environment to the job environment.
 
