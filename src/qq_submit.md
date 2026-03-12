@@ -47,7 +47,7 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--account` `TEXT` — Account to use for the job. Required only in environments with accounting (e.g., IT4Innovations).  
 
-`--job-type` `TEXT` — Type of the qq job. Defaults to `standard`.  
+`--job-type` `TEXT` — Type of the qq job. Defaults to `standard`. Available types: 'standard', 'loop', 'continuous'.
 
 `--exclude` `TEXT` — A colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths must be relative to the input directory.
 

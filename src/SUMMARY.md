@@ -12,6 +12,7 @@
 - [Job types](job_types.md)
     - [Standard jobs](standard_job.md)
     - [Loop jobs](loop_job.md)
+    - [Continuous jobs](continuous_job.md)
 - [Working directories](work_dir.md)
     - [Metacentrum family](work_dir_metacentrum.md)
     - [Karolina](work_dir_karolina.md)

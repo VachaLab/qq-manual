@@ -1,10 +1,12 @@
 # Loop jobs
 
-Loop jobs are jobs that automatically submit their continuation at the end of execution. This section describes how they differ from standard jobs. Please read the section about [standard jobs](standard_job.md) first — otherwise, this may be difficult to follow.
+Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](standard_job.md) first — otherwise, this may be difficult to follow.
 
 To turn a job into a loop job, you must set two [`qq submit`](qq_submit.md) options:  
 - `job-type` to `loop`, and  
 - `loop-end` to specify the last [cycle](#loop-job-cycles) of the loop job.
+
+> Do loop jobs seem unnecessarily complex for your use-case? Do you just want a job that submits its own continuation without worrying about archival and cycle tracking? Take a look at [continuous jobs](continuous_job.md)—they might be what you need.
 
 ## Loop job cycles
 
@@ -53,9 +55,9 @@ Sometimes, after a job completes *N* cycles, you may realize you need *M* more. 
 
 **Importantly:** you do not need to [delete any runtime files](standard_job.md#submitting-the-next-job) from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
 
-## Forcing qq to not resubmit
+## Forcing qq not to resubmit
 
-You can manually force qq to **not** submit the next cycle of a loop job, even if the current cycle number has not yet reached `loop-end`, by returning the value of the environment variable `QQ_NO_RESUBMIT` from within the script:
+You can manually force qq **not** to submit the next cycle of a loop job, even if the current cycle number has not yet reached `loop-end`, by returning the value of the environment variable `QQ_NO_RESUBMIT` from within the script:
 
 ```bash
 #!/usr/bin/env -S qq run
