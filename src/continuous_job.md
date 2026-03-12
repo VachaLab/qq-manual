@@ -49,4 +49,4 @@ In some cases, you may want to prolong a continuous job that has successfully fi
 > 
 > When using local scratch as your working directory (the default), qq copies all files from the job's input directory to the working directory. If you do not archive your generated data (such as MD trajectories), **everything your simulation has generated** will be copied to the working directory in each job cycle, which can consume significant time and disk space (you may easily exceed the default storage quota allocated for your working directory on scratch).
 > 
-> If possible, use [loop jobs](loop_job.md) instead, as they support data archiving. For Gromacs simulations, qq provides [qq_loop](run_scripts.md) scripts for running long simulations.
+> If possible, use [loop jobs](loop_job.md) instead, as they support data archiving. For Gromacs simulations, qq provides [run scripts](run_scripts.md) for running long simulations.
