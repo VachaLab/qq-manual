@@ -22,6 +22,8 @@ qq queues [OPTIONS]
 
 `-a`, `--all` — Display all queues, including those that are not available to you.
 
+`-s` `TEXT`, `--server` `TEXT` — Show queues for a specific batch server. If not specified, queues for the default batch server are shown.
+
 `--yaml` — Output queue metadata in YAML format.
 
 ### Examples
@@ -30,7 +32,7 @@ qq queues [OPTIONS]
 qq queues
 ```
 
-Displays a summary of all batch system queues to which you can submit jobs.
+Displays a summary of all queues associated with the default batch server to which you can submit jobs.
 
 This is what the output might look like:
 
@@ -42,13 +44,21 @@ This is what the output might look like:
 qq queues --all
 ```
 
-Displays a summary of all queues in the batch system, including those you cannot submit to.
+Displays a summary of all queues associated with the default batch server, including those you cannot submit jobs to.
 
 This is what the output might look like:
 
 ![Example of qq queues output](img/qq_queues_all.png)
 
 *Output truncated. For a detailed description of the output, see [below](#description-of-the-output).*
+
+
+```bash
+qq queues --server metacentrum
+```
+
+Displays a summary of all queues associated with the `metacentrum` batch server that are available to you. `metacentrum` is a known shortcut for the full batch server name `pbs-m1.metacentrum.cz`. You can use either of them.
+
 
 ```bash
 qq queues --yaml

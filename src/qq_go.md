@@ -32,7 +32,9 @@ If `JOB_ID` is not provided, `qq go` searches for qq jobs in the current directo
 qq go 123456
 ```
 
-Opens a new shell in the working directory of the job with ID `123456` on its main working node. You can use either the short job ID or the full ID including the batch server address. If the job does not exist, is not a qq job, its info file is missing, or the working directory no longer exists, the command exits with an error. If the job is not yet running, the command waits until the working directory is ready.
+Opens a new shell in the working directory of the job with ID `123456` on its main working node. If you use just the numerical portion of the job ID, the job is assumed to be located on the default batch server. If the job is located on a different batch server, you need to use the full ID including the server address.
+
+If the job does not exist, is not a qq job, its info file is missing, or the working directory no longer exists, the command exits with an error. If the job is not yet running, the command waits until the working directory is ready.
 
 ```bash
 qq go

@@ -24,7 +24,9 @@ qq jobs [OPTIONS]
 
 `-e`, `--extra` — Include extra information about the jobs.
 
-`-a`, `--all` — Include both unfinished and finished jobs in the summary.
+`-a`, `--all` — Include both uncompleted and completed jobs in the summary.
+
+`-s` `TEXT`, `--server` `TEXT` — Show jobs for a specific batch server. If not specified, jobs on the default batch server are shown.
 
 `--yaml` — Output job metadata in YAML format.
 
@@ -34,7 +36,7 @@ qq jobs [OPTIONS]
 qq jobs
 ```
 
-Displays a summary of your unfinished jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the current batch server. 
+Displays a summary of your uncompleted jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the default batch server. For array jobs, individual tasks that have finished are still shown unless the array job as a whole has completed.
 
 This is what the output might look like:
 
@@ -46,7 +48,7 @@ This is what the output might look like:
 qq jobs -u user2
 ```
 
-Displays a summary of user2's unfinished jobs.
+Displays a summary of user2's uncompleted jobs.
 
 ```bash
 qq jobs -e
@@ -58,17 +60,23 @@ Includes extra information about your jobs in the output: the input machine (if 
 qq jobs --all
 ```
 
-Displays a summary of all your jobs in the batch system, both unfinished and finished. Note that the batch system eventually removes records of finished jobs, so they may disappear from the output over time. This is what the output might look like:
+Displays a summary of all your jobs associated with the default batch server, both uncompleted and completed. Note that the batch system eventually removes records of completed jobs, so they may disappear from the output over time. This is what the output might look like:
 
 ![Example of qq jobs output](img/qq_jobs_all.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
 ```bash
+qq jobs --server sokar
+```
+
+Displays a summary of all your uncompleted jobs associated with the `sokar` batch server that are available to you. `sokar` is a known shortcut for the full batch server name `sokar-pbs.ncbr.muni.cz`. You can use either of them.
+
+```bash
 qq jobs --yaml
 ```
 
-Prints a summary of your unfinished jobs in YAML format. This output contains all available metadata as provided by the batch system.
+Prints a summary of your uncompleted jobs in YAML format. This output contains all available metadata as provided by the batch system.
 
 ### Notes
 

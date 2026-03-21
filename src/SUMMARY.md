@@ -14,7 +14,7 @@
     - [Loop jobs](loop_job.md)
     - [Continuous jobs](continuous_job.md)
 - [Working directories](work_dir.md)
-    - [Metacentrum family](work_dir_metacentrum.md)
+    - [Robox, Sokar, Metacentrum](work_dir_metacentrum.md)
     - [Karolina](work_dir_karolina.md)
     - [LUMI](work_dir_lumi.md)
 - [Transferring files from the working directory](transfer_modes.md)

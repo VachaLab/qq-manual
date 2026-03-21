@@ -39,7 +39,9 @@ Without the `--force` flag, it will only attempt to terminate jobs that are queu
 qq kill 123456
 ```
 
-Terminates the job with ID `123456`. You can use either the short job ID or the full ID including the batch server address. You will be prompted to confirm the termination by pressing `y`. This command only works if the specified job is a qq job with a valid and accessible info file, and the batch server must be reachable from the current machine.
+Terminates the job with ID `123456` located on the default batch server. If the job is located on a different batch server, you need to use the full ID including the sever address.
+
+Upon running this command, you will be prompted to confirm the termination by pressing `y`. This command only works if the specified job is a qq job with a valid and accessible info file, and the target batch server is reachable from the current machine.
 
 ```bash
 qq kill

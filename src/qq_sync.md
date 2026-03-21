@@ -35,7 +35,9 @@ If `JOB_ID` is not provided, `qq sync` searches for qq jobs in the current direc
 qq sync 123456
 ```
 
-Fetches all files from the working directory of the job with ID `123456` to that job's input directory. You can use either the short job ID or the full ID including the batch server address. This only works if the specified job is a qq job with a valid and accessible info file, and if the batch server and main node are reachable from the current machine.
+Fetches all files from the working directory of the job with ID `123456` to that job's input directory. If you use just the numerical portion of the job ID, the job is assumed to be located on the default batch server. If the job is located on a different batch server, you need to use the full ID including the server address.
+
+This command only works if the specified job is a qq job with a valid and accessible info file, and if the batch server and main node are reachable from the current machine.
 
 ```bash
 qq sync

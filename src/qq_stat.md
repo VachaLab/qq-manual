@@ -11,7 +11,7 @@ The `qq stat` command displays information about jobs from all users. It is qq's
 
 ### Description
 
-Displays a summary of jobs from all users. By default, only unfinished jobs are shown.
+Displays a summary of jobs from all users. By default, only uncompleted jobs are shown.
 
 ```bash
 qq stat [OPTIONS]
@@ -21,7 +21,9 @@ qq stat [OPTIONS]
 
 `-e`, `--extra` — Include extra information about the jobs.
 
-`-a`, `--all` — Include both unfinished and finished jobs in the summary.
+`-a`, `--all` — Include both uncompleted and completed jobs in the summary.
+
+`-s` `TEXT`, `--server` `TEXT` — Show jobs for a specific batch server. If not specified, jobs on the default batch server are shown.
 
 `--yaml` — Output job metadata in YAML format.
 
@@ -31,7 +33,7 @@ qq stat [OPTIONS]
 qq stat
 ```
 
-Displays a summary of all unfinished (queued, running, or exiting) jobs associated with the current batch server. The display looks similar to the display of [`qq jobs`](qq_jobs.md#description-of-the-output).
+Displays a summary of all uncompleted (queued, running, or exiting) jobs associated with the default batch server. For array jobs, individual tasks that have finished are still shown unless the array job as a whole has completed. The display looks similar to the display of [`qq jobs`](qq_jobs.md#description-of-the-output).
 
 ```bash
 qq stat -e
@@ -43,7 +45,13 @@ Includes extra information about the jobs in the output: the input machine (if a
 qq stat --all
 ```
 
-Displays a summary of all jobs in the batch system, both unfinished and finished. Note that the batch system eventually removes information about finished jobs, so they may disappear from the output over time.
+Displays a summary of all jobs associated with the default batch server, both uncompleted and completed. Note that the batch system eventually removes records of completed jobs, so they may disappear from the output over time.
+
+```bash
+qq stat --server sokar
+```
+
+Displays a summary of all uncompleted jobs associated with the `sokar` batch server that are available to you. `sokar` is a known shortcut for the full batch server name `sokar-pbs.ncbr.muni.cz`. You can use either of them.
 
 ```bash
 qq stat --yaml
