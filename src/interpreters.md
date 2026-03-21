@@ -1,10 +1,10 @@
 # Submitting non-bash scripts
 
-When you submit a qq job using [`qq submit`](qq_submit.md), the submitted script is executed using a special [`qq run`](qq_run.md) interpreter. This interpreter does not just run the script, but also performs many operations related to job preparation: for example, it creates the working directory for the job, transfers files, and, in the case of loop jobs, also archives files and resubmits jobs. To execute the actual commands in the submitted script, `qq run` uses the standard Linux `bash` shell by default. That's why you typically write your script in bash with a [qq run shebang](qq_shebang.md) and potentially some [qq directives](qq_submit.md#specifying-options-in-the-script).
+When you submit a qq job using [`qq submit`](commands/qq_submit.md), the submitted script is executed using a special [`qq run`](commands/qq_run.md) interpreter. This interpreter does not just run the script, but also performs many operations related to job preparation: for example, it creates the working directory for the job, transfers files, and, in the case of loop jobs, also archives files and resubmits jobs. To execute the actual commands in the submitted script, `qq run` uses the standard Linux `bash` shell by default. That's why you typically write your script in bash with a [qq run shebang](commands/qq_run.md) and potentially some [qq directives](commands/qq_submit.md#specifying-options-in-the-script).
 
 However, with qq you can also specify a different interpreter than bash to execute the commands in your submitted script. This means you don't need to write a wrapper around e.g. your Python script — you can submit the script itself and tell qq: "Run it using Python".
 
-To control what interpreter `qq run` uses to execute the submitted script, specify the `--interpreter` option of [`qq submit`](qq_submit.md). For example, to submit a Python script, you can run:
+To control what interpreter `qq run` uses to execute the submitted script, specify the `--interpreter` option of [`qq submit`](commands/qq_submit.md). For example, to submit a Python script, you can run:
 
 ```bash
 qq submit my_script.py (...) --interpreter python
@@ -12,7 +12,7 @@ qq submit my_script.py (...) --interpreter python
 
 The script `my_script.py` will be executed using `python`. **You need to make sure that Python is available on the compute node where your job is to be executed, otherwise your job will fail.** Also make sure that the `python` executable on the compute node starts the Python interpreter of the expected version with the expected packages your script requires.
 
-> Note that no matter what interpreter you want your script to be executed with, you must **always include the standard qq run shebang**: `#!/usr/bin/env -S qq run`. You can easily add it to your script using [`qq shebang`](qq_shebang.md).
+> Note that no matter what interpreter you want your script to be executed with, you must **always include the standard qq run shebang**: `#!/usr/bin/env -S qq run`. You can easily add it to your script using [`qq shebang`](commands/qq_shebang.md).
 
 ## Submitting a simple Python script
 
@@ -54,7 +54,7 @@ We save the script into a file `calc_pi.py` and submit it to the batch system:
 qq submit -q default --ncpus 1 calc_pi.py
 ```
 
-We do not need to specify the Python interpreter on the command line, as it is already specified in the body of the script using the qq directive `# qq interpreter python`. Upon submission and job start, everything happens [as usual](standard_job.md) — including the creation of the working directory — but the script is interpreted using Python. Once the script finishes, the clean-up happens as for other qq jobs. The result of the calculation will be stored in `calc_pi.out` in the input (submission) directory once the job finishes.
+We do not need to specify the Python interpreter on the command line, as it is already specified in the body of the script using the qq directive `# qq interpreter python`. Upon submission and job start, everything happens [as usual](job_types/standard_job.md) — including the creation of the working directory — but the script is interpreted using Python. Once the script finishes, the clean-up happens as for other qq jobs. The result of the calculation will be stored in `calc_pi.out` in the input (submission) directory once the job finishes.
 
 > Here we are using the Python executable name (just `python`), which is automatically expanded using the [`which`](https://en.wikipedia.org/wiki/Which_(command)) command to the full path of the interpreter (e.g., `/usr/bin/python`). If you do not trust this automatic expansion, you can always specify the full path to the interpreter yourself (e.g., `# qq interpreter /usr/bin/python` or `# qq interpreter /path/to/my/own/python/on/shared/storage`).
 
@@ -153,8 +153,8 @@ We save the script into a file `loop_job.py` and submit it to the batch system:
 qq submit -q default --ncpus 1 loop_job.py
 ```
 
-The job is a regular qq [loop job](loop_job.md) with the script interpreted using Python. Once a cycle finishes successfully, the next one is automatically submitted until the job reaches cycle number 10 (`# qq loop-end 10`). Files are archived according to [standard qq rules for file archiving](loop_job.md#working-with-the-archive).
+The job is a regular qq [loop job](job_types/loop_job.md) with the script interpreted using Python. Once a cycle finishes successfully, the next one is automatically submitted until the job reaches cycle number 10 (`# qq loop-end 10`). Files are archived according to [standard qq rules for file archiving](job_types/loop_job.md#working-with-the-archive).
 
 ***
 
-> **Important note:** If the language you are writing the script in does not interpret lines starting with `#` as comments (e.g., Octave, Lua), you cannot use [qq directives](qq_submit.md#specifying-options-in-the-script), including the `# qq interpreter` directive. In that case, you can still — and in fact *must* — specify all submission options on the command line when submitting the script.
+> **Important note:** If the language you are writing the script in does not interpret lines starting with `#` as comments (e.g., Octave, Lua), you cannot use [qq directives](commands/qq_submit.md#specifying-options-in-the-script), including the `# qq interpreter` directive. In that case, you can still — and in fact *must* — specify all submission options on the command line when submitting the script.

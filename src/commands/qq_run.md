@@ -8,7 +8,7 @@ You should not invoke `qq run` directly. Instead, every script submitted with [`
 #!/usr/bin/env -S qq run
 ```
 
-For more details about what `qq run` does, see the sections on [standard jobs](standard_job.md) and [loop jobs](loop_job.md).
+For more details about what `qq run` does, see the sections on [standard jobs](../job_types/standard_job.md) and [loop jobs](../job_types/loop_job.md).
 
 ***
 

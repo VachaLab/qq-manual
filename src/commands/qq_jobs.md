@@ -62,7 +62,7 @@ qq jobs --all
 
 Displays a summary of all your jobs associated with the default batch server, both uncompleted and completed. Note that the batch system eventually removes records of completed jobs, so they may disappear from the output over time. This is what the output might look like:
 
-![Example of qq jobs output](img/qq_jobs_all.png)
+![Example of qq jobs output](../img/qq_jobs_all.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -88,5 +88,5 @@ Prints a summary of your uncompleted jobs in YAML format. This output contains a
 ![Example and a description of qq jobs output](img/qq_jobs_description.png)
 
 - The output of [`qq stat`](qq_stat.md) is the same, except that it displays the jobs of all users.
-- You can control which columns are displayed and customize the appearance of the output using a [configuration file](config.md).
+- You can control which columns are displayed and customize the appearance of the output using a [configuration file](../config.md).
 - Note that the `%CPU` and `%Mem` columns are not available on systems using Slurm (Karolina, LUMI).

@@ -39,7 +39,7 @@ This command only works if the job is a qq job with a valid and accessible info 
 
 This is what the output might look like:
 
-![Example of qq info output](img/qq_info_2.png)
+![Example of qq info output](../img/qq_info_2.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -51,7 +51,7 @@ Displays the full information panel for all jobs whose info files are present in
 
 This is what the output might look like:
 
-![Example of qq info output](img/qq_info_1.png)
+![Example of qq info output](../img/qq_info_1.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -63,6 +63,6 @@ Displays short information for all jobs whose info files are present in the curr
 
 ### Description of the output
 
-![Example and a description of qq info output](img/qq_info_description.png)
+![Example and a description of qq info output](../img/qq_info_description.png)
 
-- You can customize the appearance of the output using a [configuration file](config.md).
+- You can customize the appearance of the output using a [configuration file](../config.md).

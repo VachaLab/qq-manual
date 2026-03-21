@@ -48,7 +48,7 @@ Displays a summary of all queues associated with the default batch server, inclu
 
 This is what the output might look like:
 
-![Example of qq queues output](img/qq_queues_all.png)
+![Example of qq queues output](../img/qq_queues_all.png)
 
 *Output truncated. For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -68,8 +68,8 @@ Prints a summary of all available queues in YAML format. This output contains th
 
 ### Description of the output
 
-![Example and a description of qq queues output](img/qq_queues_description.png)
+![Example and a description of qq queues output](../img/qq_queues_description.png)
 
-- You can customize the appearance of the output using a [configuration file](config.md).
+- You can customize the appearance of the output using a [configuration file](../config.md).
 - The output may also contain the column `Comment` providing the comment associated with the queue (typically additional information about the queue).
 - `Max Nodes` column is hidden if no queue defines a maximal allowed number of requested nodes per job.

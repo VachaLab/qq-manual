@@ -1,4 +1,4 @@
-# Working directories
+# Working directory
 
 A *working directory* is the directory where a qq job is actually executed. qq copies the data from the input directory to the working directory, executes the submitted script there, and then copies the data back.
 

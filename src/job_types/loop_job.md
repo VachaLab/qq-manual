@@ -1,8 +1,8 @@
 # Loop jobs
 
-Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](standard_job.md) first — otherwise, this may be difficult to follow.
+Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](../commands/standard_job.md) first — otherwise, this may be difficult to follow.
 
-To turn a job into a loop job, you must set two [`qq submit`](qq_submit.md) options:  
+To turn a job into a loop job, you must set two [`qq submit`](../commands/qq_submit.md) options:  
 - `job-type` to `loop`, and  
 - `loop-end` to specify the last [cycle](#loop-job-cycles) of the loop job.
 
@@ -31,7 +31,7 @@ When a new cycle is submitted (either manually or automatically by the previous 
 
 ## Working with the archive
 
-You typically should not transfer files from and to the archive directly inside your submitted script. If you follow the proper naming etiquette, the [`qq run`](qq_run.md) environment will handle all archiving operations for you.
+You typically should not transfer files from and to the archive directly inside your submitted script. If you follow the proper naming etiquette, the [`qq run`](../commands/qq_run.md) environment will handle all archiving operations for you.
 
 At the start of each cycle, after copying files from the input directory to the working directory, `qq run` checks the archive and automatically copies all files associated with the **current cycle** into the working directory. For example, if the current cycle number is 8 and `archive-format` is `job%04d`, any file in the archive containing `job0008` in its name will be automatically copied to the working directory. These files can then be used to initialize the next cycle of the job.
 
@@ -39,7 +39,7 @@ After the submitted script finishes successfully, qq moves **all** files matchin
 
 In summary, unlike with Infinity, you do not need to explicitly fetch files from and to the archive, you just need to name them accordingly and qq will archive them automatically.
 
-If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](runtime_files.md) are copied to the input directory. Note that this behavior can be changed by providing a non-default [archival mode](transfer_modes.md#archive-modes).
+If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](../runtime_files.md) are copied to the input directory. Note that this behavior can be changed by providing a non-default [archival mode](../transfer_modes.md#archive-modes).
 
 ## Resubmiting
 

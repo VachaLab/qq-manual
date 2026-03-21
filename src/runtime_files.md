@@ -4,10 +4,10 @@ qq uses four types of runtime files, each with one of the following extensions: 
 
 ### qqinfo files
 
-A `.qqinfo` file (also called a "qq info file") is created after submission by [`qq submit`](qq_submit.md). It stores information used to track the job submitted from that directory. Each qq job requires its own info file for management and control.
+A `.qqinfo` file (also called a "qq info file") is created after submission by [`qq submit`](commands/qq_submit.md). It stores information used to track the job submitted from that directory. Each qq job requires its own info file for management and control.
 
 > **Do NOT move, modify, or delete qq info files manually.**  
-> Always use qq commands such as [`qq kill`](qq_kill.md) or [`qq clear`](qq_clear.md) to manage them safely.  
+> Always use qq commands such as [`qq kill`](commands/qq_kill.md) or [`qq clear`](commands/qq_clear.md) to manage them safely.  
 > Moving, editing, or removing a qq info file while a job is running **will** cause the job to crash, and you may lose its data.
 
 ### out files
@@ -20,4 +20,4 @@ A `.err` file contains the **standard error output** from the script executed as
 
 ### qqout files
 
-A `.qqout` file contains the output from the [`qq run`](qq_run.md) execution environment. It includes technical information about the job's progress and internal qq operations. If your batch system is PBS, this file is only placed into the input directory after the job is completed. If your batch system is Slurm, this file is available after the job starts running.
+A `.qqout` file contains the output from the [`qq run`](commands/qq_run.md) execution environment. It includes technical information about the job's progress and internal qq operations. If your batch system is PBS, this file is only placed into the input directory after the job is completed. If your batch system is Slurm, this file is available after the job starts running.

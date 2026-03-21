@@ -40,7 +40,7 @@ Displays a summary of all nodes associated with the default batch server that ar
 
 This is what the output might look like *(truncated)*:
 
-![Example of qq nodes output](img/qq_nodes.png)
+![Example of qq nodes output](../img/qq_nodes.png)
 
 *Output truncated. For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -68,9 +68,9 @@ Prints a summary of all available nodes associated with the default batch server
 
 ### Description of the output
 
-![Example and a description of qq nodes output](img/qq_nodes_description.png)
+![Example and a description of qq nodes output](../img/qq_nodes_description.png)
 
-- You can customize the appearance of the output using a [configuration file](config.md).
+- You can customize the appearance of the output using a [configuration file](../config.md).
 - Columns for resources that are not relevant to a given node group (e.g., when no node in the group has GPUs) are hidden.
 - For some node groups, there may also be a `Scratch Shared` column specifying the amount of scratch space available to be shared among the nodes.
 

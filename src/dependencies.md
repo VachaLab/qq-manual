@@ -1,6 +1,6 @@
 # Specifying job dependencies
 
-Occasionally, you may want your submitted job to start only after some condition related to the state of some other job(s) is fulfilled. You can control when the job should start being executed using the `--depend` option of [`qq submit`](qq_submit.md).
+Occasionally, you may want your submitted job to start only after some condition related to the state of some other job(s) is fulfilled. You can control when the job should start being executed using the `--depend` option of [`qq submit`](commands/qq_submit.md).
 
 As the value for this option, you can provide a list of comma- or space-separated job dependencies in this format:
 ```text
