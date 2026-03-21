@@ -1,4 +1,4 @@
-# Run scripts
+# Gromacs run scripts
 
 The [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/run_scripts) provides several ready-to-use scripts for running [Gromacs](https://www.gromacs.org/) simulations in loops — similar to Infinity’s `precycle` scripts.
 
