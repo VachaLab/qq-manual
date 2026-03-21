@@ -24,7 +24,7 @@ Once the working directory is ready, qq updates the info file to mark the job st
 
 ## 3. Executing the script
 
-After preparing the working directory, submitted script is executed using `bash`.
+After preparing the working directory, the submitted script is executed using bash by default. You can also [specify a different interpreter](interpreters.md), if you wish, such as Python.
 
 The script should exit with code 0 if everything ran successfully, or a non-zero code to indicate an error. The exit code is passed back to qq, which sets the appropriate job state (`finished` for 0, `failed` for anything else).
 

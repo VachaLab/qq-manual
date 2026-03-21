@@ -58,7 +58,7 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--transfer-mode` `TEXT` — Colon-, comma-, or space-separated list of transfer modes controlling when working directory files are transferred to the input directory. Modes: **success** (exit code 0), **failure** (non-zero exit code), **always**, **never**, or a specific exit code number (e.g., **42**). Combine modes; files transfer if any apply. Defaults to **success**. On transfer, the working directory is deleted; otherwise it is preserved. Killed jobs are never transferred automatically. Ignored if the input directory is used as the working directory. Examples: 'success', 'always', 'success:42', '1 2 3'.
 
-`--interpreter` `TEXT` — Executable name or absolute path of the interpreter used to run the submitted script. Defaults to **bash**. The interpreter must be available on the computing node.
+`--interpreter` `TEXT` — Executable name or absolute path of the interpreter used to run the submitted script. Defaults to **bash**. The interpreter must be available on the computing node. Read more about specifying interpreters [here](interpreters.md).
 
 `--batch-system` `TEXT` — Name of the batch system used to submit the job. If not specified, the value of the environment variable 'QQ_BATCH_SYSTEM' is used or the system is auto-detected.
 

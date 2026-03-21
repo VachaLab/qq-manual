@@ -19,6 +19,7 @@
     - [LUMI](work_dir_lumi.md)
 - [Transferring files from the working directory](transfer_modes.md)
 - [Specifying job dependencies](dependencies.md)
+- [Submitting non-bash scripts](interpreters.md)
 - [Job states](job_states.md)
 - [Runtime files](runtime_files.md)
 - [Environment variables](env_vars.md)
