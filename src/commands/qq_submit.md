@@ -44,7 +44,7 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `-q`, `--queue` `TEXT` — Name of the queue to submit the job to.
 
-`-s`, `--server` `TEXT` — Name of the batch server to submit the job to. If not specified, the job is submitted to the default batch server. Only supported on Metacentrum-family clusters.
+`-s`, `--server` `TEXT` — Name of the batch server to submit the job to. If not specified, the job is submitted to the default batch server. Only supported on Metacentrum-family clusters. Read more about specifying a server [here](../servers.md).
 
 `--account` `TEXT` — Account to use for the job. Required only in environments with accounting (e.g., IT4Innovations).
 

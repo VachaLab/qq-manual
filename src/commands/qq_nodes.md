@@ -54,7 +54,7 @@ Displays a summary of all nodes associated with the default batch server, includ
 qq nodes --server sokar
 ```
 
-Displays a summary of all nodes associated with the `sokar` batch server that are available to you. `sokar` is a known shortcut for the full batch server name `sokar-pbs.ncbr.muni.cz`. You can use either of them.
+Displays a summary of all nodes associated with the `sokar` batch server that are available to you. `sokar` is a known shortcut for the full batch server name `sokar-pbs.ncbr.muni.cz`. You can use either of them. For more information about accessing information from other clusters, read [this section of the manual](../servers.md#qq-jobs-qq-stat-qq-queues-qq-nodes).
 
 ```bash
 qq nodes --yaml

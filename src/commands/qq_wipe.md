@@ -35,7 +35,7 @@ Without the `--force` flag, it will only attempt to delete working directories o
 qq wipe 123456
 ```
 
-Deletes the working directory of the job with ID `123456` located on the default batch server. If the job is located on a different batch server, you need to use the full ID including the server address.
+Deletes the working directory of the job with ID `123456` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
 
 Upon running the command, you will be prompted to confirm the termination by pressing `y`. This command only works if the specified job is a qq job with a valid and accessible info file, and the batch server must be reachable from the current machine.
 

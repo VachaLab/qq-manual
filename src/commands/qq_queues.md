@@ -57,7 +57,7 @@ This is what the output might look like:
 qq queues --server metacentrum
 ```
 
-Displays a summary of all queues associated with the `metacentrum` batch server that are available to you. `metacentrum` is a known shortcut for the full batch server name `pbs-m1.metacentrum.cz`. You can use either of them.
+Displays a summary of all queues associated with the `metacentrum` batch server that are available to you. `metacentrum` is a known shortcut for the full batch server name `pbs-m1.metacentrum.cz`. You can use either of them. For more information about accessing information from other clusters, read [this section of the manual](../servers.md#qq-jobs-qq-stat-qq-queues-qq-nodes).
 
 
 ```bash

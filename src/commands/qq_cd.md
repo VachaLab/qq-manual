@@ -28,7 +28,7 @@ qq cd [OPTIONS] JOB_ID
 qq cd 123456
 ```
 
-Changes the current shell's working directory to the input directory of the job with ID `123456` located on the default batch server. If the job is located on a different batch server, you need to use the full ID including the server address.
+Changes the current shell's working directory to the input directory of the job with ID `123456` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-cd), you need to use the full ID including the server address.
 
 ### Notes
 

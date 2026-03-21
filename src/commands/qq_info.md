@@ -33,7 +33,7 @@ If `JOB_ID` is not provided, `qq info` searches for qq jobs in the current direc
 qq info 740173
 ```
 
-Displays the full information panel for the job with ID `740173` located on the default batch server. If the job is located on a different batch server, you need to use the full ID including the server address.
+Displays the full information panel for the job with ID `740173` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
 
 This command only works if the job is a qq job with a valid and accessible info file, and the target batch server is reachable from the current machine.
 
