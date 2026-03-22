@@ -27,10 +27,10 @@ from qq_lib.kill import Killer
 And use them:
 
 ```python
-informer = Informer.fromFile("my_job.qqinfo")
-print(informer.getRealState())
+informer = Informer.from_file("my_job.qqinfo")
+print(informer.get_real_state())
 
-killer = Killer.fromInformer(informer)
+killer = Killer.from_informer(informer)
 killer.kill()
 ```
 
