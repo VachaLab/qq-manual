@@ -27,6 +27,8 @@ By default, `qq killall` prompts for confirmation before terminating the jobs.
 
 `--force` — Forcefully terminate all jobs, ignoring their current states and skipping confirmation.
 
+`-s` `TEXT`, `--server` `TEXT` — Termine all your jobs on the specified batch server. If not specified, the current server is used.
+
 ### Examples
 
 ```bash
@@ -46,3 +48,9 @@ qq killall --force
 ```
 
 Forcefully terminates all your qq jobs with valid and accessible info files. No confirmation is requested, and the jobs will be terminated even if qq believes they are already finished, failed, or killed.
+
+```bash
+qq killall --server sokar
+```
+
+Terminate all your qq jobs with valid and accessible info files associated with the `sokar` batch server. You will be prompted to confirm termination by pressing `y`.
