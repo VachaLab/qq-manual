@@ -34,7 +34,7 @@ killer = Killer.fromInformer(informer)
 killer.kill()
 ```
 
-See the [Python API documentation](https://qq.readthedocs.io/) for details on available modules, classes, and functions.
+See the [Python API documentation](https://qq.readthedocs.io/en/stable/qq_lib.html) for details on available modules, classes, and functions.
 
 ## Official qq scripts
 
