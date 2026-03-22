@@ -44,7 +44,7 @@
     - [Transferring files from the working directory](transfer_modes.md)
     - [Specifying job dependencies](dependencies.md)
     - [Submitting non-bash scripts](interpreters.md)
-    - [Working with non-default clusters](servers.md)
+    - [Inter-cluster job management](servers.md)
 - [Miscellaneous](miscellaneous.md)
     - [Job states](job_states.md)
     - [Runtime files](runtime_files.md)

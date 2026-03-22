@@ -12,7 +12,7 @@ qq submit my_script.py (...) --interpreter python
 
 The script `my_script.py` will be executed using `python`. **You need to make sure that Python is available on the compute node where your job is to be executed, otherwise your job will fail.** Also make sure that the `python` executable on the compute node starts the Python interpreter of the expected version with the expected packages your script requires.
 
-> Note that no matter what interpreter you want your script to be executed with, you must **always include the standard qq run shebang**: `#!/usr/bin/env -S qq run`. You can easily add it to your script using [`qq shebang`](commands/qq_shebang.md).
+> Note that no matter what interpreter you want your script to be run with, you must **always include the standard qq run shebang**: `#!/usr/bin/env -S qq run`. You can easily add it to your script using [`qq shebang`](commands/qq_shebang.md).
 
 ## Submitting a simple Python script
 
@@ -56,7 +56,7 @@ qq submit -q default --ncpus 1 calc_pi.py
 
 We do not need to specify the Python interpreter on the command line, as it is already specified in the body of the script using the qq directive `# qq interpreter python`. Upon submission and job start, everything happens [as usual](job_types/standard_job.md) — including the creation of the working directory — but the script is interpreted using Python. Once the script finishes, the clean-up happens as for other qq jobs. The result of the calculation will be stored in `calc_pi.out` in the input (submission) directory once the job finishes.
 
-> Here we are using the Python executable name (just `python`), which is automatically expanded using the [`which`](https://en.wikipedia.org/wiki/Which_(command)) command to the full path of the interpreter (e.g., `/usr/bin/python`). If you do not trust this automatic expansion, you can always specify the full path to the interpreter yourself (e.g., `# qq interpreter /usr/bin/python` or `# qq interpreter /path/to/my/own/python/on/shared/storage`).
+> Here we are using the Python executable name (just `python`), which is automatically expanded using the [`which`](https://en.wikipedia.org/wiki/Which_(command)) command to the full path of the interpreter on the compute node (e.g., `/usr/bin/python`). If you do not trust this automatic expansion, you can always specify the full path to the interpreter yourself (e.g., `# qq interpreter /usr/bin/python` or `# qq interpreter /path/to/my/own/python/on/shared/storage`).
 
 ## Submitting a looping Python script
 
