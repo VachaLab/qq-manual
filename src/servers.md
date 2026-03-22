@@ -1,4 +1,4 @@
-# Submitting to non-default clusters
+# Working with non-default clusters
 
 Clusters of the Metacentrum family (Robox, Sokar, and Metacentrum clusters) use a compatible environment and are somewhat interconnected. Consequently, while connected to a computer of the Robox cluster, you can reach not just the default Robox batch server, but also the batch servers of Sokar and Metacentrum. You can therefore monitor, submit, kill, and manage jobs on all of these clusters directly from your Robox desktop.
 
