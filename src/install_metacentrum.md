@@ -12,4 +12,6 @@ Because qq runs significantly slower when stored on non-local storage, the insta
 
 To complete the installation, either open a new terminal or source your `.bashrc` file.
 
-> **Note:** qq is known **not** to work on the Metacentrum machine **`samson`**. When running jobs on Metacentrum, submit them with the option `--props=^cl_samson` to ensure they are not scheduled on `samson`.
+***
+
+For more details about the Metacentrum clusters, see [Metacentrum clusters specifics](specifics/metacentrum_family.md).

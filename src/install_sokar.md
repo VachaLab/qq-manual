@@ -9,3 +9,7 @@ curl -fsSL https://github.com/VachaLab/qq/releases/latest/download/qq-sokar-inst
 This downloads the latest version of qq and installs it to the shared home directory of the cluster nodes.
 
 To complete the installation, open a new terminal or source your `.bashrc` file.
+
+***
+
+For more details about the Sokar cluster, see [Sokar cluster specifics](specifics/metacentrum_family.md).
