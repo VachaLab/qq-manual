@@ -33,7 +33,8 @@
         ${PLUMED} -ntomp ${NTOMP} ${APPEND} -nb ${NB} -pin on -maxh ${MAX_TIME}
     ```
 
-        with
+    with
+    
     ```bash
         export OMP_NUM_THREADS="$((NTOMP * 2))"
         (...)
