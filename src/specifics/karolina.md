@@ -15,7 +15,7 @@
 
 - If you want to know more about configuring the storage qq uses for your job, read [this section of the manual](../resources/work_dir_karolina.md).
 
-- Submit jobs with the `--account` option providing your project ID. You can find your project ID by running `it4ifree` (left-most column, in the format `OPEN-XX-YY`).
+- Submit jobs with the `--account` option providing your project ID. You can find your project ID by running `it4ifree` (left-most column, in the format `OPEN-12-34`).
 
 - When submitting CPU-only jobs (queues starting with `qcpu`), you always need to allocate a full compute node. Each CPU node has 128 CPU cores. If you do not specify the number of CPUs, qq will use the correct value automatically.
 

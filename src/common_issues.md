@@ -63,6 +63,35 @@ fi
 
 > Note that if `.profile` and `.bash_profile` do not exist, `qq` should create them with the above content during installation. However, if you already have these files, `qq` does not modify them and assumes you have already configured them.
 
+
+## PBS GSS error - No credentials were supplied
+
+On Robox, Sokar, or Metacentrum clusters, you may get the following error when running `qq jobs`, `qq stat`, `qq nodes`, or `qq queues`:
+
+```text
+ERROR Could not retrieve information about jobs: pbs_gss_establish_context: GSS - gss_acquire_cred: No credentials were supplied, or the credentials were unavailable or inaccessible.
+pbs_gss_establish_context: GSS - gss_acquire_cred: unknown mech-code 0 for mech unknown
+auth: error returned: 15010
+auth: auth_process_handshake_data failure
+Permission denied
+```
+
+This indicates that your Kerberos ticket has expired. Run `kinit` and provide your password when prompted to generate a new Kerberos ticket. Then rerun the qq command.
+
+
+## sbatch error: AssocMaxSubmitJobLimit
+
+On Karolina and LUMI, you may get the following error when submitting a job:
+
+```text
+ERROR    Failed to submit script '<script_name>': sbatch: error: AssocMaxSubmitJobLimit
+sbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits).
+```
+
+This usually indicates that you did not provide the required `--account` option. Provide it along with your project ID (something like `OPEN-AB-CD` on Karolina or `project_123456` on LUMI; check the output of `it4ifree` or `lumi-allocations`, respectively).
+
+In case you did provide the `--account` option, you are probably running too many jobs on a given queue, you have used all the resources allocated for your project, the specified walltime for your job is too long, or you are asking for too many resources.
+
 ***
 
 ## I have some other issue
