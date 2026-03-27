@@ -6,9 +6,9 @@ A property can be a simple boolean flag (a node either has it or it doesn't), or
 
 - `--props cl_two` — the job will only run on nodes that have the `cl_two` property.
 - `--props ^cl_two` — the job will only run on nodes that do not have the `cl_two` property.
-- `--props cl_two,gpu_v100` — the job will only run on nodes that have both the `cl_two` and `gpu_v100` properties.
-- `--props gpu_model=rtx_4080` — the job will only run on nodes equipped with an RTX 4080 GPU.
-- `--props gpu_model=^rtx_4080` — the job will **not** run on nodes equipped with an RTX 4080 GPU.
+- `--props cl_two,singularity` — the job will only run on nodes that have both the `cl_two` and `singularity` properties.
+- `--props gpu_cap=sm_120` — the job will only run on nodes equipped with GPUs with [compute capability](https://developer.nvidia.com/cuda/gpus) 12.0 (Blackwell).
+- `--props gpu_cap=^sm_120` — the job will **not** run on nodes equipped with GPUs with compute capability 12.0 (Blackwell).
 
 You can use [`qq nodes`](../commands/qq_nodes.md) to browse the available nodes and their properties.
 
