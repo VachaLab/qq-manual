@@ -41,6 +41,8 @@ In summary, unlike with Infinity, you do not need to explicitly fetch files from
 
 If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](../runtime_files.md) are copied to the input directory. Note that this behavior can be changed by providing a non-default [archival mode](../transfer_modes.md#archive-modes).
 
+> Be aware that if your input directory contains a file whose name matches the archive format, it **will** be copied to the storage and either just sit there uselessly or potentially overwrite something important. Make sure that files you do **not** want placed into the archive are named differently than the files for archival.
+
 ## Resubmiting
 
 After the current cycle finishes the execution of the submitted script, archives the relevant files, and copies the other files to the input directory, qq resubmits the job. This means that the next cycle is submitted from the original input directory. The resubmission may occur from either the original input machine or the current main execution node, depending on the batch system.

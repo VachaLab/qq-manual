@@ -60,7 +60,7 @@ We do not need to specify the Python interpreter on the command line, as it is a
 
 ## Submitting a looping Python script
 
-With qq, you can also run Python loop jobs — useful when your script takes a very long time to finish and you have a mechanism to restart from checkpoints.
+With qq, you can run [loop jobs](job_types/loop_job.md) even when using a non-bash interpreter. Loop jobs are useful when your script takes a very long time to finish and you have a mechanism to restart from checkpoints.
 
 ```python
 #!/usr/bin/env -S qq run
