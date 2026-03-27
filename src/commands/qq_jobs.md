@@ -36,11 +36,11 @@ qq jobs [OPTIONS]
 qq jobs
 ```
 
-Displays a summary of your uncompleted jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the default batch server. For array jobs, individual tasks that have finished are still shown unless the array job as a whole has completed.
+Displays a summary of your uncompleted jobs (queued, running, or exiting). This includes both qq jobs and any other jobs associated with the default batch server.
 
 This is what the output might look like:
 
-![Example of qq jobs output](img/qq_jobs.png)
+![Example of qq jobs output](../img/qq_jobs.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -85,7 +85,7 @@ Prints a summary of your uncompleted jobs in YAML format. This output contains a
 
 ### Description of the output
 
-![Example and a description of qq jobs output](img/qq_jobs_description.png)
+![Example and a description of qq jobs output](../img/qq_jobs_description.png)
 
 - The output of [`qq stat`](qq_stat.md) is the same, except that it displays the jobs of all users.
 - You can control which columns are displayed and customize the appearance of the output using a [configuration file](../config.md).

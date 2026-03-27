@@ -33,7 +33,7 @@ qq stat [OPTIONS]
 qq stat
 ```
 
-Displays a summary of all uncompleted (queued, running, or exiting) jobs associated with the default batch server. For array jobs, individual tasks that have finished are still shown unless the array job as a whole has completed. The display looks similar to the display of [`qq jobs`](qq_jobs.md#description-of-the-output).
+Displays a summary of all uncompleted (queued, running, or exiting) jobs associated with the default batch server. The display looks similar to the display of [`qq jobs`](qq_jobs.md#description-of-the-output).
 
 ```bash
 qq stat -e

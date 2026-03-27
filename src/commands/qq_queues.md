@@ -36,7 +36,7 @@ Displays a summary of all queues associated with the default batch server to whi
 
 This is what the output might look like:
 
-![Example of qq queues output](img/qq_queues.png)
+![Example of qq queues output](../img/qq_queues.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
