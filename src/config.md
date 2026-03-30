@@ -129,6 +129,8 @@ retry_wait = 300
 sigterm_to_sigkill = 5
 # Interval (in seconds) between successive checks of the running script's state.
 subprocess_checks_wait_time = 2
+# Default intepreter used to run the submitted scripts in the qq environment.
+default_interpreter = "bash"
 
 
 ##############################################
@@ -208,6 +210,8 @@ max_nodes_length = 40
 border_style = "white"
 # Style used for the title.
 title_style = "white bold"
+# Style used for the subtitle (server name).
+subtitle_style = "white bold"
 # Style used for table headers.
 headers_style = "default"
 # Style used for table values.
@@ -239,6 +243,8 @@ min_width = 80
 border_style = "white"
 # Style used for the title.
 title_style = "white bold"
+# Style used for the subtitle (server name).
+subtitle_style = "white bold"
 # Style used for table headers.
 headers_style = "default"
 
@@ -274,6 +280,8 @@ max_props_panel_width = 40
 border_style = "white"
 # Style used for the title.
 title_style = "white bold"
+# Style used for the subtitle (server name).
+subtitle_style = "white bold"
 # Style used for table headers.
 headers_style = "default"
 # Style of the separators between individual sections of the panel.
@@ -408,6 +416,24 @@ scratch_dir_attempts = 3
 default_transfer_mode = "success"
 # Default archive mode used for jobs.
 default_archive_mode = "success"
+
+##############################################
+# Options associated with working with non-default batch servers.
+##############################################
+[batch_servers_options]
+
+# Dictionary mapping known server shortcuts to full server names.
+[batch_servers_options.known_servers]
+robox = "robox-pro.ceitec.muni.cz"
+sokar = "sokar-pbs.ncbr.muni.cz"
+metacentrum = "pbs-m1.metacentrum.cz"
+meta = "pbs-m1.metacentrum.cz"
+
+# Dictionary mapping known server names to frontends / output hosts.
+[batch_servers_options.known_output_hosts]
+"robox-pro.ceitec.muni.cz" = "st1.ceitec.muni.cz"
+"sokar-pbs.ncbr.muni.cz" = "sokar.ncbr.muni.cz"
+"pbs-m1.metacentrum.cz" = "perian.metacentrum.cz"
 
 ##############################################
 # General configuration

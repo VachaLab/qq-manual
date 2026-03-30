@@ -1,4 +1,5 @@
 # Using qq in Python
+> Looking for how to run Python scripts as qq jobs instead? See [this section of the manual](interpreters.md).
 
 qq is built on top of `qq_lib`, a Python library that exposes core qq functionality programmatically. You can install `qq_lib` to integrate qq workflows directly into your Python scripts.
 
@@ -7,13 +8,13 @@ The recommended way to use `qq_lib` is to use the [uv package manager](https://d
 To add `qq_lib` to your project:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.9.0
+uv add git+https://github.com/VachaLab/qq.git --tag v0.10.0
 ```
 
 Alternatively, you can add it directly to a specific script:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.9.0 --script [YOUR_SCRIPT].py
+uv add git+https://github.com/VachaLab/qq.git --tag v0.10.0 --script [YOUR_SCRIPT].py
 ```
 
 Then import qq classes and utilities in your Python code:
@@ -26,14 +27,14 @@ from qq_lib.kill import Killer
 And use them:
 
 ```python
-informer = Informer.fromFile("my_job.qqinfo")
-print(informer.getRealState())
+informer = Informer.from_file("my_job.qqinfo")
+print(informer.get_real_state())
 
-killer = Killer.fromInformer(informer)
+killer = Killer.from_informer(informer)
 killer.kill()
 ```
 
-See the [Python API documentation](https://qq.readthedocs.io/) for details on available modules, classes, and functions.
+See the [Python API documentation](https://qq.readthedocs.io/en/stable/qq_lib.html) for details on available modules, classes, and functions.
 
 ## Official qq scripts
 

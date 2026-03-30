@@ -5,12 +5,12 @@ There are three types of job states that qq uses: **batch states**, **naïve sta
 - *Naïve states* are recorded in qq info files.
 - *Real states* combine both sources of information to report the most accurate job status.
 
-Batch states are shown in the output of [`qq jobs`](qq_jobs.md) and [`qq stat`](qq_stat.md), while real states are used by all other commands that report a job's status.
+Batch states are shown in the output of [`qq jobs`](commands/qq_jobs.md) and [`qq stat`](commands/qq_stat.md), while real states are used by all other commands that report a job's status.
 
 Below are the meanings of the most common real states you may encounter:
 
 - **queued** – The job has been submitted and is waiting in the queue for execution.
-- **held** – The job has been submitted but is blocked from execution for some reason.
+- **held** – The job has been submitted but is blocked from execution for some reason (typically due to an unsatisfied [dependency](dependencies.md)).
 - **booting** – The job has been allocated computing nodes and the working directory is being prepared, but it is not yet ready.
 - **running** – The job is currently running; its script is being executed or the execution is being finalized.
 - **exiting** – `qq run` has finished executing or is submitting the next job cycle (for loop jobs), but the batch system hasn't completed the job yet.

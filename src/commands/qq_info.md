@@ -33,11 +33,13 @@ If `JOB_ID` is not provided, `qq info` searches for qq jobs in the current direc
 qq info 740173
 ```
 
-Displays the full information panel for the job with ID `740173`. You can use either the short ID or the full ID including the batch server address. This only works if the job is a qq job with a valid and accessible info file, and the associated batch server is reachable from the current machine.
+Displays the full information panel for the job with ID `740173` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
+
+This command only works if the job is a qq job with a valid and accessible info file, and the target batch server is reachable from the current machine.
 
 This is what the output might look like:
 
-![Example of qq info output](img/qq_info_2.png)
+![Example of qq info output](../img/qq_info_2.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -49,7 +51,7 @@ Displays the full information panel for all jobs whose info files are present in
 
 This is what the output might look like:
 
-![Example of qq info output](img/qq_info_1.png)
+![Example of qq info output](../img/qq_info_1.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -61,6 +63,6 @@ Displays short information for all jobs whose info files are present in the curr
 
 ### Description of the output
 
-![Example and a description of qq info output](img/qq_info_description.png)
+![Example and a description of qq info output](../img/qq_info_description.png)
 
-- You can customize the appearance of the output using a [configuration file](config.md).
+- You can customize the appearance of the output using a [configuration file](../config.md).

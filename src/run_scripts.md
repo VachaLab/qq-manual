@@ -1,4 +1,4 @@
-# Run scripts
+# Gromacs run scripts
 
 The [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/run_scripts) provides several ready-to-use scripts for running [Gromacs](https://www.gromacs.org/) simulations in loops — similar to Infinity’s `precycle` scripts.
 
@@ -16,7 +16,7 @@ Start by preparing a directory containing all necessary input files, and place `
 
 In your `.mdp` file, specify the number of simulation steps to perform **in each cycle**. In the body of the script, set the total number of cycles to run (using the `qq loop-end` directive), define input filenames, specify the Gromacs module to load, and optionally adjust the number of MPI ranks and OpenMP threads to use. By default, qq assigns one MPI rank per CPU core. If any GPUs are requested, one MPI rank per GPU is used and the remaining CPU cores are distributed among the MPI ranks as OpenMP threads.
 
-Once ready, submit the job with `qq submit`. The first cycle will be submitted and executed, and before it finishes, qq will automatically submit the next cycle. Read more about qq loop jobs [here](loop_job.md).
+Once ready, submit the job with `qq submit`. The first cycle will be submitted and executed, and before it finishes, qq will automatically submit the next cycle. Read more about qq loop jobs [here](job_types/loop_job.md).
 
 The total simulation length after all cycles finish equals: (steps per cycle in the `.mdp` file) × (number of cycles).
 
@@ -62,7 +62,7 @@ After your simulations finish, you may find that you want them to continue for a
 
 ### qq_loop_md / qq_loop_re
 
-Prolonging simulations run with `qq_loop_*` scripts is straightforward. Increase the value in the `# qq loop-end ...` directive to extend the total number of cycles, then submit the loop script again using [`qq submit`](qq_submit.md). You do not need to remove the runtime files in the directory. The loop job will resume from the next cycle.
+Prolonging simulations run with `qq_loop_*` scripts is straightforward. Increase the value in the `# qq loop-end ...` directive to extend the total number of cycles, then submit the loop script again using [`qq submit`](commands/qq_submit.md). You do not need to remove the runtime files in the directory. The loop job will resume from the next cycle.
 
 ### qq_flex_md / qq_flex_re
 
@@ -82,4 +82,4 @@ If you are using `qq_flex_re`, you must update `tpr` files for all clients creat
 md<NEXT_CYCLE_NUMBER>-<DIRECTORY_IDENTIFIER>.tpr
 ```
 
-Once the `tpr` files are updated, simply submit the flex script again using [`qq submit`](qq_submit.md). You do not need to remove the runtime files in the directory.
+Once the `tpr` files are updated, simply submit the flex script again using [`qq submit`](commands/qq_submit.md). You do not need to remove the runtime files in the directory.

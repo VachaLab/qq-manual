@@ -22,6 +22,8 @@ qq queues [OPTIONS]
 
 `-a`, `--all` — Display all queues, including those that are not available to you.
 
+`-s` `TEXT`, `--server` `TEXT` — Show queues for a specific batch server. If not specified, queues for the default batch server are shown.
+
 `--yaml` — Output queue metadata in YAML format.
 
 ### Examples
@@ -30,11 +32,11 @@ qq queues [OPTIONS]
 qq queues
 ```
 
-Displays a summary of all batch system queues to which you can submit jobs.
+Displays a summary of all queues associated with the default batch server to which you can submit jobs.
 
 This is what the output might look like:
 
-![Example of qq queues output](img/qq_queues.png)
+![Example of qq queues output](../img/qq_queues.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
 
@@ -42,13 +44,21 @@ This is what the output might look like:
 qq queues --all
 ```
 
-Displays a summary of all queues in the batch system, including those you cannot submit to.
+Displays a summary of all queues associated with the default batch server, including those you cannot submit jobs to.
 
 This is what the output might look like:
 
-![Example of qq queues output](img/qq_queues_all.png)
+![Example of qq queues output](../img/qq_queues_all.png)
 
 *Output truncated. For a detailed description of the output, see [below](#description-of-the-output).*
+
+
+```bash
+qq queues --server metacentrum
+```
+
+Displays a summary of all queues associated with the `metacentrum` batch server that are available to you. `metacentrum` is a known shortcut for the full batch server name `pbs-m1.metacentrum.cz`. You can use either of them. For more information about accessing information from other clusters, read [this section of the manual](../servers.md#qq-jobs-qq-stat-qq-queues-qq-nodes).
+
 
 ```bash
 qq queues --yaml
@@ -58,8 +68,8 @@ Prints a summary of all available queues in YAML format. This output contains th
 
 ### Description of the output
 
-![Example and a description of qq queues output](img/qq_queues_description.png)
+![Example and a description of qq queues output](../img/qq_queues_description.png)
 
-- You can customize the appearance of the output using a [configuration file](config.md).
+- You can customize the appearance of the output using a [configuration file](../config.md).
 - The output may also contain the column `Comment` providing the comment associated with the queue (typically additional information about the queue).
 - `Max Nodes` column is hidden if no queue defines a maximal allowed number of requested nodes per job.

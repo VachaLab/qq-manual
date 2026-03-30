@@ -12,13 +12,13 @@ When a qq job is submitted, several environment variables are automatically set 
 - `QQ_NGPUS`: the total number of allocated GPU cores
 - `QQ_WALLTIME`: the walltime of the job in hours
 
-If the `QQ_DEBUG` environment variable is set when running `qq submit`, its value is propagated to the job environment as well. This turns on the debug mode, dramatically increasing the verbosity of [`qq run`](qq_run.md).
+If the `QQ_DEBUG` environment variable is set when running `qq submit`, its value is propagated to the job environment as well. This turns on the debug mode, dramatically increasing the verbosity of [`qq run`](commands/qq_run.md).
 
-If the job is a [loop job](loop_job.md) or a [continuous job](continuous_job.md), the following environment variable is also set:
+If the job is a [loop job](job_types/loop_job.md) or a [continuous job](job_types/continuous_job.md), the following environment variable is also set:
 
-- `QQ_NO_RESUBMIT`: exit code that can be returned from the body of the script to indicate that the next cycle of the job should [not be submitted](loop_job.md#forcing-qq-not-to-resubmit)
+- `QQ_NO_RESUBMIT`: exit code that can be returned from the body of the script to indicate that the next cycle of the job should [not be submitted](job_types/loop_job.md#forcing-qq-not-to-resubmit)
 
-If the job is a [loop job](loop_job.md), the following additional environment variables are also set:
+If the job is a [loop job](job_types/loop_job.md), the following additional environment variables are also set:
 
 - `QQ_LOOP_CURRENT`: current cycle number of the loop job
 - `QQ_LOOP_START`: first cycle of the loop job

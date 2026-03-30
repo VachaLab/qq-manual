@@ -1,6 +1,6 @@
 # Continuous jobs
 
-Continuous jobs are jobs that automatically submit their continuation at the end of execution, but unlike [loop jobs](loop_job.md), do not track their current cycle and do not perform archiving or any other advanced operations.
+Continuous jobs are jobs that automatically submit their continuation at the end of execution, but unlike [loop jobs](../job_types/loop_job.md), do not track their current cycle and do not perform archiving or any other advanced operations.
 
 They simply continue running and submitting their continuations until resubmission is explicitly stopped by returning the value of the environment variable [`QQ_NO_RESUBMIT`](#forcing-a-continuous-job-not-to-resubmit) from the executed script, or until the job is manually killed or fails.
 
@@ -49,4 +49,4 @@ In some cases, you may want to prolong a continuous job that has successfully fi
 > 
 > When using local scratch as your working directory (the default), qq copies all files from the job's input directory to the working directory. If you do not archive your generated data (such as MD trajectories), **everything your simulation has generated** will be copied to the working directory in each job cycle, which can consume significant time and disk space (you may easily exceed the default storage quota allocated for your working directory on scratch).
 > 
-> If possible, use [loop jobs](loop_job.md) instead, as they support data archiving. For Gromacs simulations, qq provides [run scripts](run_scripts.md) for running long simulations.
+> If possible, use [loop jobs](loop_job.md) instead, as they support data archiving. For Gromacs simulations, qq provides [run scripts](../run_scripts.md) for running long simulations.
