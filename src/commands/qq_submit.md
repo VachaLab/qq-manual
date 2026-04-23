@@ -19,7 +19,7 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >   qq submit -q cpu run_script --ncpus 8 --walltime 12h --props cl_zero
 >   ```
 >
-> - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence (including list options since qq v0.8).
+> - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
 > - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory.
 > - `qq submit` has better support for multi-node jobs than `psubmit` as it allows specifying resource requirements per requested node.
 
@@ -122,6 +122,7 @@ All qq directives must appear at the beginning of the script, before any executa
 ```bash
 #!/usr/bin/env -S qq run
 
+# qq queue gpu
 # qq job-type loop
 # qq loop-end 10
 # qq archive storage
@@ -137,7 +138,9 @@ metamodule add ...
 > In the example above, kebab-case is used for option names, but qq directives also support snake_case, camelCase, and PascalCase.  
 > For example: `# qq job-type loop`, `# qq job_type loop`, `# qq jobType loop`, and `# qq JobType loop` are all equivalent.
 
-Command-line options (*including list options since qq v0.8*) always take precedence over options defined in the script body.
+**All** options of `qq submit` can be defined within the script body. Options that have a short form, such as `-q`/`--queue` and `-s`/`--server`, must be written in their long form (e.g., `# qq queue gpu` instead of `# qq q gpu`).
+
+Command-line options **always take precedence** over options defined in the script body.
 
 ### Examples
 
