@@ -145,10 +145,10 @@ Command-line options **always take precedence** over options defined in the scri
 ### Examples
 
 ```bash
-qq submit run_script.sh -q default --ncpus 8 --workdir scratch_local --worksize-per-cpu 2gb --walltime 2d --props hyperthreading
+qq submit run_script.sh -q cpu --ncpus 8 --workdir scratch_local --worksize-per-cpu 2gb --walltime 2d --props hyperthreading
 ```
 
-Submits the script `run_script.sh` to the `default` queue, requesting 8 CPU cores and 16 GB of local scratch space (2 GB per core). The requested walltime is 48 hours, and the job must run on a node with the `hyperthreading` property. Additional options may come from the script or queue defaults, but command-line options take precedence.
+Submits the script `run_script.sh` to the `cpu` queue, requesting 8 CPU cores and 16 GB of local scratch space (2 GB per core). The requested walltime is 48 hours, and the job must run on a node with the `hyperthreading` property. Additional options may come from the script or queue defaults, but command-line options take precedence.
 
 ```bash
 qq submit run_script.sh
