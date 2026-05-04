@@ -44,28 +44,53 @@ Again, the recommended approach is to use the [uv package manager](https://docs.
 
 ## [gmx-eta](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/gmx-eta)
 
-`gmx-eta` estimates the remaining runtime of a Gromacs simulation. Run it in a directory containing a qq job, or supply a specific job ID.
+`gmx-eta` estimates the remaining runtime of a Gromacs simulation. Run it in a directory containing a qq job, supply job ID(s), or use the `--all` flag.
 
 ### Usage
 ```bash
-usage: gmx-eta [-h] [job_id]
+usage: gmx-eta [-h] [--all] [job_id ...]
 
 Get the estimated time of a Gromacs simulation finishing.
 
 positional arguments:
-  job_id                Job ID. Optional.
+  job_id      Job ID(s). Optional. If not provided, ETA is obtained for the newest job submitted from the current directory.
 
 options:
-  -h, --help            show this help message and exit
+  -h, --help  show this help message and exit
+  --all, -a   Show ETA for all jobs.
 ```
 
-### Example
+### Examples
+Using a single job ID:
 ```bash
 $ gmx-eta 12345
-Simulation will finish in 06:41:07.
+[12345] gromacs_job: Simulation will finish in 06:41:07.
 ```
 
-> **Note:** `gmx-eta` requires that your Gromacs `gmx mdrun` command is executed with the `-v` flag.
+Using multiple job IDs:
+```bash
+$ gmx-eta 12345 12356
+[12345] gromacs_job: Simulation will finish in 06:41:07.
+[12356] gromacs_job: Simulation will finish in 05:23:57.
+```
+
+Using the `--all` flag:
+```bash
+$ gmx-eta --all
+[12345] gromacs_job: Simulation will finish in 06:41:07.
+[12356] gromacs_job: Simulation will finish in 05:23:57.
+[12444] gromacs_job_new: Simulation will finish in 08:45:12.
+[12458] gromacs_job_new: Simulation will finish in 11:33:01.
+```
+
+Without arguments inside an input directory of a job:
+```bash
+$ gmx-eta
+[12444] gromacs_job_new: Simulation will finish in 08:45:12.
+```
+
+
+> **Note:** `gmx-eta` requires that your Gromacs `mdrun` command is executed with the `-v` flag.
 
 ---
 
