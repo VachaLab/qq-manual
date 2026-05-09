@@ -132,6 +132,17 @@ subprocess_checks_wait_time = 2
 # Default intepreter used to run the submitted scripts in the qq environment.
 default_interpreter = "bash"
 
+##############################################
+# Settings for Resubmitter operations.
+##############################################
+[runner]
+# Maximum number of attempts when retrying an operation.
+retry_tries = 3
+# Wait time (in seconds) between retry attempts.
+retry_wait = 300
+# List of hosts from which job resubmission should be attempted.
+# If empty, the batch system defaults are used.
+default_resubmit_hosts = ""
 
 ##############################################
 # Settings for Archiver operations.
@@ -158,6 +169,10 @@ wait_time = 5
 [loop_jobs]
 # Pattern used for naming loop jobs.
 pattern = "+%04d"
+# Pattern used for names of archived files.
+archive_format = "job%04d"
+# Default name of the archive directory.
+archive_dir = "storage"
 
 
 ##############################################
@@ -434,6 +449,13 @@ meta = "pbs-m1.metacentrum.cz"
 "robox-pro.ceitec.muni.cz" = "st1.ceitec.muni.cz"
 "sokar-pbs.ncbr.muni.cz" = "sokar.ncbr.muni.cz"
 "pbs-m1.metacentrum.cz" = "perian.metacentrum.cz"
+
+##############################################
+# Options associated with multithreaded execution.
+##############################################
+[parallelization_options]
+# Maximal number of threads used to collect job information.
+job_info_max_threads = 8
 
 ##############################################
 # General configuration

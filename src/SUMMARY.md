@@ -50,6 +50,7 @@
     - [Specifying job dependencies](dependencies.md)
     - [Submitting non-bash scripts](interpreters.md)
     - [Inter-cluster job management](servers.md)
+    - [Specifying resubmission hosts](resubmit_hosts.md)
 - [Miscellaneous](miscellaneous.md)
     - [Job states](job_states.md)
     - [Runtime files](runtime_files.md)
