@@ -5,7 +5,7 @@ When running a [continuous](job_types/continuous_job.md) or a [loop](job_types/l
 This default behavior can be overridden by using the `--resubmit-from` option of [`qq submit`](commands/qq_submit.md):
 
 ```bash
-qq submit -q default --ncpus 8 --job-type continuous --resubmit-from st1 loop_job.sh
+qq submit -q default --ncpus 8 --job-type continuous --resubmit-from st1 job.sh
 ```
 
 With this setting, all new cycles of the continuous job will be resubmitted from the `st1` node, regardless of where they were originally submitted from. **Note that `qq` does NOT need to be installed on the resubmission host, so you can use almost any computer with access to the batch server.**
