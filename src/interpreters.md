@@ -12,6 +12,14 @@ qq submit my_script.py (...) --interpreter python
 
 The script `my_script.py` will be executed using `python`. **You need to make sure that Python is available on the compute node where your job is to be executed, otherwise your job will fail.** Also make sure that the `python` executable on the compute node starts the Python interpreter of the expected version with the expected packages your script requires.
 
+If you want to provide arguments to your interpreter, you can do that as follows:
+
+```bash
+qq submit my_script.py (...) --interpreter "python -u -O"
+```
+
+The script `my_script.py` will be executed using `python` with unbuffered output (`-u`) and optimized mode enabled (`-O`).
+
 > Note that no matter what interpreter you want your script to be run with, you must **always include the standard qq run shebang**: `#!/usr/bin/env -S qq run`. You can easily add it to your script using [`qq shebang`](commands/qq_shebang.md).
 
 ## Submitting a simple Python script
