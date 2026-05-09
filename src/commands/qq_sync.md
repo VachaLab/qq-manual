@@ -19,9 +19,9 @@ Fetches files from the working directory of the specified qq job, or from the wo
 qq sync [OPTIONS] JOB_ID
 ```
 
-**JOB_ID** — Identifier of the job whose working directory files should be fetched. This argument is optional.
+**JOB_ID** — One or more IDs of jobs whose working directory files should be fetched. Optional
 
-If `JOB_ID` is not provided, `qq sync` searches for qq jobs in the current directory. If multiple suitable jobs are found, `qq sync` fetches files from each one in turn. Files fetched from later jobs may overwrite files from earlier ones in the input directory.
+If no `JOB_ID` not provided, `qq sync` searches for qq jobs in the current directory. If multiple suitable jobs are found, `qq sync` fetches files from each one in turn. Files fetched from later jobs may overwrite files from earlier ones in the input directory.
 
 **Files are copied from the job's working directory to its input directory, not to the current directory.**
 
@@ -35,15 +35,27 @@ If `JOB_ID` is not provided, `qq sync` searches for qq jobs in the current direc
 qq sync 123456
 ```
 
-Fetches all files from the working directory of the job with ID `123456` to that job's input directory. If you use just the numerical portion of the job ID, the job is assumed to be located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
+Fetches all files from the working directory of the job with ID `123456` to that job's input directory. If you use just the numerical portion of the job ID, the job is assumed to be located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe-qq-respawn), you need to use the full ID including the server address.
 
 This command only works if the specified job is a qq job with a valid and accessible info file, and if the batch server and main node are reachable from the current machine.
+
+***
+
+```bash
+qq sync 123456 144844 156432
+```
+
+Fetches all files from the working directories of jobs `123456`, `144844`, and `156432` to their respective input directories.
+
+***
 
 ```bash
 qq sync
 ```
 
 Fetches all files from the working directories of all jobs whose info files are present in the current directory.
+
+***
 
 ```bash
 qq sync 123456 -f file1.txt,file2.txt,file3.txt

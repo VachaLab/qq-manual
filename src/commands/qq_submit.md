@@ -150,6 +150,8 @@ qq submit run_script.sh -q cpu --ncpus 8 --workdir scratch_local --worksize-per-
 
 Submits the script `run_script.sh` to the `cpu` queue, requesting 8 CPU cores and 16 GB of local scratch space (2 GB per core). The requested walltime is 48 hours, and the job must run on a node with the `hyperthreading` property. Additional options may come from the script or queue defaults, but command-line options take precedence.
 
+***
+
 ```bash
 qq submit run_script.sh
 ```

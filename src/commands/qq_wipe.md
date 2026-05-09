@@ -6,17 +6,17 @@ The `qq wipe` command is used to delete working directories of qq jobs. It has n
 
 ### Description
 
-Deletes the working directory of the specified qq job, or of all qq jobs in the current directory.
+Deletes the working directories of the specified qq jobs, or of all qq jobs in the current directory.
 
 ```bash
 qq wipe [OPTIONS] JOB_ID
 ```
 
-**JOB_ID** — Identifier of the job which working directory should be deleted. This argument is optional.
+**JOB_ID** — One or more IDs of jobs whose working directories should be deleted. Optional.
 
-If JOB_ID is not specified, `qq wipe` searches for qq jobs in the current directory.
+If no `JOB_ID` is specified, `qq wipe` searches for qq jobs in the current directory.
 
-By default, `qq wipe` prompts for confirmation before deleting the working directory. 
+By default, `qq wipe` prompts for confirmation before deleting the working directory for each job.
 
 Without the `--force` flag, it will only attempt to delete working directories of jobs that have failed or been killed. When the `--force` flag is used, `qq wipe` attempts to wipe the working directory of any job regardless of its state, including jobs that are queued, running or successfully finished. You should be very careful when using this option as it may delete useful data or cause your job to crash!
 
@@ -35,9 +35,19 @@ Without the `--force` flag, it will only attempt to delete working directories o
 qq wipe 123456
 ```
 
-Deletes the working directory of the job with ID `123456` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
+Deletes the working directory of the job with ID `123456` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe-qq-respawn), you need to use the full ID including the server address.
 
 Upon running the command, you will be prompted to confirm the termination by pressing `y`. This command only works if the specified job is a qq job with a valid and accessible info file, and the batch server must be reachable from the current machine.
+
+***
+
+```bash
+qq wipe 123456 144844 156432
+```
+
+Deletes the working directories of the jobs `123456`, `144844` and `156432`. You will be asked to confirm each deletion individually.
+
+***
 
 ```bash
 qq wipe
@@ -45,11 +55,15 @@ qq wipe
 
 Deletes the working directories of all suitable qq jobs whose info files are present in the current directory. You will be asked to confirm each deletion individually.
 
+***
+
 ```bash
 qq wipe 123456 -y
 ```
 
 Deletes the working directory of the job with ID `123456` without asking for confirmation (assumes 'yes').
+
+***
 
 ```bash
 qq wipe 123456 --force

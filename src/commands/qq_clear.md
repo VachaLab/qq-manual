@@ -32,6 +32,8 @@ qq clear
 
 Deletes all qq runtime files (files with extensions `.out`, `.err`, `.qqinfo`, `.qqout`) from the current directory, provided these files are not associated with any job or belong to a job that has been killed or has failed. If multiple jobs are represented in the directory, only files related to killed or failed jobs are deleted. This helps prevent accidental removal of files from running or successfully finished jobs.
 
+***
+
 ```bash
 qq clear --force
 ```

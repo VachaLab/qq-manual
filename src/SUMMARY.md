@@ -38,6 +38,7 @@
     - [qq killall](commands/qq_killall.md)
     - [qq nodes](commands/qq_nodes.md)
     - [qq queues](commands/qq_queues.md)
+    - [qq respawn](commands/qq_respawn.md)
     - [qq shebang](commands/qq_shebang.md)
     - [qq run](commands/qq_run.md)
     - [qq stat](commands/qq_stat.md)
