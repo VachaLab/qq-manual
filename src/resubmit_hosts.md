@@ -1,6 +1,6 @@
 # Specifying resubmission hosts
 
-When running a [continuous](job_types/continuous_job.md) or a [loop](job_types/loop_job.md) job, each new cycle of the job is, by default, resubmitted either from the working node or from the input machine, depending on the batch system used. Currently, on Metacentrum-family clusters, the resubmission occurs from the input machine, while on Karolina and LUMI, the resubmission occurs from the working node.
+When running a [continuous](job_types/continuous_job.md) or a [loop](job_types/loop_job.md) job, each new cycle of the job is, by default, resubmitted either from the working node (where the job was running) or from the input machine (where the job was submitted from), depending on the batch system used. Currently, on Metacentrum-family clusters, the resubmission occurs from the input machine, while on Karolina and LUMI, the resubmission occurs from the working node.
 
 This default behavior can be overridden by using the `--resubmit-from` option of [`qq submit`](commands/qq_submit.md):
 
@@ -35,4 +35,4 @@ You can globally configure the resubmission hosts in your [qq configuration file
 default_resubmit_hosts = "input,st1,working"
 ```
 
-**Note that you need to make this configuration file available to the compute nodes on the cluster, not just locally on your desktop.**
+> You only need to make this configuration file available on the original input machine from which the job is submitted. The settings will be transferred to the compute nodes and to the eventual resubmission host.
