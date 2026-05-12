@@ -8,13 +8,13 @@ The recommended way to use `qq_lib` is to use the [uv package manager](https://d
 To add `qq_lib` to your project:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.10.1
+uv add git+https://github.com/VachaLab/qq.git --tag v0.11.0
 ```
 
 Alternatively, you can add it directly to a specific script:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.10.1 --script [YOUR_SCRIPT].py
+uv add git+https://github.com/VachaLab/qq.git --tag v0.11.0 --script [YOUR_SCRIPT].py
 ```
 
 Then import qq classes and utilities in your Python code:
@@ -134,7 +134,7 @@ win19 win37 win40 win41 win44 win46 win47 win50 win51
 TOTAL           51
 ```
 
-You may also use `--fix` to automatically attempt to fix and resubmit jobs in **FAILED** or **KILLED** states. Jobs are submitted with the same parameters originally used.
+You may also use `--fix` to automatically attempt to respawn jobs in **FAILED** or **KILLED** states. Jobs are respawned with the same parameters originally used.
 
 ### Example fix
 ```bash
@@ -170,7 +170,7 @@ COULD NOT FIX             0
 
 ## [multi-submit](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-submit)
 
-`multi-submit` submits qq jobs from multiple directories in bulk. All jobs must use the same submission script name and request identical resources. The resource specification from the *first* submitted job is applied to all others.
+`multi-submit` submits qq jobs from multiple directories in bulk. All jobs must use the same submission script name and request identical resources. The resource specification from the *first* submitted job is applied to all others. It uses multithreading to significantly speed up job submission compared to submitting jobs individually.
 
 ### Usage
 ```bash
@@ -183,6 +183,7 @@ positional arguments:
   directories           Directories containing qq info files.
 
 options:
+  -t, --threads THREADS Number of worker threads (default: 16)
   -h, --help            show this help message and exit
 ```
 
