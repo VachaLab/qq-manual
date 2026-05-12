@@ -1,6 +1,6 @@
 # qq clear
 
-The `qq clear` command is used to remove qq runtime files from the current directory. It is qq's equivalent of Infinity's `premovertf`.
+The `qq clear` command is used to remove qq runtime files from the current or specified directory. It is qq's equivalent of Infinity's `premovertf`.
 
 ***
 
@@ -9,12 +9,13 @@ The `qq clear` command is used to remove qq runtime files from the current direc
 >   - If they **do**, the files are **not** deleted (if you *really* want to delete them, you have to use the `--force` flag).  
 >   - If they do **not**, the files are deleted without asking for confirmation.  
 >   - In contrast, `premovertf` simply lists the files and always asks for confirmation before deleting them (unless run as `premovertf -f`).
+> - `qq clear` can operate on a specific directory using the `-d`/`--dir` option.
 
 ***
 
 ### Description
 
-Deletes qq runtime files from the current directory.
+Deletes qq runtime files from the current or specified directory.
 
 ```bash
 qq clear [OPTIONS]
@@ -22,7 +23,8 @@ qq clear [OPTIONS]
 
 #### Options
 
-`--force` — Force deletion of all qq runtime files, even if they belong to active or successfully completed jobs.
+- `-d`, `--dir` — Specify the directory to clear qq runtime files from.
+- `--force` — Force deletion of all qq runtime files, even if they belong to active or successfully completed jobs.
 
 ### Examples
 
@@ -31,6 +33,16 @@ qq clear
 ```
 
 Deletes all qq runtime files (files with extensions `.out`, `.err`, `.qqinfo`, `.qqout`) from the current directory, provided these files are not associated with any job or belong to a job that has been killed or has failed. If multiple jobs are represented in the directory, only files related to killed or failed jobs are deleted. This helps prevent accidental removal of files from running or successfully finished jobs.
+
+***
+
+```bash
+qq clear -d gromacs/popc/job1
+```
+
+Deletes all *suitable* qq runtime files from directory corresponding to the relative path `gromacs/popc/job1`.
+
+***
 
 ```bash
 qq clear --force

@@ -64,7 +64,7 @@ qq submit -q default --ncpus 8 --walltime 12h --server sokar my_job.sh
 
 > **Important note:** If you submit a job to a different cluster, you need to have [qq installed on this cluster](installation.md)!
 
-## [qq info](commands/qq_info.md), [qq go](commands/qq_go.md), [qq kill](commands/qq_kill.md), [qq sync](commands/qq_sync.md), [qq wipe](commands/qq_wipe.md)
+## [qq info](commands/qq_info.md), [qq go](commands/qq_go.md), [qq kill](commands/qq_kill.md), [qq sync](commands/qq_sync.md), [qq wipe](commands/qq_wipe.md), [qq respawn](commands/qq_respawn.md)
 
 You can operate on jobs submitted to another server. When you run any of these commands without an argument, the command operates on the job submitted from the current directory — in this case, even if the job is associated with a different batch server, all operations will work normally. In other words, you can get information about the job, navigate to its working directory, kill it, fetch files from the working directory, or delete the working directory, just as you would for a job submitted to your default batch server.
 

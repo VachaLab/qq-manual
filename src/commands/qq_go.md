@@ -22,9 +22,9 @@ Opens a new shell in the working directory of the specified qq job, or in the wo
 qq go [OPTIONS] JOB_ID
 ```
 
-**JOB_ID** — Identifier of the job whose working directory should be entered. This argument is optional.
+**JOB_ID** — One or more IDs of jobs whose working directories should be entered. Optional.
 
-If `JOB_ID` is not provided, `qq go` searches for qq jobs in the current directory. If multiple matching jobs are found, `qq go` opens a shell for each one in turn.
+If no JOB_ID is specified, `qq go` searches for qq jobs in the current directory. If multiple suitable jobs are provided or found, `qq go` opens a shell for each job in turn.
 
 ### Examples
 
@@ -32,9 +32,19 @@ If `JOB_ID` is not provided, `qq go` searches for qq jobs in the current directo
 qq go 123456
 ```
 
-Opens a new shell in the working directory of the job with ID `123456` on its main working node. If you use just the numerical portion of the job ID, the job is assumed to be located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
+Opens a new shell in the working directory of the job with ID `123456` on its main working node. If you use just the numerical portion of the job ID, the job is assumed to be located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe-qq-respawn), you need to use the full ID including the server address.
 
 If the job does not exist, is not a qq job, its info file is missing, or the working directory no longer exists, the command exits with an error. If the job is not yet running, the command waits until the working directory is ready.
+
+***
+
+```bash
+qq go 123456 144844 156432
+```
+
+For each of the specified jobs (`123456`, `144844`, `156432`), `qq go` opens a new shell in its working directory.
+
+***
 
 ```bash
 qq go

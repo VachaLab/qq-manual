@@ -56,9 +56,9 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--depend` `TEXT` — Comma- or space-separated list of job dependencies in the format '<type>=<job_id>[:<job_id>...]'. Available types: **after** (after start), **afterok** (after success), **afternotok** (after failure/kill), **afterany** (after completion regardless of outcome). Multiple job IDs in one expression (colon-separated) require all listed jobs to satisfy the condition. Multiple expressions must all be satisfied before the job starts. Examples: 'afterok=1234', 'after=456:789', 'afterok=123,afternotok=678'. Read more about dependencies [here](../dependencies.md).
 
-`--transfer-mode` `TEXT` — Colon-, comma-, or space-separated list of transfer modes controlling when working directory files are transferred to the input directory. Modes: **success** (exit code 0), **failure** (non-zero exit code), **always**, **never**, or a specific exit code number (e.g., **42**). Combine modes; files transfer if any apply. Defaults to **success**. On transfer, the working directory is deleted; otherwise it is preserved. Killed jobs are never transferred automatically. Ignored if the input directory is used as the working directory. Examples: 'success', 'always', 'success:42', '1 2 3'.
+`--transfer-mode` `TEXT` — Colon-, comma-, or space-separated list of transfer modes controlling when working directory files are transferred to the input directory. Modes: **success** (exit code 0), **failure** (non-zero exit code), **always**, **never**, or a specific exit code number (e.g., **42**). Combine modes; files transfer if any apply. Defaults to **success**. On transfer, the working directory is deleted; otherwise it is preserved. Killed jobs are never transferred automatically. Ignored if the input directory is used as the working directory. Examples: 'success', 'always', 'success:42', '1 2 3'. Read more about transfer modes [here](../transfer_modes.md).
 
-`--interpreter` `TEXT` — Executable name or absolute path of the interpreter used to run the submitted script. Defaults to **bash**. The interpreter must be available on the computing node. Read more about specifying interpreters [here](../interpreters.md).
+`--interpreter` `TEXT` — Executable name or absolute path of the interpreter used to run the submitted script, including options for the interpreter. The interpreter must be available on the computing node. Defaults to **bash**. Read more about specifying interpreters [here](../interpreters.md).
 
 `--batch-system` `TEXT` — Name of the batch system used to submit the job. If not specified, the value of the environment variable 'QQ_BATCH_SYSTEM' is used or the system is auto-detected.
 
@@ -95,7 +95,12 @@ Memory and storage sizes are specified as 'N<unit>' where unit is one of b, kb, 
 
 `--props` `TEXT` — Colon-, comma-, or space-separated list of node properties required (e.g., cl_two) or prohibited (e.g., ^cl_two) to run the job.
 
-##### Loop options
+##### Settings for continuous and loop jobs
+Only used when job-type is **continuous** or **loop**.
+
+`--resubmit-from` `TEXT` — Colon-, comma-, or space-separated ordered list of hosts to try resubmitting from. The job is resubmitted from the first reachable host. Allowed values: **input** (the submission machine), **working** (the execution node), or a specific hostname (e.g., perian.metacentrum.cz). Default value depends on the batch system. Examples: 'input', 'input,working', 'input:st1:st2', 'working perian.metacentrum.cz'. Read more about resubmission hosts [here](../resubmit_hosts.md).
+
+##### Settings for loop jobs
 Only used when job-type is **loop**.
 
 `--loop-start` `INTEGER` — Starting cycle for a loop job. Defaults to **1**.
@@ -149,6 +154,8 @@ qq submit run_script.sh -q cpu --ncpus 8 --workdir scratch_local --worksize-per-
 ```
 
 Submits the script `run_script.sh` to the `cpu` queue, requesting 8 CPU cores and 16 GB of local scratch space (2 GB per core). The requested walltime is 48 hours, and the job must run on a node with the `hyperthreading` property. Additional options may come from the script or queue defaults, but command-line options take precedence.
+
+***
 
 ```bash
 qq submit run_script.sh

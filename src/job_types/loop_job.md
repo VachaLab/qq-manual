@@ -45,7 +45,7 @@ If the script fails or the job is killed, no archival is performed. As with stan
 
 ## Resubmitting
 
-After the current cycle finishes the execution of the submitted script, archives the relevant files, and copies the other files to the input directory, qq resubmits the job. This means that the next cycle is submitted from the original input directory. The resubmission may occur from either the original input machine or the current main execution node, depending on the batch system.
+After the current cycle finishes the execution of the submitted script, archives the relevant files, and copies the other files to the input directory, qq resubmits the job. This means that the next cycle is submitted from the original input directory. By default, the resubmission occurs from either the original input machine or the current main execution node, depending on the batch system. You can [customize this behavior](../resubmit_hosts.md) using the `--resubmit-from` option of [`qq submit`](../commands/qq_submit.md).
 
 The new job (the next cycle) waits for the previous one to finish completely before starting. When it begins, even before creating its working directory, qq archives runtime files from the previous cycle, renaming them according to the specified `archive-format`.
 

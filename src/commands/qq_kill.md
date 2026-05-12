@@ -13,17 +13,17 @@ The `qq kill` command is used to terminate qq jobs. It is qq's equivalent of Inf
 
 ### Description
 
-Terminates the specified qq job, or all qq jobs submitted from the current directory.
+Terminates the specified qq job(s), or all qq jobs submitted from the current directory.
 
 ```bash
 qq kill [OPTIONS] JOB_ID
 ```
 
-**JOB_ID** — Identifier of the job to terminate. This argument is optional.
+**JOB_ID** — One or more IDs of jobs to terminate. Optional.
 
-If `JOB_ID` is not provided, `qq kill` searches for qq jobs in the current directory. If multiple suitable jobs are found, `qq kill` terminates each one in turn.
+If no `JOB_ID` is provided, `qq kill` searches for qq jobs in the current directory. If multiple suitable jobs are provided or found, `qq kill` terminates each one in turn.
 
-By default, `qq kill` prompts for confirmation before terminating a job.
+By default, `qq kill` prompts for confirmation before terminating each job.
 
 Without the `--force` flag, it will only attempt to terminate jobs that are queued, held, booting, or running — not jobs that are already finished or killed. When the `--force` flag is used, `qq kill` attempts to terminate any job regardless of its state, including jobs that qq believes are already finished or killed. This can be used to remove lingering or stuck jobs.
 
@@ -39,9 +39,19 @@ Without the `--force` flag, it will only attempt to terminate jobs that are queu
 qq kill 123456
 ```
 
-Terminates the job with ID `123456` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the sever address.
+Terminates the job with ID `123456` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe-qq-respawn), you need to use the full ID including the sever address.
 
 Upon running this command, you will be prompted to confirm the termination by pressing `y`. This command only works if the specified job is a qq job with a valid and accessible info file, and the target batch server is reachable from the current machine.
+
+***
+
+```bash
+qq kill 123456 144844 156432
+```
+
+Terminates jobs `123456`, `144844`, and `156432`. You will be asked to confirm each termination individually.
+
+***
 
 ```bash
 qq kill
@@ -49,11 +59,15 @@ qq kill
 
 Terminates all suitable qq jobs whose info files are present in the current directory. You will be asked to confirm each termination individually.
 
+***
+
 ```bash
 qq kill 123456 -y
 ```
 
 Terminates the job with ID `123456` without asking for confirmation (assumes 'yes').
+
+***
 
 ```bash
 qq kill 123456 --force

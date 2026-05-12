@@ -13,15 +13,15 @@ The `qq info` command is used to monitor a qq job's state and display informatio
 
 ### Description
 
-Displays information about the state and properties of the specified qq job, or of qq jobs found in the current directory.
+Displays information about the state and properties of the specified qq job(s), or of qq jobs found in the current directory.
 
 ```bash
 qq info [OPTIONS] JOB_ID
 ```
 
-**JOB_ID** — Identifier of the job to display information for. This argument is optional.
+**JOB_ID** — One or more IDs of jobs to display information for. Optional.
 
-If `JOB_ID` is not provided, `qq info` searches for qq jobs in the current directory. If multiple jobs are found, `qq info` prints information for each job in turn.
+If no `JOB_ID` is provided, `qq info` searches for qq jobs in the current directory. If multiple jobs are provided or found, `qq info` prints information for each job in turn.
 
 #### Options
 
@@ -33,7 +33,7 @@ If `JOB_ID` is not provided, `qq info` searches for qq jobs in the current direc
 qq info 740173
 ```
 
-Displays the full information panel for the job with ID `740173` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe), you need to use the full ID including the server address.
+Displays the full information panel for the job with ID `740173` located on the default batch server. If the job is located on a [different batch server](../servers.md#qq-info-qq-go-qq-kill-qq-sync-qq-wipe-qq-respawn), you need to use the full ID including the server address.
 
 This command only works if the job is a qq job with a valid and accessible info file, and the target batch server is reachable from the current machine.
 
@@ -42,6 +42,16 @@ This is what the output might look like:
 ![Example of qq info output](../img/qq_info_2.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
+
+***
+
+```bash
+qq info 740173 741234 741236
+```
+
+Displays full information panels for jobs `740173`, `741234`, and `741236`.
+
+***
 
 ```bash
 qq info
@@ -54,6 +64,8 @@ This is what the output might look like:
 ![Example of qq info output](../img/qq_info_1.png)
 
 *For a detailed description of the output, see [below](#description-of-the-output).*
+
+***
 
 ```bash
 qq info -s

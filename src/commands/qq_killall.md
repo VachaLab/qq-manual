@@ -37,17 +37,23 @@ qq killall
 
 Terminates all your qq jobs with valid and accessible info files. You will be prompted to confirm termination by pressing `y`.
 
+***
+
 ```bash
 qq killall -y
 ```
 
 Terminates all your qq jobs with valid and accessible info files without asking for confirmation (assumes "yes").
 
+***
+
 ```bash
 qq killall --force
 ```
 
 Forcefully terminates all your qq jobs with valid and accessible info files. No confirmation is requested, and the jobs will be terminated even if qq believes they are already finished, failed, or killed.
+
+***
 
 ```bash
 qq killall --server sokar
