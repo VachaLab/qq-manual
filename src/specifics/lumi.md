@@ -43,4 +43,5 @@
 
 - LUMI's compute nodes have fast interconnections, making it easy to efficiently run jobs across multiple nodes.
 
+> [!TIP]
 > Click here for detailed [external documentation](https://docs.lumi-supercomputer.eu/) of the LUMI supercomputer.

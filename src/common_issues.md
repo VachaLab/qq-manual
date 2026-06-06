@@ -1,6 +1,7 @@
 # Common issues
 
-> If something does not work or behaves unexpectedly, it's **never** your fault — it's either a bug or an unclear documentation.
+> [!TIP]
+> If something does not work or behaves unexpectedly, it's **never** your fault — it's either a bug or an unclear documentation. [Report it!](https://github.com/VachaLab/qq/issues)
 
 Here are some issues that you may encounter when installing or using `qq`.
 
@@ -61,7 +62,8 @@ if [ -f ~/.bashrc ]; then
 fi
 ```
 
-> Note that if `.profile` and `.bash_profile` do not exist, `qq` should create them with the above content during installation. However, if you already have these files, `qq` does not modify them and assumes you have already configured them.
+> [!NOTE]
+> If `.profile` and `.bash_profile` do not exist, `qq` should create them with the above content during installation. However, if you already have these files, `qq` does not modify them and assumes you have already configured them.
 
 
 ## PBS GSS error - No credentials were supplied

@@ -14,8 +14,10 @@ qq submit -q default --ncpus 8 --walltime 1d --transfer-mode always my_script.sh
 
 With this setting, files are transferred from the working directory to the input directory regardless of whether the job succeeds or fails. **The working directory is then removed.**
 
+> [!WARNING]
 > Files are **never** transferred if the job is **killed** by you, the administrator, or the system, regardless of the specified transfer mode. Similarly, in the case of a qq error (job exit codes 90–99), data may not be transferred even if explicitly requested. In these situations, you can still access the data using [`qq go`](commands/qq_go.md) or [`qq sync`](commands/qq_sync.md), unless the working directory has already been deleted.
 
+> [!NOTE]
 > Specifying a transfer mode only makes sense when the working directory is different from the input directory (i.e., when you are **not** using the `--work-dir input_dir` option). If the job runs directly in the input directory, no file transfer is performed.
 
 ## Transfer modes
@@ -62,4 +64,5 @@ qq submit -q default (...) --transfer-mode always --archive-mode always qq_loop_
 
 The same modes are available for `--archive-mode` as for `--transfer-mode` (see [above](#transfer-modes)).
 
+> [!TIP]
 > Remember that all qq options, including `--transfer-mode` and `--archive-mode`, can also be specified [inside the submitted script](commands/qq_submit.md#specifying-options-in-the-script) using qq directives. You can also set the default transfer and archive mode for your jobs in the [QQ_CONFIG file](config.md) (this needs to be done on all machines from which you submit jobs).

@@ -10,6 +10,7 @@ qq automatically loads configuration from:
 
 If no file is found, qq falls back to built-in defaults.
 
+> [!IMPORTANT]
 > If you want the configuration to apply across the entire cluster, you must install it both on your desktop and in the home directories of all compute nodes. However, if you are only customizing qq's appearance (see [Themes](#themes)), placing the configuration file on your desktop will probably suffice.
 
 ## Configuration structure
@@ -43,9 +44,10 @@ You may import these themes directly or copy pieces into your own configuration.
 
 The following expanded TOML structure lists all available sections and fields. You can copy this into your config and modify only the pieces you care about.
 
-> Note that we generally recommend modifying only qq's appearance (tables with `presenter` in name or the `state_colors` table). 
+> [!CAUTION]
+> We generally only recommend modifying qq's appearance (tables with `presenter` in name or the `state_colors` table). 
 >
-> Changing any of `suffixes`, `env_vars`, `date_formats`, `exit_codes`, `binary_name` is **dangerous** and may break qq's functionality.
+> Changing any of `suffixes`, `env_vars`, `date_formats`, `exit_codes`, `binary_name` is **dangerous** and may potentially break qq's functionality.
 
 
 ```toml

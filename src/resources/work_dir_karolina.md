@@ -8,6 +8,7 @@ To control where the working directory is created, use the `work-dir` option (or
 - `--work-dir input_dir` – Uses the input directory itself as the working directory. Files are not copied anywhere. If you use this option, it is **strongly** recommended to submit from the scratch storage.  
 - `--work-dir job_dir` – Same as `input_dir`.
 
+> [!TIP]
 > **Recommendation:**
 > - Submit jobs from your Project storage (`/mnt/...`). With the default `--work-dir` option, qq automatically copies your data to scratch, executes the job there, and then copies the results back to your input directory.  
 > - The size of the working directory on Karolina is limited by your filesystem quota, so you do not need to specify the `work-size` option.

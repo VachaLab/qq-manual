@@ -9,6 +9,7 @@ To control where the working directory is created, use the `work-dir` option (or
 - `--work-dir input_dir` – **Recommended option**. Uses the input directory itself as the working directory. Files are not copied anywhere. If you use this option, you should submit the job from the scratch or flash storage.
 - `--work-dir job_dir` – Same as `input_dir`.
 
+> [!TIP]
 > **Recommendations:**
 > - **Submit jobs from your project's scratch (`/scratch/<project_id>`) and using the option `--workdir input_dir`!**
 > - On LUMI, you are billed for the amount of storage you use! Try to avoid storing large amounts of data in the project's storages.

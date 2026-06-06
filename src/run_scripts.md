@@ -2,8 +2,9 @@
 
 The [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/run_scripts) provides several ready-to-use scripts for running [Gromacs](https://www.gromacs.org/) simulations in loops — similar to Infinity’s `precycle` scripts.
 
-These scripts are compatible with all qq-supported clusters, including Metacentrum-family clusters, Karolina, and LUMI. **Do not forget to load Gromacs from the module appropriate for the given cluster.**
+These scripts are compatible with all qq-supported clusters, including Metacentrum-family clusters, Karolina, and LUMI. **You just have to remember to modify the script to load Gromacs from the module appropriate for the given cluster.**
 
+> [!IMPORTANT]
 > **For LUMI users:** If you are using full nodes on the LUMI's GPU queues, the run scripts may require some modifications to get solid performance (see [here](https://docs.csc.fi/apps/gromacs/#full-gpu-node-batch-script)).
 
 ---

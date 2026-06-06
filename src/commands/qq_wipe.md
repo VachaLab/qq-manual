@@ -2,6 +2,7 @@
 
 The `qq wipe` command is used to delete working directories of qq jobs. It has no direct equivalent in Infinity.
 
+> [!TIP]
 > It can be tricky to remember the difference between `qq wipe` and [`qq clear`](qq_clear.md). This might be useful: **W**ipe affects the **W**orking directory.
 
 ### Description
@@ -20,8 +21,8 @@ By default, `qq wipe` prompts for confirmation before deleting the working direc
 
 Without the `--force` flag, it will only attempt to delete working directories of jobs that have failed or been killed. When the `--force` flag is used, `qq wipe` attempts to wipe the working directory of any job regardless of its state, including jobs that are queued, running or successfully finished. You should be very careful when using this option as it may delete useful data or cause your job to crash!
 
+> [!NOTE]
 > If the working directory matches the input directory, `qq wipe` will never delete it, even if you use the `--force` flag, to protect you from accidentally removing your data.
-
 
 #### Options
 

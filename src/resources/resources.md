@@ -4,4 +4,5 @@ Each qq job requires some resources to run. These resources need to be requested
 
 You can specify resources on the command line when running [`qq submit`](../commands/qq_submit.md), or inside the submitted script itself using [qq directives](../commands/qq_submit.md#specifying-options-in-the-script). If a resource is not specified, its value falls back to the queue default, then the server default, and finally the qq-level default for the given environment — in that order of priority.
 
+> [!NOTE]
 > In this section of the manual, every time you see an option, something like `--nnodes`, `--ncpus`, or `--walltime`, these options relate to the [`qq submit`](../commands/qq_submit.md) command.

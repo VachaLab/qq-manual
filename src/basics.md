@@ -10,19 +10,15 @@ Start by creating a directory for the job on a shared storage (*you can also sub
 
 Next, prepare a run script that creates a `tpr` file from the input files using `gmx grompp`, and then runs the simulation with `gmx mdrun`. We’ll configure the simulation to use 8 OpenMP threads.
 
-**Note that all qq run scripts must start with the correct shebang line:**
-
-```bash
-#!/usr/bin/env -S qq run
-```
-
 A complete example of a run script:
 
 ```bash
 #!/usr/bin/env -S qq run
 
 # activate the Gromacs module
-metamodule add gromacs/2024.3-cuda
+module add gromacs/2024.3-cuda
+# or metamodule add gromacs/2024.3-cuda, depending on 
+# whether you have activated the Infinity environment or not
 
 # prepare a TPR file
 gmx_mpi grompp -f md.mdp -c eq.gro -t eq.cpt -n index.ndx -p system.top -o md.tpr
@@ -31,7 +27,15 @@ gmx_mpi grompp -f md.mdp -c eq.gro -t eq.cpt -n index.ndx -p system.top -o md.tp
 gmx_mpi mdrun -deffnm md -ntomp 8 -v
 ```
 
-> **Hint:** You can use the [`qq shebang`](commands/qq_shebang.md) command to easily add the qq run shebang to your script.
+> [!IMPORTANT]
+> **All qq run scripts must start with the correct shebang line:**
+> 
+> ```bash
+> #!/usr/bin/env -S qq run
+> ```
+
+> [!TIP]
+> You can use the [`qq shebang`](commands/qq_shebang.md) command to easily add the qq run shebang to your script.
 
 Save this file as `run_job.sh` and make it executable:
 ```bash
@@ -48,7 +52,8 @@ qq submit run_job.sh -q cpu --ncpus 8 --walltime 1d
 
 This submits `run_job.sh` to the `cpu` queue, requesting 8 CPU cores and a walltime of one day. All other parameters are determined by the queue or qq’s default settings.
 
-> Note that on Karolina and LUMI, you also have to specify the `--account` option, providing the ID of the project you are associated with.
+> [!IMPORTANT]
+> **On Karolina and LUMI**, you also have to specify the `--account` option, providing the ID of the project you are associated with.
 
 The batch system then schedules the job for execution. Once a suitable compute node is available, the job runs through [`qq run`](commands/qq_run.md), a wrapper around bash that prepares the [working directory](resources/work_dir.md), copies files, executes the script, and performs cleanup. You can read more about how exactly this works in [this section](job_types/standard_job.md) of the manual.
 

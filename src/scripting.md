@@ -1,4 +1,5 @@
 # Using qq in Python
+> [!TIP]
 > Looking for how to run Python scripts as qq jobs instead? See [this section of the manual](interpreters.md).
 
 qq is built on top of `qq_lib`, a Python library that exposes core qq functionality programmatically. You can install `qq_lib` to integrate qq workflows directly into your Python scripts.
@@ -46,6 +47,9 @@ Again, the recommended approach is to use the [uv package manager](https://docs.
 
 `gmx-eta` estimates the remaining runtime of a Gromacs simulation. Run it in a directory containing a qq job, supply job ID(s), or use the `--all` flag.
 
+> [!IMPORTANT]
+> `gmx-eta` requires that your Gromacs `mdrun` command is executed with the `-v` flag.
+
 ### Usage
 ```bash
 usage: gmx-eta [-h] [--all] [job_id ...]
@@ -88,9 +92,6 @@ Without arguments inside an input directory of a job:
 $ gmx-eta
 [12444] gromacs_job_new: Simulation will finish in 08:45:12.
 ```
-
-
-> **Note:** `gmx-eta` requires that your Gromacs `mdrun` command is executed with the `-v` flag.
 
 ---
 

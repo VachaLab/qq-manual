@@ -35,4 +35,5 @@ You can globally configure the resubmission hosts in your [qq configuration file
 default_resubmit_hosts = "input,st1,working"
 ```
 
+> [!NOTE]
 > You only need to make this configuration file available on the original input machine from which the job is submitted. The settings will be transferred to the compute nodes and to the eventual resubmission host.

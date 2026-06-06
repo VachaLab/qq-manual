@@ -140,8 +140,8 @@ All qq directives must appear at the beginning of the script, before any executa
 metamodule add ...
 ```
 
-> In the example above, kebab-case is used for option names, but qq directives also support snake_case, camelCase, and PascalCase.  
-> For example: `# qq job-type loop`, `# qq job_type loop`, `# qq jobType loop`, and `# qq JobType loop` are all equivalent.
+> [!NOTE]
+> In the example above, kebab-case is used for option names, but qq directives also support snake_case, camelCase, and PascalCase. For example: `# qq job-type loop`, `# qq job_type loop`, `# qq jobType loop`, and `# qq JobType loop` are all equivalent.
 
 **All** options of `qq submit` can be defined within the script body. Options that have a short form, such as `-q`/`--queue` and `-s`/`--server`, must be written in their long form (e.g., `# qq queue gpu` instead of `# qq q gpu`).
 

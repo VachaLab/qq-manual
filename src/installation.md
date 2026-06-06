@@ -8,4 +8,5 @@ All installation scripts assume that you are using bash as your shell. If you us
 
 To **reinstall** or **update** qq on a cluster, just run the installation command for the given cluster again.
 
+> [!NOTE]
 > Updating qq is *usually* safe, even if you have running qq jobs on the cluster. Jobs that are already running will continue using the old version of qq. Loop jobs will automatically switch to the updated version in their next cycle.

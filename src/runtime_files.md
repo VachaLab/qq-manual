@@ -6,7 +6,9 @@ qq uses four types of runtime files, each with one of the following extensions: 
 
 A `.qqinfo` file (also called a "qq info file") is created after submission by [`qq submit`](commands/qq_submit.md). It stores information used to track the job submitted from that directory. Each qq job requires its own info file for management and control.
 
-> **Do NOT move, modify, or delete qq info files manually.**  
+> [!CAUTION]
+> **Do NOT move, modify, or delete qq info files manually.**
+>
 > Always use qq commands such as [`qq kill`](commands/qq_kill.md) or [`qq clear`](commands/qq_clear.md) to manage them safely.  
 > Moving, editing, or removing a qq info file while a job is running **will** cause the job to crash, and you may lose its data.
 

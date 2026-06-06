@@ -12,7 +12,8 @@ A property can be a simple boolean flag (a node either has it or it doesn't), or
 
 You can use [`qq nodes`](../commands/qq_nodes.md) to browse the available nodes and their properties.
 
-> Note that prohibiting property values is only supported for the PBS batch system (on Robox, Sokar, Metacentrum).
+> [!IMPORTANT]
+> Prohibiting property values is only supported for the PBS batch system (on Robox, Sokar, Metacentrum).
 
 ### vnode property
 

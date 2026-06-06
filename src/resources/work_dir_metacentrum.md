@@ -11,6 +11,7 @@ To control where the working directory is created, use the `work-dir` option (or
 - `--work-dir input_dir` – Uses the input directory itself as the working directory. Files are not copied anywhere. Can be slower for I/O-heavy jobs.
 - `--work-dir job_dir` – Same as `input_dir`.
 
+> [!TIP]
 > Not all scratch types are available on every compute node. Use [`qq nodes`](../commands/qq_nodes.md) to see which storage options are supported by each node.
 
 For more details on scratch storage types available on Metacentrum-family clusters, visit the [official documentation](https://docs.metacentrum.cz/en/docs/computing/infrastructure/scratch-storages).
@@ -24,6 +25,7 @@ By default, qq allocates **1 GB of storage per CPU core** when using a scratch d
 - `--work-size-per-node` (or `--worksize-per-node`) — specifies the amount of storage per requested compute node.
 - `--work-size` (or `--worksize`) — specifies the total amount of storage for the entire job.
 
+> [!NOTE]
 > `--work-size-per-node` overrides `--work-size-per-cpu`. `--work-size` overrides both `--work-size-per-cpu` and `--work-size-per-node`.
 
 **Example:**
@@ -34,11 +36,13 @@ qq submit --work-size 16gb (...)
 qq submit --work-size-per-cpu 2gb (...)
 ```
 
+> [!NOTE]
 > Storage sizes are specified as `N<unit>` where unit is one of `b`, `kb`, `mb`, `gb`, `tb`, `pb` (e.g., `500mb`, `32gb`).
 
 ### In-memory scratch
 If you use `--work-dir scratch_shm`, you should allocate memory instead of `work-size`, using the `mem`, `mem-per-node`, or `mem-per-cpu` options. Make sure the total allocated memory covers both your program’s memory usage **and** your in-memory storage needs. By default, qq allocates **1 GB of RAM per CPU core** for all jobs.
 
+> [!NOTE]
 > `--mem-per-node` overrides `--mem-per-cpu`. `--mem` overrides both `--mem-per-cpu` and `--mem-per-node`.
 
 **Example:**

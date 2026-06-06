@@ -25,6 +25,7 @@ If the job is a [loop job](job_types/loop_job.md), the following additional envi
 - `QQ_LOOP_END`: last cycle of the loop job
 - `QQ_ARCHIVE_FORMAT`: filename format used for archived files
 
+> [!IMPORTANT]
 > Apart from the variables listed here and those provided by the batch system itself, no other environment variables can be guaranteed to be propagated from the submission environment to the job environment.
 
 Additional internal environment variables may be set, but these are not intended for public use and may change or be removed in future versions of qq.

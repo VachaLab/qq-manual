@@ -10,12 +10,20 @@ To submit a continuous job, run:
 qq submit (...) --job-type continuous
 ```
 
+> [!CAUTION]
+> Using continuous jobs is **not recommended** for long-running simulations that generate large amounts of data. 
+> 
+> When using local scratch as your working directory (the default), qq copies all files from the job's input directory to the working directory. If you do not archive your generated data (such as MD trajectories), **everything your simulation has generated** will be copied to the working directory in each job cycle, which can consume significant time and disk space (you may easily exceed the default storage quota allocated for your working directory on scratch).
+> 
+> If possible, use [loop jobs](loop_job.md) instead, as they support data archiving. For Gromacs simulations, qq provides [run scripts](../run_scripts.md) for running long simulations.
+
 ## Submitting and running a continuous job
 
 When submitting a continuous job, the sequence of operations is initially the same as for a [standard job](standard_job.md). The job gets queued by the batch system, then starts, creates a working directory, copies the data from the input directory there, and executes the submitted script. 
 
 Once the script successfully finishes, the data are transferred back from the working directory to the input directory. Then the job is automatically resubmitted using the same submission options. The new job has exactly the same name as the previous job, meaning that **runtime files for the next job overwrite those created for the previous job**. Once the *next* job finishes, it also automatically submits its continuation, and this continues indefinitely until the job fails or is killed. Failed and killed jobs are not resubmitted.
 
+> [!IMPORTANT]
 > Continuous jobs do not perform any archiving operations and overwrite their runtime files. If you want to or need to keep runtime files for all your finished jobs, use a [loop job](loop_job.md) instead.
 
 ## Forcing a continuous job not to resubmit
@@ -44,9 +52,3 @@ If qq detects this exit code (`${QQ_NO_RESUBMIT}`), it will not submit the conti
 ## Extending a continuous job
 
 In some cases, you may want to prolong a continuous job that has successfully finished (and that has been forced not to submit its own continuation). As with [loop jobs](loop_job.md#extending-a-loop-job), you do not need to delete the runtime files. You can simply run [`qq submit`](qq_submit.md) again—qq will recognize that a continuous job has been running in the directory and will allow submitting the job. The extended job will continue running and submitting its continuation until its script returns the environment variable [`QQ_NO_RESUBMIT`](#forcing-a-continuous-job-not-to-resubmit) or until the job fails or is killed.
-
-> Using continuous jobs is **not recommended** for long-running simulations that generate large amounts of data. 
-> 
-> When using local scratch as your working directory (the default), qq copies all files from the job's input directory to the working directory. If you do not archive your generated data (such as MD trajectories), **everything your simulation has generated** will be copied to the working directory in each job cycle, which can consume significant time and disk space (you may easily exceed the default storage quota allocated for your working directory on scratch).
-> 
-> If possible, use [loop jobs](loop_job.md) instead, as they support data archiving. For Gromacs simulations, qq provides [run scripts](../run_scripts.md) for running long simulations.

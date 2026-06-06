@@ -6,6 +6,7 @@ To turn a job into a loop job, you must set two [`qq submit`](../commands/qq_sub
 - `job-type` to `loop`, and  
 - `loop-end` to specify the last [cycle](#loop-job-cycles) of the loop job.
 
+> [!TIP]
 > Do loop jobs seem unnecessarily complex for your use-case? Do you just want a job that submits its own continuation without worrying about archival and cycle tracking? Take a look at [continuous jobs](continuous_job.md)—they might be what you need.
 
 ## Loop job cycles
@@ -41,6 +42,7 @@ In summary, unlike with Infinity, you do not need to explicitly fetch files from
 
 If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](../runtime_files.md) are copied to the input directory. Note that this behavior can be changed by providing a non-default [archival mode](../transfer_modes.md#archive-modes).
 
+> [!IMPORTANT]
 > Be aware that if your input directory contains a file whose name matches the archive format, it **will** be copied to the storage and either just sit there uselessly or potentially overwrite something important. Make sure that files you do **not** want placed into the archive are named differently than the files for archival.
 
 ## Resubmitting
@@ -55,7 +57,8 @@ If the current cycle of the loop job corresponds to `loop-end`, no resubmission 
 
 Sometimes, after a job completes *N* cycles, you may realize you need *M* more. To extend the job, simply submit it again from the same input directory with `loop-end` set to *N + M*, either on the command line or in the submission script.  
 
-**Importantly:** you do not need to [delete any runtime files](standard_job.md#submitting-the-next-job) from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
+> [!TIP]
+> You do not need to [delete any runtime files](standard_job.md#submitting-the-next-job) from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
 
 ## Forcing qq not to resubmit
 

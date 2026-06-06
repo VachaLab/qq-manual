@@ -16,7 +16,8 @@ Alternatively, you can use one of the following shortcuts:
 - `sokar`, which expands to `sokar-pbs.ncbr.muni.cz`
 - `metacentrum` or `meta`, which both expand to `pbs-m1.metacentrum.cz`
 
-> Note that **not** all batch servers are necessarily accessible from all machines. For instance, from the Sokar frontend you cannot connect to `robox-pro.ceitec.muni.cz`. However, all of the above batch servers should be reachable from any Robox desktop.
+> [!WARNING]
+> **Not** all batch servers are necessarily accessible from all machines. For instance, from the Sokar frontend you cannot connect to `robox-pro.ceitec.muni.cz`. However, all of the above batch servers should be reachable from any Robox desktop.
 
 ## [qq jobs](commands/qq_jobs.md), [qq stat](commands/qq_stat.md), [qq queues](commands/qq_queues.md), [qq nodes](commands/qq_nodes.md)
 
@@ -40,6 +41,7 @@ Similarly, you can get information about all jobs of all users on the Sokar clus
 qq stat -s sokar --all
 ```
 
+> [!NOTE]
 > When you run `qq jobs` or `qq stat` without specifying a server (so that the jobs are collected for the default server), the "Job ID" column shows only the numerical portion of the job ID. When you run these commands **with** a server specified, you get the full job ID including the batch server address. This can be useful for the commands described [below](#qq-info-qq-go-qq-kill-qq-sync-qq-wipe).
 
 You can also get information about queues and compute nodes available on another server:
@@ -50,7 +52,8 @@ qq nodes  -s <server-name>
 
 ## [qq submit](commands/qq_submit.md)
 
-> ⚠️ This feature is experimental and may be unstable. Tread carefully and [report](https://github.com/VachaLab/qq/issues) any issues or suspicious behavior you encounter.
+> [!CAUTION]
+> This feature is experimental and may be unstable. Tread carefully and [report](https://github.com/VachaLab/qq/issues) any issues or suspicious behavior you encounter.
 
 Apart from monitoring jobs on different servers, you can also submit jobs to them. To do so, specify the `--server` (`-s`) option when submitting the job.
 
@@ -62,7 +65,8 @@ qq submit -q default --ncpus 8 --walltime 12h --server sokar my_job.sh
 
 *Note that you are submitting to a queue on the Sokar cluster, so you need to use a queue that is available there.*
 
-> **Important note:** If you submit a job to a different cluster, you need to have [qq installed on this cluster](installation.md)!
+> [!IMPORTANT]
+> If you submit a job to a different cluster, you need to have [qq installed on this cluster](installation.md)!
 
 ## [qq info](commands/qq_info.md), [qq go](commands/qq_go.md), [qq kill](commands/qq_kill.md), [qq sync](commands/qq_sync.md), [qq wipe](commands/qq_wipe.md), [qq respawn](commands/qq_respawn.md)
 
@@ -88,4 +92,5 @@ qq killall --server <server-name>
 
 ***
 
+> [!WARNING]
 > The `--server` option is **ignored** on Karolina and LUMI, where only one batch server is available. You also cannot submit jobs from any of the Metacentrum-family clusters to Karolina and LUMI or vice versa.
