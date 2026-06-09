@@ -25,15 +25,19 @@ The `qq respawn` command is used to "respawn" jobs, i.e. put failed or killed jo
 
 ### Description
 
-Respawns the specified qq job(s), or all qq jobs submitted from the current directory.
+Respawns the specified qq jobs, or all qq jobs in the specified directories.
 
 ```bash
-qq respawn [OPTIONS] JOB_ID
+qq respawn [OPTIONS] JOB_ID...
 ```
 
-**JOB_ID** — One or more IDs of jobs to respawn. Optional.
+**JOB_ID...** — One or more IDs of jobs to respawn. Optional.
 
-If no `JOB_ID` is provided, `qq respawn` searches for qq jobs in the current directory. If multiple suitable jobs are found, `qq respawn` respawns each one in turn.
+If no `JOB_ID` and no directory are provided, `qq respawn` searches for qq jobs in the current directory. If multiple suitable jobs are found, `qq respawn` respawns each one in turn.
+
+#### Options
+
+- `-d`, `--dir` — One or more directories to search for qq jobs in. Supports globs.
 
 ### Examples
 
@@ -60,3 +64,19 @@ qq respawn
 ```
 
 Respawns all suitable qq jobs whose info files are present in the current directory (typically one, since `qq` requires one job per directory).
+
+****
+
+```bash
+qq respawn -d /path/to/dir
+```
+
+Respawns all suitable qq jobs whose info files are present in direcotry `/path/to/dir`.
+
+***
+
+```bash
+qq respawn -d /path/to/job*
+```
+
+Respawns all suitable qq jobs whose info files are located in directories matching the glob pattern `/path/to/job*` (e.g., `/path/to/job1`, `/path/to/job2`, `/path/to/job3`). Useful for managing job collections.

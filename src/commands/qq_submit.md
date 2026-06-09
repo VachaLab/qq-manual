@@ -20,21 +20,22 @@ The `qq submit` command is used to submit qq jobs to the batch system. It is qq'
 >   ```
 >
 > - Options can also be specified directly [in the submitted script](#specifying-options-in-the-script), or as a mix of in-script and command-line definitions. Command-line options always take precedence.
-> - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory.
+> - Unlike with `psubmit`, you do **not** have to execute `qq submit` directly from the directory with the submitted script. You can run `qq submit` from anywhere and provide the path to your script. The job's input directory will always be the submitted script's parent directory. Additionally, `qq submit` can submit multiple jobs at once.
 > - `qq submit` has better support for multi-node jobs than `psubmit` as it allows specifying resource requirements per requested node.
 
 ***
 
 ### Description
 
-Submits a qq job to the batch system.
+Submits one or more qq jobs to the batch system.
+
 ```bash
-qq submit [OPTIONS] SCRIPT
+qq submit [OPTIONS] SCRIPT...
 ```
 
-**SCRIPT** — Path to the script to submit.
+**SCRIPT...** — One or more paths to the scripts to submit.
 
-The submitted script must contain the [qq run shebang](qq_run.md). You can add it to your script by running [`qq shebang SCRIPT`](qq_shebang.md).
+The submitted script(s) must contain the [qq run shebang](qq_run.md). You can add it to your script by running [`qq shebang SCRIPT`](qq_shebang.md).
 
 When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for tracking the job's state.
 
@@ -147,6 +148,12 @@ metamodule add ...
 
 Command-line options **always take precedence** over options defined in the script body.
 
+### Submitting multiple jobs
+
+You can submit multiple jobs by providing multiple script paths to `qq submit`. The command line options will apply to all submitted scripts, but each script can also define its own qq directives. Note however that command line options override options defined in the script body.
+
+Submission of multiple jobs is parallelized and consequently much faster than submitting them one by one. Note however, that the order of the jobs is not guaranteed to be preserved, i.e. a script which you provide later in the list of scripts may be submitted *before* a script which you provided earlier.
+
 ### Examples
 
 ```bash
@@ -162,3 +169,11 @@ qq submit run_script.sh
 ```
 
 Submits the script `run_script.sh`, taking all submission options from the script itself or from queue/server defaults.
+
+***
+
+```bash
+qq submit job*/run_script.sh -q cpu --ncpus 8 --walltime 1d
+```
+
+Submits all `run_script.sh` scripts in the `job*` directories (e.g., `job1/run_script.sh`, `job2/run_script.sh`) to the `cpu` queue, requesting 8 CPU cores and a walltime of 1 day for each of them. Additional parameters may be specified inside the individual scripts. The submitted jobs are completely independent of each other.

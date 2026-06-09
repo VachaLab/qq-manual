@@ -20,11 +20,11 @@ qq queues [OPTIONS]
 
 #### Options
 
-`-a`, `--all` — Display all queues, including those that are not available to you.
+- `-a`, `--all` — Display all queues, including those that are not available to you.
 
-`-s` `TEXT`, `--server` `TEXT` — Show queues for a specific batch server. If not specified, queues for the default batch server are shown.
+- `-s` `TEXT`, `--server` `TEXT` — Show queues for a specific batch server. If not specified, queues for the default batch server are shown.
 
-`--yaml` — Output queue metadata in YAML format.
+- `--yaml` — Output queue metadata in YAML format.
 
 ### Examples
 

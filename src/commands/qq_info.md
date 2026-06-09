@@ -5,7 +5,8 @@ The `qq info` command is used to monitor a qq job's state and display informatio
 ***
 
 > **Quick comparison with pinfo**
-> - You can use `qq info` with a job ID to obtain information about a qq job without having to navigate to its input directory.
+> - You can use `qq info` with a job ID to obtain information about a qq job without having to navigate to its input directory. You can even provide IDs of multiple jobs.
+> - You can provide `qq info` with one or more directories to search for qq jobs in. Information are then displayed for all collected qq jobs.
 > - Unlike `pinfo`, `qq info` focuses only on the most important details about a job.  
 >   The output is intentionally compact and easier to read.
 
@@ -13,19 +14,25 @@ The `qq info` command is used to monitor a qq job's state and display informatio
 
 ### Description
 
-Displays information about the state and properties of the specified qq job(s), or of qq jobs found in the current directory.
+Displays information about the state and properties of the specified qq jobs or of qq jobs found in the specified directories.
 
 ```bash
-qq info [OPTIONS] JOB_ID
+qq info [OPTIONS] JOB_ID...
 ```
 
-**JOB_ID** — One or more IDs of jobs to display information for. Optional.
+**JOB_ID...** — One or more IDs of jobs to display information for. Optional.
 
-If no `JOB_ID` is provided, `qq info` searches for qq jobs in the current directory. If multiple jobs are provided or found, `qq info` prints information for each job in turn.
+If no `JOB_ID` and no directory are provided, `qq info` searches for qq jobs in the current directory. If multiple jobs are provided or found, `qq info` prints information for each job in turn.
 
 #### Options
 
-`-s`, `--short` — Display only the job ID and the current state of the job.
+- `-d`, `--dir` — One or more directories to search for qq jobs in. Supports globs.
+ 
+- `-a`, `--all` — Print info for all your unfinished jobs.
+ 
+- `-s`, `--server` — Collect jobs from the specified batch server. If not specified, the current server is used. Only used with `--all`.
+
+- `-b`, `--brief`, `--short` — Display a brief summary of the job.
 
 ### Examples
 
@@ -57,7 +64,7 @@ Displays full information panels for jobs `740173`, `741234`, and `741236`.
 qq info
 ```
 
-Displays the full information panel for all jobs whose info files are present in the current directory.
+Displays full information panel for all jobs whose info files are present in the current directory.
 
 This is what the output might look like:
 
@@ -68,10 +75,42 @@ This is what the output might look like:
 ***
 
 ```bash
-qq info -s
+qq info -b
 ```
 
-Displays short information for all jobs whose info files are present in the current directory. Only the jobs' full IDs and their current states are shown.
+Displays brief information for all jobs whose info files are present in the current directory.
+
+***
+
+```bash
+qq info -d /path/to/dir
+```
+
+Displays full information panels for all jobs whose info files are present in directory `/path/to/dir`.
+
+***
+
+```bash
+qq info -d /path/to/job* -b
+```
+
+Displays brief information for all jobs located in directories matching the glob pattern `/path/to/job*` (e.g., `/path/to/job1`, `/path/to/job2`, `/path/to/job3`). Useful for monitoring job collections.
+
+***
+
+```bash
+qq info --all
+```
+
+Displays full information panels for all your uncompleted (i.e, running and queued) qq jobs.
+
+***
+
+```bash
+qq info --all --server meta
+```
+
+Displays full information panels for all your uncompleted qq jobs associated with the Metacentrum batch server.
 
 ### Description of the output
 

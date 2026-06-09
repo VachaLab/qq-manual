@@ -1,5 +1,8 @@
 # qq killall
 
+> [!CAUTION]
+> This command is deprecated in qq v0.12. It will be removed completely in a future release of qq. Use [`qq kill --all`](qq_kill.md) instead.
+
 The `qq killall` command is used to terminate all of your qq jobs. It is qq's equivalent of Infinity's `pkillall`.
 
 ***

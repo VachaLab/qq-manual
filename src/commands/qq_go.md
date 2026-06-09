@@ -16,15 +16,23 @@ The `qq go` command is used to navigate to the working directory of a job. It is
 
 ### Description
 
-Opens a new shell in the working directory of the specified qq job, or in the working directory of the job submitted from the current directory.
+Opens a new shell in the working directory of the specified qq job, or in the working directories of qq jobs found in the specified directories.
 
 ```bash
-qq go [OPTIONS] JOB_ID
+qq go [OPTIONS] JOB_ID...
 ```
 
-**JOB_ID** — One or more IDs of jobs whose working directories should be entered. Optional.
+**JOB_ID...** — One or more IDs of jobs whose working directories should be entered. Optional.
 
-If no JOB_ID is specified, `qq go` searches for qq jobs in the current directory. If multiple suitable jobs are provided or found, `qq go` opens a shell for each job in turn.
+If no JOB_ID and no directory are specified, `qq go` searches for qq jobs in the current directory. If multiple suitable jobs are provided or found, `qq go` opens a shell for each job in turn.
+
+#### Options
+
+- `-d`, `--dir` — One or more directories to search for qq jobs in. Supports globs.
+
+- `-a`, `--all` — Open a shell in the working directories of all your unfinished jobs.
+
+- `-s`, `--server` — Operate on jobs on the specified batch server. If not specified, the current server is used. Only used with `--all`.
 
 ### Examples
 
@@ -51,6 +59,38 @@ qq go
 ```
 
 Opens a new shell in the working directory of the job whose info file is present in the current directory. If multiple suitable jobs are found, `qq go` opens a shell for each job in turn.
+
+***
+
+```bash
+qq go -d /path/to/dir
+```
+
+Opens a new shell in the working directory of the job whose info file is present in directory `/path/to/dir`. If multiple suitable jobs are found, `qq go` opens a shell for each job in turn.
+
+***
+
+```bash
+qq go -d /path/to/job*
+```
+
+Opens a new shell in the working directories of all jobs located in directories matching the glob pattern `/path/to/job*` (e.g., `/path/to/job1`, `/path/to/job2`, `/path/to/job3`).
+
+***
+
+```bash
+qq go --all
+```
+
+Opens a new shell in the working directories of all your uncompleted (i.e, running and queued) qq jobs in turn.
+
+***
+
+```bash
+qq go --all --server meta
+```
+
+Opens a new shell in the working directories of all your uncompleted qq jobs associated with the Metacentrum batch server.
 
 ### Notes
 

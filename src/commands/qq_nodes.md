@@ -24,11 +24,11 @@ Nodes are grouped heuristically into node groups based on their names.
 
 #### Options
 
-`-a`, `--all` — Display all nodes, including those that are down, inaccessible, or reserved.
+- `-a`, `--all` — Display all nodes, including those that are down, inaccessible, or reserved.
 
-`-s` `TEXT`, `--server` `TEXT` — Show nodes for a specific batch server. If not specified, nodes for the default batch server are shown.
+- `-s` `TEXT`, `--server` `TEXT` — Show nodes for a specific batch server. If not specified, nodes for the default batch server are shown.
 
-`--yaml` — Output node metadata in YAML format.
+- `--yaml` — Output node metadata in YAML format.
 
 ### Examples
 
