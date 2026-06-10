@@ -26,10 +26,6 @@ You can control the archive directory's name using the `archive` submission opti
 
 Archived files should follow a specific filename format that includes the job cycle number they belong to. You can define this format using the `archive-format` submission option (default: `job%04d`). In this format, `%04d` is replaced by the cycle number — for example, `job0001` for cycle 1, `job0002` for cycle 2, `job0143` for cycle 143 and so on.
 
-When a new cycle is submitted (either manually or automatically by the previous one), qq sets the current cycle number based on the highest cycle number found in the names of the archived files. **In other words: in each cycle of a loop job, at least one file must be added to the archive whose name includes the number of the next cycle**. Otherwise, the job submission will fail with an error.
-
-(If no archive directory or archived files exist, the cycle number defaults to `loop-start`.)
-
 ## Working with the archive
 
 You typically should not transfer files from and to the archive directly inside your submitted script. If you follow the proper naming etiquette, the [`qq run`](../commands/qq_run.md) environment will handle all archiving operations for you.
