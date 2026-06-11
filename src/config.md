@@ -210,6 +210,14 @@ title_style = "white bold"
 # Style of the separators between individual sections of the panel.
 rule_style = "white"
 
+[presenter.brief_info]
+# Color of the job ID in brief info.
+job_id_color = "default"
+# Color of the directory path in brief info.
+dir_path_color = "cyan"
+# Color of the loop info in brief info.
+loop_info_color = "grey70"
+
 
 ##############################################
 # Settings for JobsPresenter (qq jobs/stat).
@@ -457,7 +465,11 @@ meta = "pbs-m1.metacentrum.cz"
 ##############################################
 [parallelization_options]
 # Maximal number of threads used to collect job information.
-job_info_max_threads = 8
+job_info_max_threads = 16
+# Maximal number of threads used to submit jobs in parallel.
+submission_max_threads = 8
+# Maximal number of threads used to clear runtime files in parallel.
+clear_max_threads = 8
 
 ##############################################
 # General configuration

@@ -6,8 +6,8 @@ Each command is run in the terminal using the following syntax:
 `qq [COMMAND] [ARGS] [OPTIONS]`
 
 For example:  
-`qq info 123456 -s`  
-prints a short summary of the job with ID `123456`.
+`qq info 123456 -b`  
+prints a brief summary of the job with ID `123456`.
 
 To see a list of all available qq commands, simply type:  
 `qq`

@@ -9,13 +9,13 @@ The recommended way to use `qq_lib` is to use the [uv package manager](https://d
 To add `qq_lib` to your project:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.11.0
+uv add git+https://github.com/VachaLab/qq.git --tag v0.12.0
 ```
 
 Alternatively, you can add it directly to a specific script:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.11.0 --script [YOUR_SCRIPT].py
+uv add git+https://github.com/VachaLab/qq.git --tag v0.12.0 --script [YOUR_SCRIPT].py
 ```
 
 Then import qq classes and utilities in your Python code:
@@ -94,6 +94,10 @@ $ gmx-eta
 ```
 
 ---
+---
+
+> [!WARNING]
+> The following scripts are deprecated. You can still use them, but their functionality is now part of core qq. See [job collections](job_collections.md) for more information.
 
 ## [multi-check](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-check)
 

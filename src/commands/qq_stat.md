@@ -19,13 +19,13 @@ qq stat [OPTIONS]
 
 #### Options
 
-`-e`, `--extra` — Include extra information about the jobs.
+- `-e`, `--extra` — Include extra information about the jobs.
 
-`-a`, `--all` — Include both uncompleted and completed jobs in the summary.
+- `-a`, `--all` — Include both uncompleted and completed jobs in the summary.
 
-`-s` `TEXT`, `--server` `TEXT` — Show jobs for a specific batch server. If not specified, jobs on the default batch server are shown.
+- `-s` `TEXT`, `--server` `TEXT` — Show jobs for a specific batch server. If not specified, jobs on the default batch server are shown.
 
-`--yaml` — Output job metadata in YAML format.
+- `--yaml` — Output job metadata in YAML format.
 
 ### Examples
 

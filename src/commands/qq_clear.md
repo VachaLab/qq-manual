@@ -1,6 +1,6 @@
 # qq clear
 
-The `qq clear` command is used to remove qq runtime files from the current or specified directory. It is qq's equivalent of Infinity's `premovertf`.
+The `qq clear` command is used to remove qq runtime files from the current or specified directory or directories. It is qq's equivalent of Infinity's `premovertf`.
 
 ***
 
@@ -9,13 +9,13 @@ The `qq clear` command is used to remove qq runtime files from the current or sp
 >   - If they **do**, the files are **not** deleted (if you *really* want to delete them, you have to use the `--force` flag).  
 >   - If they do **not**, the files are deleted without asking for confirmation.  
 >   - In contrast, `premovertf` simply lists the files and always asks for confirmation before deleting them (unless run as `premovertf -f`).
-> - `qq clear` can operate on a specific directory using the `-d`/`--dir` option.
+> - `qq clear` can operate on a specific directory or even multiple directories at once using the `-d`/`--dir` option.
 
 ***
 
 ### Description
 
-Deletes qq runtime files from the current or specified directory.
+Deletes qq runtime files from the current directory or specified directories.
 
 ```bash
 qq clear [OPTIONS]
@@ -23,7 +23,8 @@ qq clear [OPTIONS]
 
 #### Options
 
-- `-d`, `--dir` — Specify the directory to clear qq runtime files from.
+- `-d`, `--dir` — One or more directories from which to clear qq runtime files. Supports globs.
+
 - `--force` — Force deletion of all qq runtime files, even if they belong to active or successfully completed jobs.
 
 ### Examples
@@ -45,6 +46,14 @@ Deletes all *suitable* qq runtime files from directory corresponding to the rela
 ***
 
 ```bash
+qq clear -d gromacs/popc/job*
+```
+
+Deletes all *suitable* qq runtime files from directories corresponding to paths matching the glob pattern `gromacs/popc/job*` (e.g., `gromacs/popc/job1`, `gromacs/popc/job2`, `gromacs/popc/job3`).
+
+***
+
+```bash
 qq clear --force
 ```
 
@@ -52,4 +61,4 @@ Deletes all qq runtime files from the current directory, regardless of their job
 
 ### Notes
 
-- You should not delete the `.qqinfo` file of a running job, as **this will cause the job to fail!**
+- You should not delete the `.qqinfo` file of a running job, as **this will cause the job to fail!** If you use just `qq clear` without `--force`, you don't need to worry about accidentally deleting it, since `qq` will only delete files that are safe to be deleted.

@@ -7,15 +7,15 @@ The `qq wipe` command is used to delete working directories of qq jobs. It has n
 
 ### Description
 
-Deletes the working directories of the specified qq jobs, or of all qq jobs in the current directory.
+Deletes the working directories of the specified qq jobs, or of all qq jobs in the specified directories.
 
 ```bash
-qq wipe [OPTIONS] JOB_ID
+qq wipe [OPTIONS] JOB_ID...
 ```
 
 **JOB_ID** — One or more IDs of jobs whose working directories should be deleted. Optional.
 
-If no `JOB_ID` is specified, `qq wipe` searches for qq jobs in the current directory.
+If no `JOB_ID` and no directory are specified, `qq wipe` searches for qq jobs in the current directory.
 
 By default, `qq wipe` prompts for confirmation before deleting the working directory for each job.
 
@@ -26,9 +26,11 @@ Without the `--force` flag, it will only attempt to delete working directories o
 
 #### Options
 
-`-y`, `--yes` — Delete the working directory without confirmation.
+- `-d`, `--dir` — One or more directories to search for qq jobs in. Supports globs.
 
-`--force` — Delete the working directory of the job forcibly, ignoring its current state and without confirmation.
+- `-y`, `--yes` — Delete the working directory without confirmation.
+
+- `--force` — Delete the working directory of the job forcibly, ignoring its current state and without confirmation.
 
 ### Examples
 
@@ -71,3 +73,19 @@ qq wipe 123456 --force
 ```
 
 Forcefully deletes the working directory of the job with ID `123456`. This deletes the working directory no matter the state of the job. **This is dangerous — only use the `--force` flag if you are absolutely sure you know what you are doing!**
+
+****
+
+```bash
+qq wipe -d /path/to/dir
+```
+
+Deletes working directories of all suitable qq jobs whose info files are present in direcotry `/path/to/dir`. Asks for confirmation before deleting each working directory.
+
+***
+
+```bash
+qq wipe -d /path/to/job* -y
+```
+
+Deletes working directories of all suitable qq jobs located in directories matching the glob pattern `/path/to/job*` (e.g., `/path/to/job1`, `/path/to/job2`, `/path/to/job3`) without asking for confirmation (assumes 'yes').

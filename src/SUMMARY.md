@@ -27,7 +27,7 @@
 - [Cluster specifics and recommendations](specifics/specifics.md)
     - [Robox, Sokar, Metacentrum](specifics/metacentrum_family.md)
     - [Karolina](specifics/karolina.md)
-    - [LUMI](specifics/lumi.md)
+    - [LUMI](specifics/lumi.md)¨
 - [Commands](commands/commands.md)
     - [qq cd](commands/qq_cd.md)
     - [qq clear](commands/qq_clear.md)
@@ -45,6 +45,7 @@
     - [qq submit](commands/qq_submit.md)
     - [qq sync](commands/qq_sync.md)
     - [qq wipe](commands/qq_wipe.md)
+- [Job collections](job_collections.md)
 - [Advanced topics](advanced_topics.md)
     - [Transferring files from the working directory](transfer_modes.md)
     - [Specifying job dependencies](dependencies.md)
