@@ -58,7 +58,7 @@ qq respawn -d job*
 To clear runtime files for all jobs in the collection, use [`qq clear`](commands/qq_clear.md):
 
 ```bash
-qq clear -d job*¨
+qq clear -d job*
 ```
 
 > [!TIP]
