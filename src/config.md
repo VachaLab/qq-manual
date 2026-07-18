@@ -93,7 +93,7 @@ loop_end = "QQ_LOOP_END"
 no_resubmit = "QQ_NO_RESUBMIT"
 # Archive filename pattern.
 archive_format = "QQ_ARCHIVE_FORMAT"
-# Scratch directory on Metacentrum clusters.
+# Scratch directory on Metacentrum-family clusters.
 pbs_scratch_dir = "SCRATCHDIR"
 # Slurm account used for the job.
 slurm_job_account = "SLURM_JOB_ACCOUNT"

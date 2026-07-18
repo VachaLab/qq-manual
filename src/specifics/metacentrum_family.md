@@ -1,4 +1,4 @@
-# Robox, Sokar, and Metacentrum clusters
+# Robox, Sokar, and Metacentrum Grid clusters
 
 - Use shared storages (e.g., `brno14-ceitec`, `brno12-cerit`) for storing your simulation data and submitting jobs.
 
@@ -12,9 +12,9 @@
 
 - Metacentrum-family clusters are very heterogeneous — you can use pretty much any number of CPUs and GPUs you need, as long as they fit on a single node. Running multi-node jobs can be complicated, as most clusters do not have fast interconnections between individual compute nodes.
 
-- On Metacentrum, some nodes or node groups may be slow or unstable. You can filter them out by submitting with `--props ^cl_<cluster_name>` to exclude a cluster, or with `--props vnode=^<node_name>` to exclude a specific node.
+- On Metacentrum Grid, some nodes or node groups may be slow or unstable. You can filter them out by submitting with `--props ^cl_<cluster_name>` to exclude a cluster, or with `--props vnode=^<node_name>` to exclude a specific node.
 
 - On Robox, you should generally **not** submit to the `desktops` queue as it only contains desktops (duh). By default, qq is not installed on other people's desktops, so your jobs [will most likely crash](../common_issues.md#submitted-jobs-fail-on-a-node). Instead, use the `cpu` or `gpu` queues. If you want to submit to your own desktop, you can use the `desktops` queue but must explicitly select your desktop (using [`--props vnode=YOUR_DESKTOP_NAME`](../resources/props.md)).
 
 > [!TIP]
-> Click here for detailed [external documentation](https://docs.metacentrum.cz/en/docs/welcome) of the Metacentrum family clusters.
+> Click here for detailed [external documentation](https://docs.metacentrum.cz/en/docs/welcome) of the Metacentrum-family clusters.

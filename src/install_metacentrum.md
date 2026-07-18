@@ -1,6 +1,6 @@
 # Installing on Metacentrum
 
-To install qq on Metacentrum, log in to any Metacentrum frontend and run:
+To install qq on Metacentrum Grid, log in to any [Metacentrum frontend](https://docs.metacentrum.cz/en/docs/computing/infrastructure/frontends) and run:
 
 ```bash
 curl -fsSL https://github.com/VachaLab/qq/releases/latest/download/qq-metacentrum-install.sh | bash
@@ -14,4 +14,4 @@ To complete the installation, either open a new terminal or source your `.bashrc
 
 ***
 
-For more details about the Metacentrum clusters, see [Metacentrum clusters specifics](specifics/metacentrum_family.md).
+For more details about the Metacentrum Grid, see [Metacentrum Grid specifics](specifics/metacentrum_family.md).

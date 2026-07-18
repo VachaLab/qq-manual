@@ -5,4 +5,4 @@
 Although qq and Infinity ABS share the same philosophy and use very similar commands, they share no code.
 
 > [!WARNING]
-> qq is developed for the internal use of the [Robert Vácha Lab](https://vacha.ceitec.cz/) and may not work on clusters other than those officially supported (Robox, Sokar, Metacentrum, LUMI, Karolina).
+> qq is developed for the internal use of the [Robert Vácha Lab](https://vacha.ceitec.cz/) and may not work on clusters other than those officially supported (Robox, Sokar, Metacentrum Grid, LUMI, Karolina).

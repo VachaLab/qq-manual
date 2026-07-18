@@ -1,6 +1,6 @@
-# Robox, Sokar, and Metacentrum clusters
+# Robox, Sokar, and Metacentrum Grid clusters
 
-On Robox, Sokar, and all Metacentrum clusters (collectively known as "clusters of the Metacentrum family"), the working directory is, by default, created on the local scratch storage of the main compute node assigned to the job. You can, however, explicitly choose to use SSD scratch, shared scratch, in-memory scratch (if available), or even use the input directory itself as the working directory.
+On Robox, Sokar, and all clusters of the Metacentrum Grid (collectively known as "clusters of the Metacentrum family"), the working directory is, by default, created on the local scratch storage of the main compute node assigned to the job. You can, however, explicitly choose to use SSD scratch, shared scratch, in-memory scratch (if available), or even use the input directory itself as the working directory.
 
 To control where the working directory is created, use the `work-dir` option (or the equivalent spelling `workdir`) of the [`qq submit`](../commands/qq_submit.md) command:
 

@@ -13,8 +13,8 @@ A property can be a simple boolean flag (a node either has it or it doesn't), or
 You can use [`qq nodes`](../commands/qq_nodes.md) to browse the available nodes and their properties.
 
 > [!IMPORTANT]
-> Prohibiting property values is only supported for the PBS batch system (on Robox, Sokar, Metacentrum).
+> Prohibiting property values is only supported for the PBS batch system (on Robox, Sokar, Metacentrum Grid).
 
 ### vnode property
 
-On Robox, Sokar, and Metacentrum, each compute node has a special `vnode` property identifying that specific node. The value of the `vnode` attribute corresponds to the name of the node. You can use this attribute to force your job to run on a particular node (`--props vnode=zeroc1`) or to prevent it from running there (`--props vnode=^zeroc1`).
+On Robox, Sokar, and Metacentrum Grid, each compute node has a special `vnode` property identifying that specific node. The value of the `vnode` attribute corresponds to the name of the node. You can use this attribute to force your job to run on a particular node (`--props vnode=zeroc1`) or to prevent it from running there (`--props vnode=^zeroc1`).
