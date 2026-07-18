@@ -39,9 +39,9 @@ See the [Python API documentation](https://qq.readthedocs.io/en/stable/qq_lib.ht
 
 ## Official qq scripts
 
-qq offers several official helper scripts built on top of `qq_lib`. These tools automate common workflows—especially useful when running many Gromacs simulations—but are not part of core qq functionality. You can find them in the [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts).
+qq offers several official helper scripts built on top of `qq_lib`. These tools automate common workflows but are not part of core qq functionality. You can find them in the [qq GitHub repository](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts).
 
-Again, the recommended approach is to use the [uv package manager](https://docs.astral.sh/uv/getting-started/installation/). If you have `uv` installed, download the script, make it executable (`chmod u+x SCRIPT`), and run it (`./SCRIPT`). If you use the scripts frequently, consider adding their directory to your `PATH`.
+To use them, the recommended approach is to use the [uv package manager](https://docs.astral.sh/uv/getting-started/installation/). If you have `uv` installed, download the script, make it executable (`chmod u+x SCRIPT`), and run it (`./SCRIPT`). If you use the scripts frequently, consider adding their directory to your `PATH`.
 
 ## [gmx-eta](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/gmx-eta)
 
