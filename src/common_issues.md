@@ -6,6 +6,7 @@
 Here are some issues that you may encounter when installing or using `qq`.
 
 ## Submitted jobs fail on a node
+
 You submit a job, it starts being executed, and then it finishes way too quickly. `qq info` says that the job is in an inconsistent state, and your `.qqout` file contains the following output:
 
 ```
@@ -14,11 +15,11 @@ You submit a job, it starts being executed, and then it finishes way too quickly
 
 This indicates that `qq` is not available on the computing node where the job was executed. Any of the following things might have gone wrong:
 
-1) **`qq` has not been installed on the concerned computing node at all.**
+1. **`qq` has not been installed on the concerned computing node at all.**
 
 This may be especially common on the Robox cluster if you run the job on someone else's desktop. When [installing `qq` on Robox](install_robox.md), it is installed only on your desktop and on the computing nodes, not on other people's desktops. This is a feature, not a bug — you probably should not run jobs on other people's desktops. If you need to, you can rerun the installation command on their desktop.
 
-2) **`qq` has been installed, but the RC file (`.bashrc`, typically) has not been properly modified.**
+2. **`qq` has been installed, but the RC file (`.bashrc`, typically) has not been properly modified.**
 
 Connect to the node where your job was executed and check the contents of `${HOME}/.bashrc`.
 
@@ -52,7 +53,7 @@ eval "$(_QQ_COMPLETE=bash_source qq)"
 
 If this block is not in the `.bashrc` file, first try reinstalling `qq` on the cluster. If that does not help, [open a GitHub issue](https://github.com/VachaLab/qq/issues).
 
-3) **`qq` has been installed, `.bashrc` has been modified, but it is not read before executing the job.**
+3. **`qq` has been installed, `.bashrc` has been modified, but it is not read before executing the job.**
 
 This may indicate that when a job was run on the affected node, a login shell was opened instead of the typically used non-login shell. In such cases, the `.bashrc` file may not be read; instead, either the `.profile` or `.bash_profile` file will be read. We need to force the shell to read the `.bashrc` file. Connect to the affected **computing node**, go to your HOME directory (`cd ~`), and add the following to both `.profile` and `.bash_profile` located there:
 
@@ -64,7 +65,6 @@ fi
 
 > [!NOTE]
 > If `.profile` and `.bash_profile` do not exist, `qq` should create them with the above content during installation. However, if you already have these files, `qq` does not modify them and assumes you have already configured them.
-
 
 ## PBS GSS error - No credentials were supplied
 
@@ -80,7 +80,6 @@ Permission denied
 
 This indicates that your Kerberos ticket has expired. Run `kinit` and provide your password when prompted to generate a new Kerberos ticket. Then rerun the qq command.
 
-
 ## sbatch error: AssocMaxSubmitJobLimit
 
 On Karolina and LUMI, you may get the following error when submitting a job:
@@ -94,7 +93,36 @@ This usually indicates that you did not provide the required `--account` option.
 
 In case you did provide the `--account` option, you are probably running too many jobs on a given queue, you have used all the resources allocated for your project, the specified walltime for your job is too long, or you are asking for too many resources.
 
-***
+## Resubmission fails with `bash: sbatch: command not found`
+
+On Karolina or LUMI, you may encounter the following error when one cycle of a loop job finishes and the next cycle is being submitted:
+
+```
+Failed to submit script '<script-name>': bash: sbatch: command not found.
+```
+
+This indicates that Slurm commands are not available on the compute node where the job is running. The problem usually lies in your `~/.bashrc` configuration.
+
+If your `.bashrc` contains the following line
+
+```bash
+[ -z "$PS1" ] && return
+```
+
+then the `[ -z "$PS1" ] && return` condition prevents Slurm commands from becoming available in non-interactive shells.
+
+To fix the issue, either remove the condition or place
+
+```bash
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+```
+
+**before** the condition.
+
+---
 
 ## I have some other issue
+
 Open a [GitHub issue](https://github.com/VachaLab/qq/issues) or write an e-mail to `ladmeb@gmail.com`.
