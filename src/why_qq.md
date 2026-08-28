@@ -108,5 +108,5 @@ There are some things qq does not try to be:
 - qq is **not** a batch system, it is a wrapper around one. PBS Pro or Slurm still does the actual work, and qq will never replace either of them. It will also never expose everything they can do — only the subset that the users most commonly need.
 - qq is **not** a general-purpose tool for any HPC system. Only specific clusters are supported.
 
-> [!INFO]
+> [!NOTE]
 > qq is developed primarily for the internal use of the [Robert Vácha Lab](https://vacha.ceitec.cz/), and our group's needs come first. If qq is missing something you need, or you think it should work differently, [tell us](https://github.com/VachaLab/qq/issues). We will listen, but we cannot promise to change it. Some things may also not work on your system simply because it differs from ours. Let us know if that happens and we will try to help, though we cannot guarantee that qq will work for you in every case.
