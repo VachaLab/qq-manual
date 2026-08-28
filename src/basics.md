@@ -4,7 +4,7 @@ This section demonstrates how to run a basic qq job by performing a simple Groma
 
 ## 1. Preparing an input directory
 
-Start by creating a directory for the job on a shared storage (*you can also submit from a local storage on your computer but that is not recommended*). This directory should contain all necessary simulation input files — in this example, an `mdp`, `gro`, `cpt`, `ndx`,`top`, and `itp` files.
+Start by creating a directory for the job on a shared storage (_you can also submit from a local storage on your computer but that is not recommended_). This directory should contain all necessary simulation input files — in this example, an `mdp`, `gro`, `cpt`, `ndx`,`top`, and `itp` files.
 
 ## 2. Preparing a run script
 
@@ -17,7 +17,7 @@ A complete example of a run script:
 
 # activate the Gromacs module
 module add gromacs/2024.3-cuda
-# or metamodule add gromacs/2024.3-cuda, depending on 
+# or metamodule add gromacs/2024.3-cuda, depending on
 # whether you have activated the Infinity environment or not
 
 # prepare a TPR file
@@ -29,7 +29,7 @@ gmx_mpi mdrun -deffnm md -ntomp 8 -v
 
 > [!IMPORTANT]
 > **All qq run scripts must start with the correct shebang line:**
-> 
+>
 > ```bash
 > #!/usr/bin/env -S qq run
 > ```
@@ -38,6 +38,7 @@ gmx_mpi mdrun -deffnm md -ntomp 8 -v
 > You can use the [`qq shebang`](commands/qq_shebang.md) command to easily add the qq run shebang to your script.
 
 Save this file as `run_job.sh` and make it executable:
+
 ```bash
 chmod u+x run_job.sh
 ```
@@ -67,7 +68,7 @@ Once the job finishes, the resulting Gromacs output files will be transferred fr
 
 If your job failed (crashed) or was killed, only the [qq runtime files](runtime_files.md) are [by default](transfer_modes.md) transferred to the input directory to ensure it remains in a consistent state. In these cases, the working directory on the compute node is preserved, allowing you to inspect the job files directly using [`qq go`](commands/qq_go.md) or to copy them back to the input directory using [`qq sync`](commands/qq_sync.md). On some systems, you may also want to explicitly delete the working directory afterward — to do this, use [`qq wipe`](commands/qq_wipe.md). If you want to try running the failed/killed job again with the same parameters, respawn it using [`qq respawn`](commands/qq_respawn.md).
 
-***
+---
 
 ## Run scripts
 
