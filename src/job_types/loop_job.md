@@ -81,6 +81,12 @@ exit 0
 
 If qq detects this exit code, it will not submit the next cycle of the loop job. The current cycle will still be marked as successfully finished (exit code 0).
 
+## Data flow in a loop job cycle
+
+The following diagram shows how files are transferred between the input directory, the working directory, and the archive in loop jobs.
+
+![Data flow in a loop job cycle](../img/qq_loop_job_lifecycle.png)
+
 ---
 
 > [!TIP]

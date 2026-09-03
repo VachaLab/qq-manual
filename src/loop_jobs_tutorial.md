@@ -250,7 +250,7 @@ Done properly, the whole script collapses to this:
 
 # qq job-type loop
 # qq loop-end 10
-# qq archive-format job%03d
+# qq archive-format job%04d
 # qq archive storage
 
 # create strings for naming files in the current and the next cycle
@@ -276,16 +276,16 @@ Let's go through it step by step.
 ```bash
 # qq job-type loop
 # qq loop-end 10
-# qq archive-format job%03d
+# qq archive-format job%04d
 # qq archive storage
 ```
 
 These are [qq directives](commands/qq_submit.md#specifying-options-in-the-script), that is, submission options. You already know `job-type`. `loop-end` says which cycle is the last one. `archive-format` sets the naming convention for archived files. `archive` says where the archived files go.
 
-What does "naming convention for archived files" mean? With `job%03d`, any file or directory whose name contains `job` followed by a three-digit number (with leading zeros) is treated as a file to archive and moved into the archive at the end of the cycle, before the next cycle is submitted. The archive is the `storage` directory inside the job directory. qq creates it for you and automatically excludes it from being copied to the working directory, so there is no needless copying and no `qq exclude` directive needed.
+What does "naming convention for archived files" mean? With `job%04d`, any file or directory whose name contains `job` followed by a four-digit number (with leading zeros) is treated as a file to archive and moved into the archive at the end of the cycle, before the next cycle is submitted. The archive is the `storage` directory inside the job directory. qq creates it for you and automatically excludes it from being copied to the working directory, so there is no needless copying and no `qq exclude` directive needed.
 
 > [!NOTE]
-> The format string is an ordinary `printf` format. `job%03d` produces `job001`, `job002`, and so on, so a results file named `job007.dat` belongs to cycle 7. Pick a width that comfortably covers the number of cycles you plan to run.
+> The format string is an ordinary `printf` format. `job%04d` produces `job0001`, `job0002`, and so on, so a results file named `job0007.dat` belongs to cycle 7. Pick a width that comfortably covers the number of cycles you plan to run.
 
 #### Staging strings
 
@@ -294,7 +294,7 @@ printf -v CURR "${QQ_ARCHIVE_FORMAT}" "${QQ_LOOP_CURRENT}"
 printf -v NEXT "${QQ_ARCHIVE_FORMAT}" "$((QQ_LOOP_CURRENT + 1))"
 ```
 
-Here we build two helper strings, `CURR` and `NEXT`, used to name the files that will be archived. `QQ_ARCHIVE_FORMAT` holds the format from the `archive-format` directive and `QQ_LOOP_CURRENT` holds the number of the current cycle; both are set by qq and available in every loop job. In the first cycle, `CURR` is `job001` and `NEXT` is `job002`.
+Here we build two helper strings, `CURR` and `NEXT`, used to name the files that will be archived. `QQ_ARCHIVE_FORMAT` holds the format from the `archive-format` directive and `QQ_LOOP_CURRENT` holds the number of the current cycle; both are set by qq and available in every loop job. In the first cycle, `CURR` is `job0001` and `NEXT` is `job0002`.
 
 But why do we need `NEXT` at all? The next section answers that.
 
@@ -313,7 +313,7 @@ If the state file for the current cycle exists, we use it as input; otherwise we
 
 Wait. Isn't `${CURR}.state` in the archive? How can we read it as if it were sitting in the working directory of the job?
 
-That is the other half of the archiving magic. At the start of every cycle, qq copies the archived files **belonging to the current cycle** into the working directory. "Belonging to the current cycle" means that the name of the file or directory contains `job` followed by the current cycle number, formatted as a three-digit number with leading zeros. So in cycle 7, qq pulls `job007.state` out of the archive for you, and at the end of the cycle it moves everything matching the format (for any cycle) back in.
+That is the other half of the archiving magic. At the start of every cycle, qq copies the archived files **belonging to the current cycle** into the working directory. "Belonging to the current cycle" means that the name of the file or directory contains `job` followed by the current cycle number, formatted as a four-digit number with leading zeros. So in cycle 7, qq pulls `job0007.state` out of the archive for you, and at the end of the cycle it moves everything matching the format (for any cycle) back in.
 
 This also explains the output state file being named `${NEXT}.state`. We will need it as the input of the next cycle, so we label it with the next cycle number, and qq will bring it back in when that cycle starts.
 
@@ -332,6 +332,9 @@ The next cycle is assigned number 2. It archives the runtime files of the previo
 
 > [!NOTE]
 > Runtime files are archived by the _following_ cycle, not by the cycle that produced them. That is why the runtime files of the last cycle stay in the job directory: there is no further cycle to move them.
+
+> [!TIP]
+> If this still does not connect and you are a visual person, [this diagram](job_types/loop_job.md#data-flow-in-a-loop-job-cycle) might help.
 
 ---
 
