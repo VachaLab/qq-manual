@@ -2,8 +2,9 @@
 
 Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](../commands/standard_job.md) first — otherwise, this may be difficult to follow.
 
-To turn a job into a loop job, you must set two [`qq submit`](../commands/qq_submit.md) options:  
-- `job-type` to `loop`, and  
+To turn a job into a loop job, you must set two [`qq submit`](../commands/qq_submit.md) options:
+
+- `job-type` to `loop`, and
 - `loop-end` to specify the last [cycle](#loop-job-cycles) of the loop job.
 
 > [!TIP]
@@ -19,7 +20,7 @@ You can control the starting cycle using the `loop-start` submission option (def
 
 Each loop job creates an archive directory inside the input directory. This directory is **not** copied to the job's working directory, so it can safely hold large amounts of data. In loop jobs, the archive serves two main purposes:
 
-- to identify and initialize the current cycle of the loop job,  
+- to identify and initialize the current cycle of the loop job,
 - to store data from previous cycles without copying them to the working directory.
 
 You can control the archive directory's name using the `archive` submission option (default: `storage`).
@@ -51,7 +52,7 @@ If the current cycle of the loop job corresponds to `loop-end`, no resubmission 
 
 ## Extending a loop job
 
-Sometimes, after a job completes *N* cycles, you may realize you need *M* more. To extend the job, simply submit it again from the same input directory with `loop-end` set to *N + M*, either on the command line or in the submission script.  
+Sometimes, after a job completes _N_ cycles, you may realize you need _M_ more. To extend the job, simply submit it again from the same input directory with `loop-end` set to _N + M_, either on the command line or in the submission script.
 
 > [!TIP]
 > You do not need to [delete any runtime files](standard_job.md#submitting-the-next-job) from the previous cycle — and you probably shouldn't. `qq submit` can detect that you are extending an existing loop job and will handle the continuation correctly. This has the added benefit that the runtime files from the Nth cycle will be properly archived.
@@ -79,3 +80,8 @@ exit 0
 ```
 
 If qq detects this exit code, it will not submit the next cycle of the loop job. The current cycle will still be marked as successfully finished (exit code 0).
+
+---
+
+> [!TIP]
+> Still confused about how to actually _write_ a loop job script? Check out the [Writing loop job scripts tutorial](../loop_jobs_tutorial.md).

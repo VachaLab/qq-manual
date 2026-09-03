@@ -14,6 +14,7 @@
   - [Standard jobs](job_types/standard_job.md)
   - [Loop jobs](job_types/loop_job.md)
   - [Continuous jobs](job_types/continuous_job.md)
+- [Writing loop job scripts](loop_jobs_tutorial.md)
 - [Job resources](resources/resources.md)
   - [Number of nodes](resources/nodes.md)
   - [Number of CPU cores](resources/cpus.md)
