@@ -5,6 +5,7 @@ Clusters of the Metacentrum family (Robox, Sokar, and Metacentrum Grid clusters)
 ## Supported servers
 
 The supported Metacentrum-family batch servers are:
+
 - `robox-pro.ceitec.muni.cz` (default for the Robox cluster)
 - `sokar-pbs.ncbr.muni.cz` (default for the Sokar cluster)
 - `pbs-m1.metacentrum.cz` (default for the Metacentrum clusters)
@@ -12,6 +13,7 @@ The supported Metacentrum-family batch servers are:
 You can provide any of these server names as an option to any qq command that supports it — namely, [qq jobs](commands/qq_jobs.md), [qq stat](commands/qq_state.md), [qq queues](commands/qq_queues.md), [qq nodes](commands/qq_nodes.md), and [qq submit](command/qq_submit.md).
 
 Alternatively, you can use one of the following shortcuts:
+
 - `robox`, which expands to `robox-pro.ceitec.muni.cz`
 - `sokar`, which expands to `sokar-pbs.ncbr.muni.cz`
 - `metacentrum` or `meta`, which both expand to `pbs-m1.metacentrum.cz`
@@ -45,6 +47,7 @@ qq stat -s sokar --all
 > When you run `qq jobs` or `qq stat` without specifying a server (so that the jobs are collected for the default server), the "Job ID" column shows only the numerical portion of the job ID. When you run these commands **with** a server specified, you get the full job ID including the batch server address. This can be useful for the commands described [below](#qq-info-qq-go-qq-kill-qq-sync-qq-wipe).
 
 You can also get information about queues and compute nodes available on another server:
+
 ```bash
 qq queues -s <server-name>
 qq nodes  -s <server-name>
@@ -63,7 +66,7 @@ For example, you can submit a job from a Robox desktop to the Sokar cluster like
 qq submit -q default --ncpus 8 --walltime 12h --server sokar my_job.sh
 ```
 
-*Note that you are submitting to a queue on the Sokar cluster, so you need to use a queue that is available there.*
+_Note that you are submitting to a queue on the Sokar cluster, so you need to use a queue that is available there._
 
 > [!IMPORTANT]
 > If you submit a job to a different cluster, you need to have [qq installed on this cluster](installation.md)!
@@ -82,15 +85,7 @@ Now suppose you want to get information about job 326432, which is running on th
 
 Similarly to the previous commands, you can run `qq cd <full-job-id>` to navigate to the input directory of a job submitted to a different server. As above, you need to provide the full job ID including the server address. Note that the input directory must be accessible under the same path on both the target server and your current machine.
 
-## [qq killall](commands/qq_killall.md)
-
-You can kill all your qq jobs on a specific server by running:
-
-```bash
-qq killall --server <server-name>
-```
-
-***
+---
 
 > [!WARNING]
 > The `--server` option is **ignored** on Karolina and LUMI, where only one batch server is available. You also cannot submit jobs from any of the Metacentrum-family clusters to Karolina and LUMI or vice versa.
