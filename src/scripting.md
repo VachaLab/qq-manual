@@ -1,4 +1,5 @@
 # Using qq in Python
+
 > [!TIP]
 > Looking for how to run Python scripts as qq jobs instead? See [this section of the manual](interpreters.md).
 
@@ -17,6 +18,9 @@ Alternatively, you can add it directly to a specific script:
 ```bash
 uv add git+https://github.com/VachaLab/qq.git --tag v0.12.0 --script [YOUR_SCRIPT].py
 ```
+
+> [!NOTE]
+> Be aware that `qq_lib` requires python 3.13 or higher.
 
 Then import qq classes and utilities in your Python code:
 
@@ -51,6 +55,7 @@ To use them, the recommended approach is to use the [uv package manager](https:/
 > `gmx-eta` requires that your Gromacs `mdrun` command is executed with the `-v` flag.
 
 ### Usage
+
 ```bash
 usage: gmx-eta [-h] [--all] [job_id ...]
 
@@ -65,13 +70,16 @@ options:
 ```
 
 ### Examples
+
 Using a single job ID:
+
 ```bash
 $ gmx-eta 12345
 [12345] gromacs_job: Simulation will finish in 06:41:07.
 ```
 
 Using multiple job IDs:
+
 ```bash
 $ gmx-eta 12345 12356
 [12345] gromacs_job: Simulation will finish in 06:41:07.
@@ -79,6 +87,7 @@ $ gmx-eta 12345 12356
 ```
 
 Using the `--all` flag:
+
 ```bash
 $ gmx-eta --all
 [12345] gromacs_job: Simulation will finish in 06:41:07.
@@ -88,12 +97,14 @@ $ gmx-eta --all
 ```
 
 Without arguments inside an input directory of a job:
+
 ```bash
 $ gmx-eta
 [12444] gromacs_job_new: Simulation will finish in 08:45:12.
 ```
 
 ---
+
 ---
 
 > [!WARNING]
@@ -104,6 +115,7 @@ $ gmx-eta
 `multi-check` scans multiple directories for qq jobs and reports their collective status. It uses multithreading to significantly speed up job-state inspection compared to checking jobs individually.
 
 ### Usage
+
 ```bash
 usage: multi-check [-h] [-t THREADS] [--fix] directories [directories ...]
 
@@ -119,6 +131,7 @@ options:
 ```
 
 ### Example check
+
 ```bash
 $ multi-check win??
 
@@ -142,6 +155,7 @@ TOTAL           51
 You may also use `--fix` to automatically attempt to respawn jobs in **FAILED** or **KILLED** states. Jobs are respawned with the same parameters originally used.
 
 ### Example fix
+
 ```bash
 $ multi-check win?? --fix
 
@@ -175,9 +189,10 @@ COULD NOT FIX             0
 
 ## [multi-submit](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-submit)
 
-`multi-submit` submits qq jobs from multiple directories in bulk. All jobs must use the same submission script name and request identical resources. The resource specification from the *first* submitted job is applied to all others. It uses multithreading to significantly speed up job submission compared to submitting jobs individually.
+`multi-submit` submits qq jobs from multiple directories in bulk. All jobs must use the same submission script name and request identical resources. The resource specification from the _first_ submitted job is applied to all others. It uses multithreading to significantly speed up job submission compared to submitting jobs individually.
 
 ### Usage
+
 ```bash
 usage: multi-submit [-h] script directories [directories ...]
 
@@ -193,6 +208,7 @@ options:
 ```
 
 ### Example
+
 ```bash
 $ multi-submit qq_loop_md win?? -q default --ncpus=8 --walltime=12h
 
@@ -211,6 +227,7 @@ COULD NOT SUBMIT          0
 `multi-kill` terminates qq jobs across multiple directories in parallel. Because it uses multithreading, it is significantly faster than running `qq kill` for each job independently.
 
 ### Usage
+
 ```bash
 usage: multi-kill [-h] [-t THREADS] directories [directories ...]
 
@@ -226,6 +243,7 @@ options:
 ```
 
 ### Example
+
 ```bash
 $ multi-kill win??
 Killing jobs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
