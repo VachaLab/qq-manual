@@ -29,14 +29,13 @@ Let's split the calculation into chunks and run each chunk as its own job. First
 ```bash
 #!/usr/bin/env -S qq run
 
-# if there is an input state file,
-# use it to continue the calculation
-if [ -f input.state ]; then
-    sick -i input.state -s settings.toml -r results.dat -o output.state
-# if there is no input state file, start from scratch
-else
-    sick -s settings.toml -r results.dat -o output.state
+# continue from the input state file, if there is one
+INPUT=""
+if [ -f "input.state" ]; then
+    INPUT="-i input.state"
 fi
+
+sick ${INPUT} -s settings.toml -r results.dat -o output.state
 
 # rename the output state file to input.state
 # to use it in the following job
@@ -78,14 +77,13 @@ else
 fi
 echo ${CYCLE} > cycle
 
-# if there is an input state file,
-# use it to continue the calculation
-if [ -f input.state ]; then
-    sick -i input.state -s settings.toml -r results.dat -o output.state
-# if there is no input state file, start from scratch
-else
-    sick -s settings.toml -r results.dat -o output.state
+# continue from the input state file, if there is one
+INPUT=""
+if [ -f "input.state" ]; then
+    INPUT="-i input.state"
 fi
+
+sick ${INPUT} -s settings.toml -r results.dat -o output.state
 
 # rename the output state file to input.state
 # to use it in the following job
@@ -112,14 +110,13 @@ else
 fi
 echo ${CYCLE} > cycle
 
-# if there is an input state file,
-# use it to continue the calculation
-if [ -f input.state ]; then
-    sick -i input.state -s settings.toml -r results.dat -o output.state
-# if there is no input state file, start from scratch
-else
-    sick -s settings.toml -r results.dat -o output.state
+# continue from the input state file, if there is one
+INPUT=""
+if [ -f "input.state" ]; then
+    INPUT="-i input.state"
 fi
+
+sick ${INPUT} -s settings.toml -r results.dat -o output.state
 
 # rename the output state file to input.state
 # to use it in the following job
@@ -157,17 +154,14 @@ else
 fi
 echo ${CYCLE} > cycle
 
-# if there is a state file from the previous cycle,
-# use it to continue the calculation
+# continue using state file from the previous cycle, if there is one
+INPUT=""
 if [ -f output_$((CYCLE - 1)).state ]; then
-    sick -i output_$((CYCLE - 1)).state \
-        -s settings.toml \
-        -r results_${CYCLE}.dat \
-        -o output_${CYCLE}.state
-# if there is no state file, start from scratch
-else
-    sick -s settings.toml -r results_${CYCLE}.dat -o output_${CYCLE}.state
+    INPUT="-i output_$((CYCLE - 1)).state"
 fi
+
+sick ${INPUT} -s settings.toml -r results_${CYCLE}.dat -o output_${CYCLE}.state
+
 
 # if the cycle limit is reached, stop the job
 if [ ${CYCLE} -ge ${N_CYCLES} ]; then
@@ -205,17 +199,13 @@ else
 fi
 echo ${CYCLE} > cycle
 
-# if there is a state file from the previous cycle,
-# use it to continue the calculation
+# continue using state file from the previous cycle, if there is one
+INPUT=""
 if [ -f input.state ]; then
-    sick -i input.state \
-        -s settings.toml \
-        -r storage/results_${CYCLE}.dat \
-        -o output.state
-# if there is no state file, start from scratch
-else
-    sick -s settings.toml -r storage/results_${CYCLE}.dat -o output.state
+    INPUT="-i input.state"
 fi
+
+sick ${INPUT} -s settings.toml -r storage/results_${CYCLE}.dat -o output.state
 
 # archive the state file of this cycle
 cp output.state storage/output_${CYCLE}.state
@@ -253,25 +243,24 @@ Done properly, the whole script collapses to this:
 # qq archive-format job%04d
 # qq archive storage
 
-# create strings for naming files in the current and the next cycle
-printf -v CURR "${QQ_ARCHIVE_FORMAT}" "${QQ_LOOP_CURRENT}"
-printf -v NEXT "${QQ_ARCHIVE_FORMAT}" "$((QQ_LOOP_CURRENT + 1))"
-
-# if there is a state file for the current cycle,
-# use it to continue the calculation
-if [ -f "${CURR}.state" ]; then
-    sick -i "${CURR}.state" -s settings.toml -r "${CURR}.dat" -o "${NEXT}.state"
-# if there is no state file, start from scratch
-else
-    sick -s settings.toml -r "${CURR}.dat" -o "${NEXT}.state"
+# continue from the state file of the current cycle, if there is one
+INPUT=""
+if [ -f "${QQ_ARCHIVE_CURRENT}.state" ]; then
+    INPUT="-i ${QQ_ARCHIVE_CURRENT}.state"
 fi
+
+sick ${INPUT} \
+    -s settings.toml \
+    -r "${QQ_ARCHIVE_CURRENT}.dat" \
+    -o "${QQ_ARCHIVE_NEXT}.state"
 ```
 
-This may look a bit like magic. How does qq know which files to archive? Where do the archiving operations even happen?
+The cycle counting is gone, the storage directory is gone, and so is the code that stops the job. What is left is one call to `sick` and a few lines of ordinary bash deciding whether to pass it an input state file. Only two things in this script have anything to do with qq: the four directives at the top, and the two `QQ_ARCHIVE_*` variables in the file names. Understand those and you understand loop jobs.
 
-Let's go through it step by step.
+> [!NOTE]
+> `${INPUT}` is deliberately left unquoted so that bash splits it into the two arguments `-i` and the file name. Quoting it would pass `sick` a single argument and confuse it.
 
-#### qq directives
+### The naming convention
 
 ```bash
 # qq job-type loop
@@ -280,47 +269,31 @@ Let's go through it step by step.
 # qq archive storage
 ```
 
-These are [qq directives](commands/qq_submit.md#specifying-options-in-the-script), that is, submission options. You already know `job-type`. `loop-end` says which cycle is the last one. `archive-format` sets the naming convention for archived files. `archive` says where the archived files go.
+These are [qq directives](commands/qq_submit.md#specifying-options-in-the-script), that is, submission options. You already know `job-type`. `loop-end` says which cycle is the last one. `archive` says where the archived files go: the `storage` directory inside the job directory, which qq creates for you and automatically excludes from being copied to the working directory, so there is no needless copying and no `qq exclude` directive needed.
 
-What does "naming convention for archived files" mean? With `job%04d`, any file or directory whose name contains `job` followed by a four-digit number (with leading zeros) is treated as a file to archive and moved into the archive at the end of the cycle, before the next cycle is submitted. The archive is the `storage` directory inside the job directory. qq creates it for you and automatically excludes it from being copied to the working directory, so there is no needless copying and no `qq exclude` directive needed.
+`archive-format` is the interesting one. It sets a naming convention, and that convention is an agreement between you and qq about which files belong to which cycle. With `job%04d`, any file or directory whose name contains `job` followed by a four-digit number counts as an archived file. You never copy anything into `storage` or out of it. You just name your files that way, and qq moves them for you in both directions.
+
+At the end of a cycle, qq moves every file matching the format into the archive, no matter which cycle number it carries, and only then copies the remaining files back to the job directory. At the start of a cycle, it does the opposite for one cycle only: it looks into the archive and copies out the files belonging to the **current** cycle. So in cycle 7, `job0007.state` is pulled out of the archive before your script starts, and your script can read it as if it had been sitting in the working directory all along.
 
 > [!NOTE]
 > The format string is an ordinary `printf` format. `job%04d` produces `job0001`, `job0002`, and so on, so a results file named `job0007.dat` belongs to cycle 7. Pick a width that comfortably covers the number of cycles you plan to run.
 
-#### Staging strings
+### The names of this cycle and the next
 
-```bash
-printf -v CURR "${QQ_ARCHIVE_FORMAT}" "${QQ_LOOP_CURRENT}"
-printf -v NEXT "${QQ_ARCHIVE_FORMAT}" "$((QQ_LOOP_CURRENT + 1))"
-```
+qq sets two environment variables in every loop job so that you do not have to build the file names yourself. `QQ_ARCHIVE_CURRENT` is the archive format filled in with the current cycle number, and `QQ_ARCHIVE_NEXT` is the same format filled in with the next cycle number. In the first cycle they are `job0001` and `job0002`, in the second `job0002` and `job0003`, and so on. Append your own suffix or file extension to either of them and you get a name that qq recognizes.
 
-Here we build two helper strings, `CURR` and `NEXT`, used to name the files that will be archived. `QQ_ARCHIVE_FORMAT` holds the format from the `archive-format` directive and `QQ_LOOP_CURRENT` holds the number of the current cycle; both are set by qq and available in every loop job. In the first cycle, `CURR` is `job0001` and `NEXT` is `job0002`.
-
-But why do we need `NEXT` at all? The next section answers that.
-
-#### Running the calculation
-
-```bash
-if [ -f "${CURR}.state" ]; then
-    sick -i "${CURR}.state" -s settings.toml -r "${CURR}.dat" -o "${NEXT}.state"
-# if there is no state file, start from scratch
-else
-    sick -s settings.toml -r "${CURR}.dat" -o "${NEXT}.state"
-fi
-```
-
-If the state file for the current cycle exists, we use it as input; otherwise we start from scratch.
-
-Wait. Isn't `${CURR}.state` in the archive? How can we read it as if it were sitting in the working directory of the job?
-
-That is the other half of the archiving magic. At the start of every cycle, qq copies the archived files **belonging to the current cycle** into the working directory. "Belonging to the current cycle" means that the name of the file or directory contains `job` followed by the current cycle number, formatted as a four-digit number with leading zeros. So in cycle 7, qq pulls `job0007.state` out of the archive for you, and at the end of the cycle it moves everything matching the format (for any cycle) back in.
-
-This also explains the output state file being named `${NEXT}.state`. We will need it as the input of the next cycle, so we label it with the next cycle number, and qq will bring it back in when that cycle starts.
+`QQ_ARCHIVE_CURRENT` is used for the input state file and the results file. `QQ_ARCHIVE_NEXT` is used for the output state file, because that file is not needed now but in the following cycle. Remember that qq only copies files of the current cycle out of the archive. If we named the output state file `${QQ_ARCHIVE_CURRENT}.state`, it would end up in the archive and the next cycle would never see it.
 
 > [!TIP]
-> A simple rule of thumb: name anything the current cycle _consumes_ with `${CURR}` and anything the next cycle _will consume_ with `${NEXT}`. Files that nothing else will read, such as results/trajectories/logs, should use `${CURR}` as well; they will be archived and stay there. Anything that is not archived, stays in the working directory and is copied back to the input directory of the job.
+> A simple rule of thumb: name anything the current cycle _consumes_ with `${QQ_ARCHIVE_CURRENT}` and anything the next cycle _will consume_ with `${QQ_ARCHIVE_NEXT}`. Files that nothing else will read, such as results, simulation trajectories, or logs, should use `${QQ_ARCHIVE_CURRENT}` as well; they will be archived and stay there. Anything that is not archived stays in the working directory and is copied back to the input directory of the job.
 
-And those are all the parts of the script.
+> [!IMPORTANT]
+> `QQ_ARCHIVE_CURRENT` and `QQ_ARCHIVE_NEXT` are available from qq **v0.13.0** onwards. In older versions you have to build these strings yourself from `QQ_ARCHIVE_FORMAT` and `QQ_LOOP_CURRENT`:
+>
+> ```bash
+> printf -v QQ_ARCHIVE_CURRENT "${QQ_ARCHIVE_FORMAT}" "${QQ_LOOP_CURRENT}"
+> printf -v QQ_ARCHIVE_NEXT "${QQ_ARCHIVE_FORMAT}" "$((QQ_LOOP_CURRENT + 1))"
+> ```
 
 #### Summary
 
