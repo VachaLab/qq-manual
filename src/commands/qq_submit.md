@@ -54,9 +54,11 @@ When the job is successfully submitted, `qq submit` creates a `.qqinfo` file for
 
 `--job-type` `TEXT` — Type of the job. Defaults to **standard**. Available types: 'standard', 'loop', 'continuous'. Read more about job types [here](../job_types/job_types.md).
 
-`--exclude` `TEXT` — Colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths must be relative to the input directory. Excluded files and directories that the job creates in the working directory **will** be copied back to the input directory (directories will be merged, files replaced).
+`--exclude` `TEXT` — Colon-, comma-, or space-separated list of files or directories that should **not** be copied to the working directory. Paths to files and directories to exclude must be absolute or relative to the input directory. You can use glob patterns to match multiple files or directories. Excluded files and directories that the job creates in the working directory **will** be copied back to the input directory (directories will be merged, files replaced). Read more about file transfers [here](../transfer_selections.md#submission-option-exclude).
 
-`--include` `TEXT` — Colon-, comma-, or space-separated list of files or directories to copy into the working directory in addition to the input directory contents. These files are not copied back after job completion. Paths must be absolute or relative to the input directory. Ignored if the input directory is used as the working directory.
+`--include` `TEXT` — Colon-, comma-, or space-separated list of files or directories to copy into the working directory in addition to the input directory contents. These files are not copied back after job completion. Paths must be absolute or relative to the input directory. You can use glob patterns to match multiple files or directories. Read more about file transfers [here](../transfer_selections.md#submission-option-include).
+
+`--ignore` `TEXT` — Colon-, comma-, or space-separated list of files or directories to ignore in all transfer operations. These files are neither copied to the working directory nor copied back after job completion. Paths to files and directories to ignore must be absolute or relative to the input directory. You can use glob patterns to match multiple files or directories. Read more about file transfers [here](../transfer_selections.md#submission-option-ignore).
 
 `--depend` `TEXT` — Comma- or space-separated list of job dependencies in the format '<type>=<job_id>[:<job_id>...]'. Available types: **after** (after start), **afterok** (after success), **afternotok** (after failure/kill), **afterany** (after completion regardless of outcome). Multiple job IDs in one expression (colon-separated) require all listed jobs to satisfy the condition. Multiple expressions must all be satisfied before the job starts. Examples: 'afterok=1234', 'after=456:789', 'afterok=123,afternotok=678'. Read more about dependencies [here](../dependencies.md).
 
@@ -118,7 +120,7 @@ Only used when job-type is **loop**.
 
 `--archive-format` `TEXT` — Filename format for archived files. Defaults to **job%04d**.
 
-`--archive-mode` `TEXT` — Colon-, comma-, or space-separated list of archive modes controlling when working directory files are archived upon job completion. Supports the same modes as **--transfer-mode**. Defaults to **success**.
+`--archive-mode` `TEXT` — Colon-, comma-, or space-separated list of archive modes controlling when working directory files are archived upon job completion. Supports the same modes as **--transfer-mode**. Defaults to **success**. Read more about archive modes [here](../transfer_modes.md#archive-modes).
 
 ### Specifying options in the script
 

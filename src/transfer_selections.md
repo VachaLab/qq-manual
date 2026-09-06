@@ -39,6 +39,9 @@ qq submit -q default (...) --ignore irrelevant_output.dat
 
 Ignored files are neither copied to the working directory, nor transferred back from it if your script generates them.
 
+> [!NOTE]
+> Everything described above only applies when the working directory is separate from the input directory. With `--work-dir input_dir` there is no transfer between the two, so `exclude`, `include`, and `ignore` have no effect there. They do still apply to the archival operations of loop jobs, which are described in the next section.
+
 ## Transfers to and from the archive of a loop job
 
 qq [loop jobs](job_types/loop_job.md) create an archive directory where they automatically store files matching the archive pattern. In each cycle, qq copies the archived files matching the pattern for the current cycle into the working directory, making them available to the executed script.
