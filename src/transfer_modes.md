@@ -1,4 +1,4 @@
-# Transferring files from the working directory
+# Controlling when transfer from the input directory is performed
 
 As described in various sections of this manual, if your job creates its own [working directory](resources/work_dir.md) (e.g., on scratch), the data produced during the job's execution are transferred back to the input directory **only if the job finishes successfully** (with exit code `0`, or the value of the `QQ_NO_RESUBMIT` environment variable in the case of loop/continuous jobs). The working directory is then removed and can no longer be accessed.
 
