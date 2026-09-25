@@ -174,7 +174,7 @@ The results file is now named `results_${CYCLE}.dat`, so `results_1.dat`, `resul
 
 ## Creating a storage directory
 
-The script works, but if the calculation runs for many cycles, the output files start to pile up in the job directory. That matters more than it might seem, because by default qq copies everything in the job directory to the working directory on the compute node, where the job actually runs (see [this section of the manual](job_types/standard_job.md#2-preparing-the-working-directory) if this is new for you). With large output files we would be copying a lot of data back and forth every cycle, which slows the job down. On some clusters the working directory also has a limited capacity that you can exceed this way.
+The script works, but if the calculation runs for many cycles, the output files start to pile up in the job directory. This might actually be a big issue, because by default qq copies everything in the job directory to the working directory on the compute node, where the job actually runs (see [this section of the manual](job_types/standard_job.md#2-preparing-the-working-directory) if this is new for you). With large output files we would be copying a lot of data back and forth every cycle, which slows the job down. On some clusters the working directory also has a limited capacity that you can exceed this way.
 
 To avoid this, we can put the finished files into a separate directory and tell qq not to copy that directory to the compute node.
 
