@@ -174,7 +174,7 @@ The results file is now named `results_${CYCLE}.dat`, so `results_1.dat`, `resul
 
 ## Creating a storage directory
 
-The script works, but if the calculation runs for many cycles, the output files start to pile up in the job directory. This might actually be a big issue, because by default qq copies everything in the job directory to the working directory on the compute node, where the job actually runs (see [this section of the manual](job_types/standard_job.md#2-preparing-the-working-directory) if this is new for you). With large output files we would be copying a lot of data back and forth every cycle, which slows the job down. On some clusters the working directory also has a limited capacity that you can exceed this way.
+The script works, but if the calculation runs for many cycles, the output files start to pile up in the input directory. This might actually be a big issue, because by default qq copies everything in the input directory to the working directory on the compute node, where the job actually runs (see [this section of the manual](job_types/standard_job.md#2-preparing-the-working-directory) if this is new for you). With large output files we would be copying a lot of data back and forth every cycle, which slows the job down. On some clusters the working directory also has a limited capacity that you can exceed this way.
 
 To avoid this, we can put the finished files into a separate directory and tell qq not to copy that directory to the compute node.
 
@@ -220,12 +220,12 @@ if [ ${CYCLE} -ge ${N_CYCLES} ]; then
 fi
 ```
 
-The results files go straight into `storage`. Because the directory is excluded, the copy of it in the working directory starts out empty every cycle, so we never drag the results of previous cycles onto the compute node; when the job finishes, what this cycle wrote there is copied back and joins the files already in `storage` in the job directory. The state files are archived the same way, one per cycle, under a name that says which cycle produced them.
+The results files go straight into `storage`. Because the directory is excluded, the copy of it in the working directory starts out empty every cycle, so we never drag the results of previous cycles onto the compute node; when the job finishes, what this cycle wrote there is copied back and joins the files already in `storage` in the input directory. The state files are archived the same way, one per cycle, under a name that says which cycle produced them.
 
-Notice that the file carrying the state into the next cycle keeps the fixed name `input.state`, and that we archive a _copy_ of it. That is because `storage` is excluded, so nothing inside it is present in the working directory when the job runs; the script cannot read from its own archive (at least not easily). The one file the next cycle needs must stay in the job directory, and since its name never changes, it is simply overwritten each cycle and nothing accumulates.
+Notice that the file carrying the state into the next cycle keeps the fixed name `input.state`, and that we archive a _copy_ of it. That is because `storage` is excluded, so nothing inside it is present in the working directory when the job runs; the script cannot read from its own archive (at least not easily). The one file the next cycle needs must stay in the input directory, and since its name never changes, it is simply overwritten each cycle and nothing accumulates.
 
 > [!TIP]
-> `qq exclude` only affects what is copied _into_ the working directory. Files that your job writes are still copied back to the job directory when the job succeeds. So an excluded directory is a good place for anything you want to keep but will never need to read again during the run.
+> `qq exclude` only affects what is copied _into_ the working directory. Files that your job writes are still copied back to the input directory when the job succeeds. So an excluded directory is a good place for anything you want to keep but will never need to read again during the run.
 
 This works, but look at what we still do not have. The [qq runtime files](runtime_files.md), which include the logs from `sick`, are overwritten every cycle, and there is no simple way to archive them by hand. Every cycle of the job has the same name in the batch system, so we have to open the `cycle` file to find out which cycle we are on. We are copying the state file twice and juggling two names for it, because we cannot easily read anything back out of the archive. And compared to the script we started with, this is a looot of boilerplate. There is a better way, and it is called a loop job.
 
@@ -269,11 +269,11 @@ The cycle counting is gone, the storage directory is gone, and so is the code th
 # qq archive storage
 ```
 
-These are [qq directives](commands/qq_submit.md#specifying-options-in-the-script), that is, submission options. You already know `job-type`. `loop-end` says which cycle is the last one. `archive` says where the archived files go: the `storage` directory inside the job directory, which qq creates for you and automatically excludes from being copied to the working directory, so there is no needless copying and no `qq exclude` directive needed.
+These are [qq directives](commands/qq_submit.md#specifying-options-in-the-script), that is, submission options. You already know `job-type`. `loop-end` says which cycle is the last one. `archive` says where the archived files go: the `storage` directory inside the input directory, which qq creates for you and automatically excludes from being copied to the working directory, so there is no needless copying and no `qq exclude` directive needed.
 
 `archive-format` is the interesting one. It sets a naming convention, and that convention is an agreement between you and qq about which files belong to which cycle. With `job%04d`, any file or directory whose name contains `job` followed by a four-digit number counts as an archived file. You never copy anything into `storage` or out of it. You just name your files that way, and qq moves them for you in both directions.
 
-At the end of a cycle, qq moves every file matching the format into the archive, no matter which cycle number it carries, and only then copies the remaining files back to the job directory. At the start of a cycle, it does the opposite for one cycle only: it looks into the archive and copies out the files belonging to the **current** cycle. So in cycle 7, `job0007.state` is pulled out of the archive before your script starts, and your script can read it as if it had been sitting in the working directory all along.
+At the end of a cycle, qq moves every file matching the format into the archive, no matter which cycle number it carries, and only then copies the remaining files back to the input directory. At the start of a cycle, it does the opposite for one cycle only: it looks into the archive and copies out the files belonging to the **current** cycle. So in cycle 7, `job0007.state` is pulled out of the archive before your script starts, and your script can read it as if it had been sitting in the working directory all along.
 
 > [!NOTE]
 > The format string is an ordinary `printf` format. `job%04d` produces `job0001`, `job0002`, and so on, so a results file named `job0007.dat` belongs to cycle 7. Pick a width that comfortably covers the number of cycles you plan to run.
@@ -297,14 +297,14 @@ qq sets two environment variables in every loop job so that you do not have to b
 
 #### Summary
 
-To put the whole thing in order: you submit a new loop job and it is assigned cycle number 1. Once it starts running, it creates the working directory on the compute node and copies the job directory into it, skipping the archive. It then pulls out of the archive every file whose name matches the archive format with the current cycle number, so that the script finds those files as if they had been there with it all along.
+To put the whole thing in order: you submit a new loop job and it is assigned cycle number 1. Once it starts running, it creates the working directory on the compute node and copies the input directory into it, skipping the archive. It then pulls out of the archive every file whose name matches the archive format with the current cycle number, so that the script finds those files as if they had been there with it all along.
 
-Your script runs, reads the files belonging to the current cycle, and writes new ones, naming anything needed later after the cycle that will consume it. When the script exits, qq moves all files matching the archive format into the archive, copies everything else back to the job directory, and submits the next cycle.
+Your script runs, reads the files belonging to the current cycle, and writes new ones, naming anything needed later after the cycle that will consume it. When the script exits, qq moves all files matching the archive format into the archive, copies everything else back to the input directory, and submits the next cycle.
 
 The next cycle is assigned number 2. It archives the runtime files of the previous cycle, creates its own working directory, copies the files there, runs the script, and so on. This execution and resubmission loop continues until the cycle limit is reached or until your script exits with `QQ_NO_RESUBMIT`. Then the job simply ends.
 
 > [!NOTE]
-> Runtime files are archived by the _following_ cycle, not by the cycle that produced them. That is why the runtime files of the last cycle stay in the job directory: there is no further cycle to move them.
+> Runtime files are archived by the _following_ cycle, not by the cycle that produced them. That is why the runtime files of the last cycle stay in the input directory: there is no further cycle to move them.
 
 > [!TIP]
 > If this still does not connect and you are a visual person, [this diagram](job_types/loop_job.md#data-flow-in-a-loop-job-cycle) might help.
