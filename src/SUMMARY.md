@@ -49,7 +49,7 @@
   - [qq wipe](commands/qq_wipe.md)
 - [Job collections](job_collections.md)
 - [Advanced topics](advanced_topics.md)
-  - [Controlling when transfer from the input directory is performed](transfer_modes.md)
+  - [Controlling when transfer from the working directory is performed](transfer_modes.md)
   - [Controlling what is transferred between the input and working directory](transfer_selections.md)
   - [Specifying job dependencies](dependencies.md)
   - [Submitting non-bash scripts](interpreters.md)
