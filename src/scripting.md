@@ -47,6 +47,12 @@ qq offers several official helper scripts built on top of `qq_lib`. These tools 
 
 To use them, the recommended approach is to use the [uv package manager](https://docs.astral.sh/uv/getting-started/installation/). If you have `uv` installed, download the script, make it executable (`chmod u+x SCRIPT`), and run it (`./SCRIPT`). If you use the scripts frequently, consider adding their directory to your `PATH`.
 
+> [!NOTE]
+> The official qq scripts serve several purposes. One purpose is testing new features before they are added to qq itself. Some of the scripts may therefore eventually become part of core qq in some form or other, as happened with [job collections](job_collections.md). Another purpose is extending qq for specific applications, such as `gmx-eta` for Gromacs. These scripts will never become part of core qq, since qq aims to be as general as possible and not tied to any particular software. A third purpose is showing how to use `qq_lib` in your own Python scripts.
+
+> [!CAUTION]
+> qq scripts are largely untested, completely unstable, and unversioned. Their functionality can change at any time without any warning or notice.
+
 ## [gmx-eta](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/gmx-eta)
 
 `gmx-eta` estimates the remaining runtime of a Gromacs simulation. Run it in a directory containing a qq job, supply job ID(s), or use the `--all` flag.
@@ -105,151 +111,110 @@ $ gmx-eta
 
 ---
 
----
+## [loop-eta](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/loop-eta)
 
-> [!WARNING]
-> The following scripts are deprecated. You can still use them, but their functionality is now part of core qq. See [job collections](job_collections.md) for more information.
+`loop-eta` estimates when a qq loop job will finish. Run it in a directory containing a loop job, or supply one or more directories.
 
-## [multi-check](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-check)
+For each job, `loop-eta` shows the current cycle, the median queue wait and run time per cycle, the remaining time, and the estimated completion time. The estimate assumes that each remaining cycle waits and runs for the median time. Cycles that ran much longer than the median are listed separately, together with the node they ran on.
 
-`multi-check` scans multiple directories for qq jobs and reports their collective status. It uses multithreading to significantly speed up job-state inspection compared to checking jobs individually.
-
-### Usage
-
-```bash
-usage: multi-check [-h] [-t THREADS] [--fix] directories [directories ...]
-
-Check the state of qq jobs in multiple directories.
-
-positional arguments:
-  directories           Directories containing qq info files.
-
-options:
-  -h, --help            show this help message and exit
-  -t, --threads THREADS Number of worker threads (default: 16)
-  --fix                 Resubmit all failed and killed jobs.
-```
-
-### Example check
-
-```bash
-$ multi-check win??
-
-Collecting job states ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-
-FAILED          4
-win05 win06 win07 win08
-
-FINISHED        3
-win45 win48 win49
-
-QUEUED          35
-win01 win02 win03 win04 win09 win10 win11 win12 win13 win14 win15 win16 win17 win18 win20 win21 win22 win23 win24 win25 win26 win27 win28 win29 win30 win31 win32 win33 win34 win35 win36 win38 win39 win42 win43
-
-RUNNING         9
-win19 win37 win40 win41 win44 win46 win47 win50 win51
-
-TOTAL           51
-```
-
-You may also use `--fix` to automatically attempt to respawn jobs in **FAILED** or **KILLED** states. Jobs are respawned with the same parameters originally used.
-
-### Example fix
-
-```bash
-$ multi-check win?? --fix
-
-Collecting job states ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-
-FAILED          4
-win05 win06 win07 win08
-
-FINISHED        3
-win45 win48 win49
-
-QUEUED          35
-win01 win02 win03 win04 win09 win10 win11 win12 win13 win14 win15 win16 win17 win18 win20 win21 win22 win23 win24 win25 win26 win27 win28 win29 win30 win31 win32 win33 win34 win35 win36 win38 win39 win42 win43
-
-RUNNING         9
-win19 win37 win40 win41 win44 win46 win47 win50 win51
-
-TOTAL           51
-
-***********************************
-
-Fixing jobs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-
-FIXED SUCCESSFULLY        4
-win05 win06 win07 win08
-
-COULD NOT FIX             0
-```
-
----
-
-## [multi-submit](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-submit)
-
-`multi-submit` submits qq jobs from multiple directories in bulk. All jobs must use the same submission script name and request identical resources. The resource specification from the _first_ submitted job is applied to all others. It uses multithreading to significantly speed up job submission compared to submitting jobs individually.
+> [!IMPORTANT]
+> `loop-eta` can only estimate the completion time after at least one cycle of the loop job has finished successfully.
+>
+> `loop-eta` is not usable if your script can end the loop job early using [`QQ_NO_RESUBMIT`](job_types/loop_job.md#forcing-qq-not-to-resubmit). The estimate assumes that the job runs through all cycles up to the last one.
 
 ### Usage
 
 ```bash
-usage: multi-submit [-h] script directories [directories ...]
+Usage: loop-eta [OPTIONS] [DIRECTORIES]...
 
-Submit qq jobs from multiple directories. All jobs must request the same resources!
+  Show timing statistics and estimated completion times of qq loop jobs in the
+  specified directories. If no directory is specified, the current directory
+  is used.
 
-positional arguments:
-  script                Name of the script to submit.
-  directories           Directories containing qq info files.
-
-options:
-  -t, --threads THREADS Number of worker threads (default: 16)
-  -h, --help            show this help message and exit
-```
-
-### Example
-
-```bash
-$ multi-submit qq_loop_md win?? -q default --ncpus=8 --walltime=12h
-
-Submitting jobs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-
-SUBMITTED SUCCESSFULLY    51
-win01 win02 win03 win04 win05 win06 win07 win08 win09 win10 win11 win12 win13 win14 win15 win16 win17 win18 win19 win20 win21 win22 win23 win24 win25 win26 win27 win28 win29 win30 win31 win32 win33 win34 win35 win36 win37 win38 win39 win40 win41 win42 win43 win44 win45 win46 win47 win48 win49 win50 win51
-
-COULD NOT SUBMIT          0
+Options:
+  --last INTEGER RANGE       Use only the last N finished cycles of each job.
+                             By default, all finished cycles are used.  [x>=1]
+  --slow-factor FLOAT RANGE  Report finished cycles whose run time exceeds the
+                             median run time by this factor.  [default: 1.5;
+                             x>=1.0]
+  -h, --help                 Show this message and exit.
 ```
 
 ---
 
-## [multi-kill](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/multi-kill)
+## [resource-usage](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/resource-usage)
 
-`multi-kill` terminates qq jobs across multiple directories in parallel. Because it uses multithreading, it is significantly faster than running `qq kill` for each job independently.
+`resource-usage` calculates the computational resources used by a collection of qq jobs and writes them into a CSV file. Run it in a directory containing qq jobs, or supply one or more directories.
+
+The CSV file contains one row per directory and a final row with the totals. For each directory, it lists the number of jobs, the total run time, and the CPU-hours, GPU-hours, and node-hours used. For loop jobs, all cycles stored in the archive are included.
+
+> [!IMPORTANT]
+> `resource-usage` only counts jobs that have completed. Queued and running jobs are ignored. Failed attempts of respawned jobs are not counted, since respawning removes their records. For continuous jobs, only the last cycle is counted. The time spent copying input files to the working directory is not included, so the numbers are slightly lower than those reported by the batch system.
 
 ### Usage
 
 ```bash
-usage: multi-kill [-h] [-t THREADS] directories [directories ...]
+Usage: resource-usage [OPTIONS] [DIRECTORIES]...
 
-Kill qq jobs in multiple directories.
+  Write the resources used by qq jobs in the specified directories into a CSV
+  file. If no directory is specified, the current directory is used.
 
-positional arguments:
-  directories           Directories containing qq info files.
-
-options:
-  -h, --help            show this help message and exit
-  -t, --threads THREADS
-                        Number of worker threads (default: 16)
+Options:
+  -o, --output FILE  Path to the output CSV file. An existing file is
+                     overwritten.  [default: resources.csv]
+  -h, --help         Show this message and exit.
 ```
 
-### Example
+---
+
+## [low-cpu-check](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts/low-cpu-check)
+
+`low-cpu-check` reports your running qq jobs with low CPU utilization. It is meant to be run periodically as a cron job. It prints nothing unless it finds such a job, so cron only sends you an e-mail when something needs your attention.
+
+A job is only checked after it has been running for a grace period (20 minutes by default), since CPU utilization takes some time to rise after a job starts. Each job is reported at most once every 6 hours by default. The times of the last reports are stored in `~/.local/state/qq/low_cpu_check.json`.
+
+> [!IMPORTANT]
+> `low-cpu-check` only works on PBS, because Slurm does not report CPU utilization.
+
+### Setting up the cron job
+
+Open your crontab using `crontab -e` and add the following lines:
 
 ```bash
-$ multi-kill win??
-Killing jobs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+SHELL=/bin/bash
+BASH_ENV=$HOME/.bashrc
 
-KILLED SUCCESSFULLY       51
-win01 win02 win03 win04 win05 win06 win07 win08 win09 win10 win11 win12 win13 win14 win15 win16 win17 win18 win19 win20 win21 win22 win23 win24 win25 win26 win27 win28 win29 win30 win31 win32 win33 win34 win35 win36 win37 win38 win39 win40 win41 win42 win43 win44 win45 win46 win47 win48 win49 win50 win51
+0 * * * * /path/to/low-cpu-check -s meta
+```
 
-COULD NOT KILL            0
+This runs the check at the start of every hour for jobs on the Metacentrum Grid. Use `-s` several times to check jobs on more servers (e.g., `-s robox -s sokar -s meta`).
+
+Cron runs commands with a minimal environment that usually does not include `uv` or the batch system commands. Setting `SHELL` and `BASH_ENV` makes cron load your `.bashrc` before running the script. If your `.bashrc` exits early for non-interactive shells (for example with `[[ $- != *i* ]] && return`), make sure your `PATH` is set before that line.
+
+### Usage
+
+```bash
+Usage: low-cpu-check [OPTIONS]
+
+  Report running qq jobs with low CPU utilization. Prints nothing if all jobs
+  are fine. Only works on PBS.
+
+Options:
+  -s, --server TEXT               Batch server to collect jobs from. Can be
+                                  specified multiple times. Shortcuts such as
+                                  'meta' are supported. If not specified, the
+                                  current server is used.
+  -t, --threshold INTEGER RANGE   CPU utilization in percent below which a job
+                                  is reported.  [default: 50; 1<=x<=100]
+  -g, --grace INTEGER RANGE       Minutes after the start of a job during
+                                  which its CPU utilization is not checked.
+                                  [default: 20; x>=0]
+  -r, --repeat-after INTEGER RANGE
+                                  Hours before a job that still has low CPU
+                                  utilization is reported again.  [default: 6;
+                                  x>=0]
+  --state-file FILE               File storing when each job was last
+                                  reported.  [default: /home/user/.local/state
+                                  /qq/low_cpu_check.json]
+  -h, --help                      Show this message and exit.
 ```

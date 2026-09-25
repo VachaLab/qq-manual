@@ -55,9 +55,6 @@ qq nodes  -s <server-name>
 
 ## [qq submit](commands/qq_submit.md)
 
-> [!CAUTION]
-> This feature is experimental and may be unstable. Tread carefully and [report](https://github.com/VachaLab/qq/issues) any issues or suspicious behavior you encounter.
-
 Apart from monitoring jobs on different servers, you can also submit jobs to them. To do so, specify the `--server` (`-s`) option when submitting the job.
 
 For example, you can submit a job from a Robox desktop to the Sokar cluster like this:

@@ -12,6 +12,9 @@ The output of PBS Pro and Slurm commands is verbose and can be hard to read. qq 
 
 qq also provides commands that PBS and Slurm do not have. For instance, [`qq info`](commands/qq_info.md) provides detailed, persistent information about a job, [`qq cd`](commands/qq_cd.md) and [`qq go`](commands/qq_go.md) navigate to a job's input and scratch directory, respectively, [`qq wipe`](commands/qq_wipe.md) cleans failed job's working directory, and [`qq respawn`](commands/qq_respawn.md) can submit a failed job again. qq also supports [loop jobs](job_types/loop_job.md): a loop job is a batch job that submits its continuation for a set number of cycles.
 
+> [!TIP]
+> We also have a small collection of scripts that provide additional functionality but are not part of core qq. For example, they can estimate when a Gromacs simulation or a loop job will finish, calculate how many resources a collection of jobs has used, or send you an e-mail when one of your jobs has low CPU utilization. You can get the scripts [here](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts) and read the documentation describing them [here](scripting.md#official-qq-scripts).
+
 ## Goal 2: Simplified scratch management
 
 Scratch storage on Metacentrum Grid is managed manually. A job script has to check that the scratch directory exists, copy the input files into it, register a trap to clean it up, copy the results back afterwards, and handle failures at each step.
