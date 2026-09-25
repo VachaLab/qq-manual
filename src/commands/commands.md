@@ -14,3 +14,6 @@ To see a list of all available qq commands, simply type:
 
 For detailed information about a specific command, use:  
 `qq [COMMAND] --help`
+
+> [!TIP]
+> Apart from the core qq commands, there are also **qq scripts** that you can download and use to extend what qq can do. You can find the scripts [here](https://github.com/VachaLab/qq/tree/main/scripts/qq_scripts) and their documentation [here](../scripting.md#official-qq-scripts).
