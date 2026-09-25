@@ -10,13 +10,13 @@ The recommended way to use `qq_lib` is to use the [uv package manager](https://d
 To add `qq_lib` to your project:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.12.0
+uv add git+https://github.com/VachaLab/qq.git --tag v0.13.0
 ```
 
 Alternatively, you can add it directly to a specific script:
 
 ```bash
-uv add git+https://github.com/VachaLab/qq.git --tag v0.12.0 --script [YOUR_SCRIPT].py
+uv add git+https://github.com/VachaLab/qq.git --tag v0.13.0 --script [YOUR_SCRIPT].py
 ```
 
 > [!NOTE]

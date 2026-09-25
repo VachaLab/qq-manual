@@ -4,8 +4,8 @@ qq is highly configurable. All user-adjustable options (colors, panel widths, ti
 
 qq automatically loads configuration from:
 
-1. `$QQ_CONFIG` environment variable (highest priority)  
-2. `qq_config.toml` (in the current directory)  
+1. `$QQ_CONFIG` environment variable (highest priority)
+2. `qq_config.toml` (in the current directory)
 3. `${HOME}/.config/qq/config.toml` (default location, XDG-compatible)
 
 If no file is found, qq falls back to built-in defaults.
@@ -45,10 +45,9 @@ You may import these themes directly or copy pieces into your own configuration.
 The following expanded TOML structure lists all available sections and fields. You can copy this into your config and modify only the pieces you care about.
 
 > [!CAUTION]
-> We generally only recommend modifying qq's appearance (tables with `presenter` in name or the `state_colors` table). 
+> We generally only recommend modifying qq's appearance (tables with `presenter` in name or the `state_colors` table).
 >
 > Changing any of `suffixes`, `env_vars`, `date_formats`, `exit_codes`, `binary_name` is **dangerous** and may potentially break qq's functionality.
-
 
 ```toml
 ##############################################
@@ -85,10 +84,16 @@ shared_submit = "QQ_SHARED_SUBMIT"
 batch_system = "QQ_BATCH_SYSTEM"
 # Current loop-cycle index.
 loop_current = "QQ_LOOP_CURRENT"
+# Loop-cycle index for the next cycle.
+loop_next = "QQ_LOOP_NEXT"
 # Starting loop-cycle index.
 loop_start = "QQ_LOOP_START"
 # Final loop-cycle index.
 loop_end = "QQ_LOOP_END"
+# Archive pattern used for the current cycle.
+archive_current = "QQ_ARCHIVE_CURRENT"
+# Archive pattern used for the next cycle.
+archive_next = "QQ_ARCHIVE_NEXT"
 # Non-resubmit flag returned by a job script.
 no_resubmit = "QQ_NO_RESUBMIT"
 # Archive filename pattern.

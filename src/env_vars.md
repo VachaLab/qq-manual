@@ -2,7 +2,7 @@
 
 When a qq job is submitted, several environment variables are automatically set and can be used within the submitted script.
 
-- `QQ_ENV_SET`: indicates that the job is running inside the qq environment (always set to `true`)  
+- `QQ_ENV_SET`: indicates that the job is running inside the qq environment (always set to `true`)
 - `QQ_INPUT_MACHINE`: name of the input machine from which the job was submitted
 - `QQ_INPUT_DIR`: absolute path to the job's input directory on the input machine
 - `QQ_INFO`: absolute path to the qq job's info file on the input machine
@@ -21,11 +21,22 @@ If the job is a [loop job](job_types/loop_job.md) or a [continuous job](job_type
 If the job is a [loop job](job_types/loop_job.md), the following additional environment variables are also set:
 
 - `QQ_LOOP_CURRENT`: current cycle number of the loop job
+- `QQ_LOOP_NEXT`: next cycle number of the loop job _(set even if the current cycle of the loop job is supposed to be the last one)_
 - `QQ_LOOP_START`: first cycle of the loop job
 - `QQ_LOOP_END`: last cycle of the loop job
 - `QQ_ARCHIVE_FORMAT`: filename format used for archived files
+- `QQ_ARCHIVE_CURRENT`: archive pattern used for the current cycle
+- `QQ_ARCHIVE_NEXT`: archive pattern used for the next cycle _(set even if the current cycle of the loop job is supposed to be the last one)_
+
+> [!WARNING]
+> `QQ_LOOP_NEXT`, `QQ_ARCHIVE_CURRENT`, and `QQ_ARCHIVE_NEXT` are only available since qq **v0.13.0**.
 
 > [!IMPORTANT]
+> If the `QQ_ARCHIVE_FORMAT` is not a [printf format string](https://en.wikipedia.org/wiki/Printf#Format_specifier), such as `job%04d` or `md%03d`, `QQ_ARCHIVE_CURRENT` and `QQ_ARCHIVE_NEXT` will be set to empty string.
+
+---
+
+> [!CAUTION]
 > Apart from the variables listed here and those provided by the batch system itself, no other environment variables can be guaranteed to be propagated from the submission environment to the job environment.
 
 Additional internal environment variables may be set, but these are not intended for public use and may change or be removed in future versions of qq.
