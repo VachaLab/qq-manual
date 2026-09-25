@@ -37,6 +37,9 @@ After the submitted script finishes successfully, qq moves **all** files matchin
 
 In summary, unlike with Infinity, you do not need to explicitly fetch files from and to the archive, you just need to name them accordingly and qq will archive them automatically.
 
+> [!TIP]
+> Since v0.13, qq provides the [environment variables](../env_vars.md) `QQ_ARCHIVE_CURRENT` and `QQ_ARCHIVE_NEXT`, which contain the `archive-format` pattern expanded for the current and the next cycle. With `archive-format` set to `job%04d` and the current cycle being 8, `QQ_ARCHIVE_CURRENT` is `job0008` and `QQ_ARCHIVE_NEXT` is `job0009`. Use these variables to name your files intended for archival. These variables are only set if `archive-format` is a printf pattern.
+
 If the script fails or the job is killed, no archival is performed. As with standard jobs, all files remain in the working directory and only [qq runtime files](../runtime_files.md) are copied to the input directory. Note that this behavior can be changed by providing a non-default [archival mode](../transfer_modes.md#archive-modes).
 
 > [!IMPORTANT]
