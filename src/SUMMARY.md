@@ -62,6 +62,6 @@
   - [Configuration](config.md)
 - [Tools and API](tools_and_api.md)
   - [Gromacs run scripts](run_scripts.md)
-  - [Using qq in Python](scripting.md)
+  - [Using qq in Python & qq scripts](scripting.md)
 - [Glossary](glossary.md)
 - [Common issues](common_issues.md)

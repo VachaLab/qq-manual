@@ -1,4 +1,4 @@
-# Using qq in Python
+# Using qq in Python & qq scripts
 
 > [!TIP]
 > Looking for how to run Python scripts as qq jobs instead? See [this section of the manual](interpreters.md).
@@ -176,21 +176,6 @@ A job is only checked after it has been running for a grace period (20 minutes b
 > [!IMPORTANT]
 > `low-cpu-check` only works on PBS, because Slurm does not report CPU utilization.
 
-### Setting up the cron job
-
-Open your crontab using `crontab -e` and add the following lines:
-
-```bash
-SHELL=/bin/bash
-BASH_ENV=$HOME/.bashrc
-
-0 * * * * /path/to/low-cpu-check -s meta
-```
-
-This runs the check at the start of every hour for jobs on the Metacentrum Grid. Use `-s` several times to check jobs on more servers (e.g., `-s robox -s sokar -s meta`).
-
-Cron runs commands with a minimal environment that usually does not include `uv` or the batch system commands. Setting `SHELL` and `BASH_ENV` makes cron load your `.bashrc` before running the script. If your `.bashrc` exits early for non-interactive shells (for example with `[[ $- != *i* ]] && return`), make sure your `PATH` is set before that line.
-
 ### Usage
 
 ```bash
@@ -218,3 +203,22 @@ Options:
                                   /qq/low_cpu_check.json]
   -h, --help                      Show this message and exit.
 ```
+
+### Setting up the cron job
+
+Open your crontab using `crontab -e` and add the following lines:
+
+```bash
+SHELL=/bin/bash
+BASH_ENV=$HOME/.bashrc
+
+0 * * * * resurrect_kerberos && /path/to/low-cpu-check -s meta
+```
+
+This runs the check at the start of every hour for jobs on the Metacentrum Grid. Use `-s` several times to check jobs on more servers (e.g., `-s robox -s sokar -s meta`).
+
+Cron runs commands with a minimal environment that usually does not include `uv` or the batch system commands. Setting `SHELL` and `BASH_ENV` makes cron load your `.bashrc` before running the command.
+
+Querying the batch system on Metacentrum-family clusters requires a valid Kerberos ticket, which cron jobs do not have. To get one, install [Keep Kerberos Alive](https://github.com/VachaLab/keep_kerberos_alive) and call `resurrect_kerberos` before the script, as in the example above. The installer adds `resurrect_kerberos` to your `.bashrc`, so it is available once cron loads the file.
+
+If your `.bashrc` exits early for non-interactive shells (for example with `[[ $- != *i* ]] && return`), make sure that your `PATH` is set and Keep Kerberos Alive is loaded before that line.
