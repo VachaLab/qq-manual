@@ -206,11 +206,11 @@ Options:
 
 ### Setting up the cron job
 
-Open your crontab using `crontab -e` and add the following lines:
+Open your crontab using `crontab -e` and add the following lines, replacing `<your-username>` with your actual username and the path to `low-cpu-check` with the actual path on your system:
 
 ```bash
 SHELL=/bin/bash
-BASH_ENV=$HOME/.bashrc
+BASH_ENV=/home/<your-username>/.bashrc
 
 0 * * * * resurrect_kerberos && /path/to/low-cpu-check -s meta
 ```
