@@ -5,7 +5,7 @@
 
 Here are some issues that you may encounter when installing or using `qq`.
 
-## Submitted jobs fail on a node
+## Submitted jobs fail on a node (with an error)
 
 You submit a job, it starts being executed, and then it finishes way too quickly. `qq info` says that the job is in an inconsistent state, and your `.qqout` file contains the following output:
 
@@ -65,6 +65,20 @@ fi
 
 > [!NOTE]
 > If `.profile` and `.bash_profile` do not exist, `qq` should create them with the above content during installation. However, if you already have these files, `qq` does not modify them and assumes you have already configured them.
+
+## Submitted jobs fail on a node without an error
+
+You submit a job, it starts being executed, and then it finishes way too quickly. `qq info` says that the job is in an inconsistent state, and your `.qqout` file contains literally nothing. According to the batch system (or the output of `qq jobs`), the job has finished successfully.
+
+This indicates that installing `qq` on the computing node failed for one reason or the other.
+
+The simplest solution is to do the following:
+
+1. Connect to the node where your job was being executed.
+
+2. Delete the entire directory, where qq is installed (`rm -rf ${HOME}/qq`).
+
+3. Back on your desktop, rerun the installation script.
 
 ## PBS GSS error - No credentials were supplied
 
