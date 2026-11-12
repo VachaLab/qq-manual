@@ -70,7 +70,7 @@ fi
 
 You submit a job, it starts being executed, and then it finishes way too quickly. `qq info` says that the job is in an inconsistent state, and your `.qqout` file contains literally nothing. According to the batch system (or the output of `qq jobs`), the job has finished successfully.
 
-This indicates that installing `qq` on the computing node failed for one reason or the other.
+This indicates that qq on the computing node is somehow corrupted. This might have happened during the installation or later.
 
 The simplest solution is to do the following:
 
