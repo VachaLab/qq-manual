@@ -2,6 +2,9 @@
 
 qq uses four types of runtime files, each with one of the following extensions: `.qqinfo`, `.out`, `.err`, and `.qqout`.
 
+> [!NOTE]
+> Since qq v0.14, `.out` and `.err` files count as qq runtime files only if a `.qqinfo` or `.qqout` file with the same name (apart from the extension) exists in the same directory. Other `.out` and `.err` files are left alone by qq commands such as [qq clear](commands/qq_clear.md), because other programs use these extensions for their own output.
+
 ### qqinfo files
 
 A `.qqinfo` file (also called a "qq info file") is created after submission by [`qq submit`](commands/qq_submit.md). It stores information used to track the job submitted from that directory. Each qq job requires its own info file for management and control.
