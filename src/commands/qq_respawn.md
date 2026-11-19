@@ -38,6 +38,8 @@ If no `JOB_ID` and no directory are provided, `qq respawn` searches for qq jobs 
 #### Options
 
 - `-d`, `--dir` — One or more directories to search for qq jobs in. Supports globs.
+- `--force-continue` — If the archive of a loop job already contains files for the next cycle, continue with the next cycle without asking.
+- `--force-rerun` — If the archive of a loop job already contains files for the next cycle, rerun the failed cycle without asking.
 
 ### Examples
 
@@ -80,3 +82,11 @@ qq respawn -d /path/to/job*
 ```
 
 Respawns all suitable qq jobs whose info files are located in directories matching the glob pattern `/path/to/job*` (e.g., `/path/to/job1`, `/path/to/job2`, `/path/to/job3`). Useful for managing job collections.
+
+### Respawning loop jobs
+
+When respawning a loop job, `qq respawn` checks the archive. Usually, it corresponds to the failed cycle, and this cycle is run again. However, if the cycle finished and archived its files but the job failed afterwards (typically because the next cycle could not be submitted), the archive already contains files for the next cycle. In that case, `qq respawn` asks whether to continue with the next cycle or to rerun the failed one. If you continue, the qq runtime files of the failed cycle are archived like those of any other finished cycle, and its working directory is kept if it still exists, since it may contain files that were not copied back or archived.
+
+If the failed cycle was the last cycle of the loop job, it can only be rerun.
+
+To choose without being asked, for example when respawning many jobs at once, use the `--force-continue` or `--force-rerun` option.
