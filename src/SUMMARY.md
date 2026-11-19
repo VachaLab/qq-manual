@@ -39,7 +39,6 @@
   - [qq info](commands/qq_info.md)
   - [qq jobs](commands/qq_jobs.md)
   - [qq kill](commands/qq_kill.md)
-  - [qq killall](commands/qq_killall.md)
   - [qq nodes](commands/qq_nodes.md)
   - [qq queues](commands/qq_queues.md)
   - [qq respawn](commands/qq_respawn.md)
