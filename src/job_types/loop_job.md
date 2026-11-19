@@ -1,6 +1,6 @@
 # Loop jobs
 
-Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](../commands/standard_job.md) first — otherwise, this may be difficult to follow.
+Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](standard_job.md) first — otherwise, this may be difficult to follow.
 
 To turn a job into a loop job, you must set two [`qq submit`](../commands/qq_submit.md) options:
 

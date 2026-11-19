@@ -4,3 +4,13 @@ language = "en"
 src = "src"
 title = "qq manual v0.14"
 description = "Manual for qq"
+
+# the installation pages used to be in the root directory
+[output.html.redirect]
+"/installation.html" = "installation/installation.html"
+"/install_robox.html" = "installation/robox.html"
+"/install_sokar.html" = "installation/sokar.html"
+"/install_metacentrum.html" = "installation/metacentrum.html"
+"/install_karolina.html" = "installation/karolina.html"
+"/install_lumi.html" = "installation/lumi.html"
+"/install_general.html" = "installation/manual.html"

@@ -17,54 +17,29 @@ This indicates that `qq` is not available on the computing node where the job wa
 
 1. **`qq` has not been installed on the concerned computing node at all.**
 
-This may be especially common on the Robox cluster if you run the job on someone else's desktop. When [installing `qq` on Robox](install_robox.md), it is installed only on your desktop and on the computing nodes, not on other people's desktops. This is a feature, not a bug — you probably should not run jobs on other people's desktops. If you need to, you can rerun the installation command on their desktop.
+This may be especially common on the Robox cluster if you run the job on someone else's desktop. When [installing `qq` on Robox](installation/robox.md), it is installed only on your desktop and on the computing nodes, not on other people's desktops. This is a feature, not a bug — you probably should not run jobs on other people's desktops. If you need to, you can [install qq on their desktop manually](installation/manual.md).
 
-2. **`qq` has been installed, but the RC file (`.bashrc`, typically) has not been properly modified.**
+It can also happen if the home directory used by the node was not available when you installed qq. The installer skips such home directories with a warning. Rerun the installation command for the cluster once the home directory is available again.
 
-Connect to the node where your job was executed and check the contents of `${HOME}/.bashrc`.
+2. **`qq` has been installed, but the shell on the node does not load it.**
 
-The file should contain a block similar to this:
+Connect to the node where your job was executed and run:
+
+```bash
+bash -lc 'qq --version'
+```
+
+If this prints the version of qq, qq is set up correctly on the node and the job failed for a different reason. Otherwise, check that `${HOME}/.qq/env.bash` exists and that your `.bashrc` and `.profile` (and `.bash_profile` or `.bash_login`, if you have them) start with a block like this:
 
 ```bash
 # >>> This block is managed by qq >>>
-# This makes qq available for you on any computer using this directory as its HOME.
-if [[ ":$PATH:" != *":/home/ladme/qq:"* ]]; then
-    export PATH="$PATH:/home/ladme/qq"
-fi
-# This makes the qq cd command work.
-qq() {
-    if [[ "$1" == "cd" ]]; then
-        for arg in "$@"; do
-            if [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
-                command qq "$@"
-                return
-            fi
-        done
-        target_dir="$(command qq cd "${@:2}")"
-        cd "$target_dir" || return
-    else
-        command qq "$@"
-    fi
-}
-# This makes qq autocomplete work.
-eval "$(_QQ_COMPLETE=bash_source qq)"
+if [ -f "$HOME/.qq/env.bash" ]; then . "$HOME/.qq/env.bash"; fi
 # <<< This block is managed by qq <<<
 ```
 
-If this block is not in the `.bashrc` file, first try reinstalling `qq` on the cluster. If that does not help, [open a GitHub issue](https://github.com/VachaLab/qq/issues).
+If the block or the file is missing, rerun the installation command for the cluster. The installer also checks that qq works in the home directory and tells you if it does not.
 
-3. **`qq` has been installed, `.bashrc` has been modified, but it is not read before executing the job.**
-
-This may indicate that when a job was run on the affected node, a login shell was opened instead of the typically used non-login shell. In such cases, the `.bashrc` file may not be read; instead, either the `.profile` or `.bash_profile` file will be read. We need to force the shell to read the `.bashrc` file. Connect to the affected **computing node**, go to your HOME directory (`cd ~`), and add the following to both `.profile` and `.bash_profile` located there:
-
-```bash
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
-```
-
-> [!NOTE]
-> If `.profile` and `.bash_profile` do not exist, `qq` should create them with the above content during installation. However, if you already have these files, `qq` does not modify them and assumes you have already configured them.
+If everything is in place but qq is still not found, something in your shell configuration files probably overwrites the `PATH` after qq is loaded. Look for a line like `export PATH=/some/directory` which does not include `$PATH` and change it to `export PATH="/some/directory:$PATH"`. If that does not help, [open a GitHub issue](https://github.com/VachaLab/qq/issues).
 
 ## Submitted jobs fail on a node without an error
 
@@ -76,9 +51,9 @@ The simplest solution is to do the following:
 
 1. Connect to the node where your job was being executed.
 
-2. Delete the entire directory, where qq is installed (`rm -rf ${HOME}/qq`).
+2. Delete the directory where qq is installed (`rm -rf ${HOME}/.qq/qq`). On Metacentrum, qq is installed only in your home directory on `brno12-cerit`, so delete `/storage/brno12-cerit/home/${USER}/.qq/qq` and also the copy of qq on the local scratch of the node (`rm -rf /scratch/${USER}/qq`).
 
-3. Back on your desktop, rerun the installation script.
+3. Back on your desktop, rerun the installation command for the cluster.
 
 ## PBS GSS error - No credentials were supplied
 
