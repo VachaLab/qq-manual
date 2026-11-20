@@ -10,7 +10,7 @@ The supported Metacentrum-family batch servers are:
 - `sokar-pbs.ncbr.muni.cz` (default for the Sokar cluster)
 - `pbs-m1.metacentrum.cz` (default for the Metacentrum clusters)
 
-You can provide any of these server names as an option to any qq command that supports it — namely, [qq jobs](commands/qq_jobs.md), [qq stat](commands/qq_state.md), [qq queues](commands/qq_queues.md), [qq nodes](commands/qq_nodes.md), and [qq submit](command/qq_submit.md).
+You can provide any of these server names as an option to any qq command that supports it — namely, [qq jobs](commands/qq_jobs.md), [qq stat](commands/qq_stat.md), [qq queues](commands/qq_queues.md), [qq nodes](commands/qq_nodes.md), and [qq submit](commands/qq_submit.md).
 
 Alternatively, you can use one of the following shortcuts:
 
@@ -44,7 +44,7 @@ qq stat -s sokar --all
 ```
 
 > [!NOTE]
-> When you run `qq jobs` or `qq stat` without specifying a server (so that the jobs are collected for the default server), the "Job ID" column shows only the numerical portion of the job ID. When you run these commands **with** a server specified, you get the full job ID including the batch server address. This can be useful for the commands described [below](#qq-info-qq-go-qq-kill-qq-sync-qq-wipe).
+> When you run `qq jobs` or `qq stat` without specifying a server (so that the jobs are collected for the default server), the "Job ID" column shows only the numerical portion of the job ID. When you run these commands **with** a server specified, you get the full job ID including the batch server address. This can be useful for the commands described [below](#qq-info-qq-go-qq-kill-qq-sync-qq-wipe-qq-respawn).
 
 You can also get information about queues and compute nodes available on another server:
 
@@ -66,7 +66,7 @@ qq submit -q default --ncpus 8 --walltime 12h --server sokar my_job.sh
 _Note that you are submitting to a queue on the Sokar cluster, so you need to use a queue that is available there._
 
 > [!IMPORTANT]
-> If you submit a job to a different cluster, you need to have [qq installed on this cluster](installation.md)!
+> If you submit a job to a different cluster, you need to have [qq installed on this cluster](installation/installation.md)!
 
 ## [qq info](commands/qq_info.md), [qq go](commands/qq_go.md), [qq kill](commands/qq_kill.md), [qq sync](commands/qq_sync.md), [qq wipe](commands/qq_wipe.md), [qq respawn](commands/qq_respawn.md)
 

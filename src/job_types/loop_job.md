@@ -1,6 +1,6 @@
 # Loop jobs
 
-Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](../commands/standard_job.md) first — otherwise, this may be difficult to follow.
+Loop jobs are jobs that automatically submit their continuation at the end of execution while tracking the current cycle and archiving output files. This section describes how they differ from standard jobs. Please read the section about [standard jobs](standard_job.md) first — otherwise, this may be difficult to follow.
 
 To turn a job into a loop job, you must set two [`qq submit`](../commands/qq_submit.md) options:
 
@@ -25,7 +25,7 @@ Each loop job creates an archive directory inside the input directory. This dire
 
 You can control the archive directory's name using the `archive` submission option (default: `storage`).
 
-Archived files should follow a specific filename format that includes the job cycle number they belong to. You can define this format using the `archive-format` submission option (default: `job%04d`). In this format, `%04d` is replaced by the cycle number — for example, `job0001` for cycle 1, `job0002` for cycle 2, `job0143` for cycle 143 and so on.
+Archived files should follow a specific filename format that includes the job cycle number they belong to. You can define this format using the `archive-format` submission option (default: `job%04d`). The format is a [printf format string](https://en.wikipedia.org/wiki/Printf#Format_specifier) in which `%04d` is replaced by the cycle number — for example, `job0001` for cycle 1, `job0002` for cycle 2, `job0143` for cycle 143 and so on. Other kinds of formats are deprecated and will not be supported in qq v0.15.
 
 ## Working with the archive
 

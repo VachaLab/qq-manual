@@ -51,6 +51,13 @@ The following expanded TOML structure lists all available sections and fields. Y
 
 ```toml
 ##############################################
+# General configuration
+##############################################
+# Name of the qq binary.
+binary_name = "qq"
+
+
+##############################################
 # File suffixes used by qq.
 ##############################################
 [suffixes]
@@ -122,6 +129,8 @@ walltime = "QQ_WALLTIME"
 ssh = 60
 # Timeout for rsync in seconds.
 rsync = 600
+# Timeout for job submission in seconds.
+submit = 120
 
 
 ##############################################
@@ -142,7 +151,7 @@ default_interpreter = "bash"
 ##############################################
 # Settings for Resubmitter operations.
 ##############################################
-[runner]
+[resubmitter]
 # Maximum number of attempts when retrying an operation.
 retry_tries = 3
 # Wait time (in seconds) between retry attempts.
@@ -194,18 +203,18 @@ value_style = "white"
 notes_style = "grey50"
 
 [presenter.job_status_panel]
-# Maximal width of the job status panel.
-max_width = null
+# Maximal width of the job status panel. Not limited by default.
+# max_width = 120
 # Minimal width of the job status panel.
-min_width = 60
+min_width = 70
 # Style of the border lines.
 border_style = "white"
 # Style of the title.
 title_style = "white bold"
 
 [presenter.full_info_panel]
-# Maximal width of the job info panel.
-max_width = null
+# Maximal width of the job info panel. Not limited by default.
+# max_width = 120
 # Minimal width of the job info panel.
 min_width = 80
 # Style of the border lines.
@@ -222,14 +231,16 @@ job_id_color = "default"
 dir_path_color = "cyan"
 # Color of the loop info in brief info.
 loop_info_color = "grey70"
+# Maximal length of a job directory path before shortening.
+max_dir_length = 80
 
 
 ##############################################
 # Settings for JobsPresenter (qq jobs/stat).
 ##############################################
 [jobs_presenter]
-# Maximal width of the jobs panel.
-max_width = null
+# Maximal width of the jobs panel. Not limited by default.
+# max_width = 120
 # Minimal width of the jobs panel.
 min_width = 80
 # Maximum displayed length of a job name before truncation.
@@ -256,7 +267,9 @@ strong_warning_style = "bright_red"
 mild_warning_style = "bright_yellow"
 # List of columns to show in the output.
 # If not set, the settings for the current batch system will be used.
-columns_to_show = null
+# Available columns: "S", "Job ID", "User", "Job Name", "Queue", "NCPUs", "NGPUs",
+# "NNodes", "Times", "Node", "%CPU", "%Mem", "Exit".
+# columns_to_show = ["S", "Job ID", "Job Name", "Queue", "NCPUs", "Times", "Node"]
 # Code used to signify "total jobs".
 sum_jobs_code = "Σ"
 
@@ -265,8 +278,8 @@ sum_jobs_code = "Σ"
 # Settings for QueuesPresenter (qq queues).
 ##############################################
 [queues_presenter]
-# Maximal width of the queues panel.
-max_width = null
+# Maximal width of the queues panel. Not limited by default.
+# max_width = 120
 # Minimal width of the queues panel.
 min_width = 80
 # Style used for border lines.
@@ -277,6 +290,11 @@ title_style = "white bold"
 subtitle_style = "white bold"
 # Style used for table headers.
 headers_style = "default"
+
+# Mark used to denote main queues.
+main_mark = "●"
+# Mark used to denote reroutings.
+rerouted_mark = " ··>"
 
 # Style used for the mark if the queue is available.
 available_mark_style = "bright_green"
@@ -300,8 +318,8 @@ sum_jobs_code = "Σ"
 # Settings for NodesPresenter (qq nodes).
 ##############################################
 [nodes_presenter]
-# Maximal width of the nodes panel.
-max_width = null
+# Maximal width of the nodes panel. Not limited by default.
+# max_width = 120
 # Minimal width of the nodes panel.
 min_width = 80
 # Maximal width of the shared properties section.
@@ -320,6 +338,9 @@ rule_style = "white"
 others_group_name = "other"
 # Name to use for the group if it contains all nodes.
 all_nodes_group_name = "all nodes"
+
+# Mark used to denote nodes.
+state_mark = "●"
 
 # Style used for main information about the nodes.
 main_text_style = "white"
@@ -475,10 +496,6 @@ job_info_max_threads = 16
 submission_max_threads = 8
 # Maximal number of threads used to clear runtime files in parallel.
 clear_max_threads = 8
-
-##############################################
-# General configuration
-##############################################
-# Name of the qq binary.
-binary_name = "qq"
+# Maximal number of threads used to walk the directory tree when searching for jobs.
+search_max_threads = 8
 ```

@@ -36,6 +36,8 @@ If no `JOB_ID` and no directory are provided, `qq sync` searches for qq jobs in 
 
 - `-f`, `--files` `TEXT` — A colon-, comma-, or space-separated list of files and directories to fetch. If not specified, the entire content of the working directory is fetched.
 
+- `--archive` — Copy files matching the archive format to the archive instead of the input directory. Only for failed or killed loop jobs.
+
 ### Examples
 
 ```bash
@@ -101,3 +103,11 @@ qq sync --all --server meta
 ```
 
 Fetches files for all your running jobs associated with the Metacentrum batch server.
+
+***
+
+```bash
+qq sync 123456 --archive
+```
+
+Fetches files from the working directory of the failed or killed loop job `123456`. Files matching the job's archive format are copied to the archive and all other files to the input directory, as qq would do after a successfully finished cycle. This is useful for instance for keeping the results of a cycle that failed due to failure in copying to the shared storage.
